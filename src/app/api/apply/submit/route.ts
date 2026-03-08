@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
       : "Not Provided";
 
     // Format the Discord message with an embed for a "Black Label" premium feel
-    const embed = {
+    const embed: any = {
       title: "🚀 New Talent Application",
       description: `A new creator has applied to join **Peace Time Agency**.`,
       color: 0xE11D48, // Vivid coral/rose color (matches Brand Primary)
