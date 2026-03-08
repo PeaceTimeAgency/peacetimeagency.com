@@ -86,7 +86,7 @@ export default function ArticlePage() {
                  </ul>
               </div>
               <p>
-                As we move further into the year, our commitment to providing the highest fidelity infrastructure remains unchanged. The goal isn't just to be seen—it's to be remembered.
+                As we move further into the year, our commitment to providing the highest fidelity infrastructure remains unchanged. The goal isn't just to be seen; it's to be remembered.
               </p>
            </article>
 

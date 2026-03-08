@@ -50,7 +50,7 @@
   /* Typography */
   --font-sans: var(--font-space-grotesk), "Inter", sans-serif;
 
-  /* Colors — Black Label Palette (Mapped to CSS variables for dynamic routing) */
+  /* Colors: Black Label Palette (Mapped to CSS variables for dynamic routing) */
   --color-background: var(--color-background-base);
   --color-background-surface: var(--color-background-surface-base);
   --color-background-elevated: var(--color-background-elevated-base);
@@ -72,7 +72,7 @@
   --color-secondary-muted: rgba(167, 139, 250, 0.12);
   --color-secondary-glow: rgba(167, 139, 250, 0.5);
 
-  /* Accent: Warm Amber — used sparingly for data/live indicators */
+  /* Accent: Warm Amber: used sparingly for data/live indicators */
   --color-accent: #F59E0B;
   --color-accent-glow: rgba(245, 158, 11, 0.5);
 

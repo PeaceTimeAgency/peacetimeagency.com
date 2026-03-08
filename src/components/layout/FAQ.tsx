@@ -6,27 +6,27 @@ import { Section } from "@/components/layout/Section";
 const faqs = [
   {
     q: "What are the expectations and quotas?",
-    a: "There are none. Peace Time operates on a Zero-Pressure Policy — no minimum streaming hours, no gifting benchmarks, and no performance requirements. The agency matches your energy. If you want to push aggressively, we provide the full toolkit. If you stream for fun, your support system stays in place.",
+    a: "None. Peace Time operates on a Zero-Pressure Policy: no minimum hours, no gifting benchmarks, and no quotas. We provide the tools; you determine the velocity.",
   },
   {
     q: "How do I join the agency?",
-    a: "Joining is handled directly through TikTok's official agency system. There are no external contracts or hidden fine print outside of TikTok's own platform agreement. Once invited, you review and accept within the app itself.",
+    a: "Submission is handled via TikTok's official agency portal. There are no external legal traps or side-contracts. Once we invite you, everything is finalized securely within the app.",
   },
   {
     q: "Are there any restrictive contracts?",
-    a: "No. Peace Time operates exclusively within the official TikTok Agency system. There are no secondary contracts, external legal traps, or fine print beyond TikTok's own platform policies. Transparency isn't a selling point — it's just how we operate.",
+    a: "Never. We operate exclusively within the official TikTok Agency framework. Transparency is core to our model: no hidden clauses, and no fine print beyond TikTok's standard platform terms.",
   },
   {
     q: "What happens if I decide to leave?",
-    a: "You can leave at any time. The only restriction is TikTok's platform-mandated 60-day transition period before joining a different agency — a platform policy, not something Peace Time imposes. We do not hold accounts hostage.",
+    a: "You retain full account ownership. You can leave at any time, subject only to TikTok's own platform-mandated 60-day transition window which applies to all agency moves.",
   },
   {
     q: "What does the agency actually do for my stream?",
-    a: "Three things. Our Technical & Aesthetic department audits your lighting, camera setup, and audio quality. Our Data & Strategy team teaches the Momentum Window (the critical first 10 minutes of every live), the 10-Second hook rule, and a monetization flow from casual viewer to Super Fan. Our Admin team handles account safety, ban appeals, and platform compliance.",
+    a: "We provide professional technical audits, data-driven strategy sessions, and 24/7 administrative support for account safety and platform compliance.",
   },
   {
     q: "What do I get immediately upon joining?",
-    a: "Immediate access to the full Education Center — a library of tutorials, step-by-step guides, and strategy playbooks — plus a personal setup audit and access to the private creator network, all within your first week.",
+    a: "Instant access to our 50+ module Education Center, a full technical setup audit, and entry into our private Discord network for strategy and collaboration.",
   },
 ];
 

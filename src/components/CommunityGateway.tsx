@@ -18,7 +18,7 @@ export default function CommunityGateway() {
         <p className="text-xs font-semibold text-secondary tracking-[0.2em] uppercase">Community Hub</p>
         <h3 className="text-2xl font-black text-foreground tracking-tight">Private Discord</h3>
         <p className="text-sm text-foreground-muted leading-relaxed max-w-xs mx-auto">
-          Exclusive access to our creator network. Strategy sessions, wins, collabs, and the inside playbook — all in one place.
+          Exclusive access to our creator network. Strategy sessions, wins, collabs, and the inside playbook, all in one place.
         </p>
       </div>
 

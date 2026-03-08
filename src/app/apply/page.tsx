@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Section } from "@/components/layout/Section";
 import Link from "next/link";
@@ -36,7 +36,7 @@ const steps = [
   }
 ];
 
-export default function ApplicationPage() {
+function ApplicationForm() {
   const searchParams = useSearchParams();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<Record<string, string>>({});
@@ -270,5 +270,17 @@ export default function ApplicationPage() {
         </div>
       </Section>
     </main>
+  );
+}
+
+export default function ApplicationPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-background flex items-center justify-center p-6">
+        <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+      </main>
+    }>
+      <ApplicationForm />
+    </Suspense>
   );
 }

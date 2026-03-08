@@ -4,7 +4,7 @@ const services = [
   {
     index: "01",
     title: "Technical & Aesthetic",
-    description: "Professional audits for your visual and audio broadcast. We cover lighting placement, camera angles, background composition, and why audio clarity is the hidden metric that determines viewer retention.",
+    description: "Full-spectrum broadcast optimization. We refine your lighting architecture, camera positioning, and audio processing to maximize viewer retention from the first second.",
     accent: "text-primary",
     bar: "bg-primary",
     tag: "Department",
@@ -12,7 +12,7 @@ const services = [
   {
     index: "02",
     title: "Data-Driven Strategy",
-    description: "We use platform analytics to guide every decision — focusing your first 10 minutes for maximum algorithmic push, teaching the 10-Second hook rule, and mapping a clear monetization flow from viewers to supporters.",
+    description: "Algorithmic positioning based on real-time analytics. We optimize your stream hooks and retention loops to capture and hold platform-wide momentum.",
     accent: "text-secondary",
     bar: "bg-secondary",
     tag: "Department",
@@ -20,7 +20,7 @@ const services = [
   {
     index: "03",
     title: "Admin & Account Safety",
-    description: "Direct assistance navigating TikTok's platform policies — including ban appeals, account recovery from erroneous flags, and maintaining your standing within the platform's official guidelines.",
+    description: "Direct handling of platform policy and account security. We manage ban appeals, flag resolution, and compliance so you can focus exclusively on creation.",
     accent: "text-primary",
     bar: "bg-primary",
     tag: "Department",
@@ -28,7 +28,7 @@ const services = [
   {
     index: "04",
     title: "The Exit Guarantee",
-    description: "You can leave at any time — no hostage clauses, no hidden fine print. The only restriction is TikTok's own platform-mandated 60-day transition period before joining a new agency, which we have zero control over.",
+    description: "Total creator autonomy. You retain 100% control over your account. If you choose to leave, we facilitate a clean transition with no hidden restrictions.",
     accent: "text-secondary",
     bar: "bg-secondary",
     tag: "Creator-First",
@@ -36,7 +36,7 @@ const services = [
   {
     index: "05",
     title: "Zero-Pressure Policy",
-    description: "No minimum streaming hours, no gifting benchmarks, no performance quotas. The agency matches your energy — if you want to push hard, we provide the tools. If you stream for fun, your support system stays in place.",
+    description: "No mandatory hours or performance benchmarks. We provide the infrastructure; you decide the pace. Our support remains constant regardless of your streaming volume.",
     accent: "text-primary",
     bar: "bg-primary",
     tag: "Creator-First",
@@ -44,7 +44,7 @@ const services = [
   {
     index: "06",
     title: "Education Center",
-    description: "Comprehensive tutorials, step-by-step guides, and a full resource library provided immediately upon onboarding. Everything you need to understand the platform, the algorithm, and how to grow — from day one.",
+    description: "Exclusive access to our private resource library. Over 50+ modules covering advanced TikTok LIVE strategy, technical setup, and community management.",
     accent: "text-secondary",
     bar: "bg-secondary",
     tag: "Onboarding",
@@ -67,8 +67,8 @@ export function Services() {
             <span className="text-gradient-primary">layer of your growth.</span>
           </h2>
           <p className="text-foreground-muted text-base leading-relaxed">
-            Peace Time operates through three specialized departments — plus a set of creator-first
-            guarantees that no standard agency offers.
+            Peace Time operates through three specialized departments plus a set of creator-first
+            guarantees that redefine agency standards.
           </p>
         </div>
 

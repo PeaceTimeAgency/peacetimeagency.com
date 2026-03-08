@@ -26,7 +26,7 @@ export default function Home() {
             Tools that move <span className="text-gradient-primary">the needle.</span>
           </h2>
           <p className="text-foreground-muted text-base max-w-xl mx-auto">
-            High-performance analytics and an elite community — engineered for scale.
+            High-performance analytics and an elite community; engineered for scale.
           </p>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl mx-auto w-full">

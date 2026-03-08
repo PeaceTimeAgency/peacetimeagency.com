@@ -22,7 +22,7 @@ export default function CreatorGrowthSystem() {
         <div>
           <p className="text-xs font-semibold text-primary tracking-[0.2em] uppercase mb-1">Analytics</p>
           <h3 className="text-lg font-black text-foreground">Creator Growth System</h3>
-          <p className="text-xs text-foreground-muted mt-0.5">Live viewer growth — last 12 sessions</p>
+          <p className="text-xs text-foreground-muted mt-0.5">Live viewer growth, last 12 sessions</p>
         </div>
         <div className="flex items-center gap-1.5 rounded-lg border border-primary/20 bg-primary/10 px-2.5 py-1.5">
           <motion.span

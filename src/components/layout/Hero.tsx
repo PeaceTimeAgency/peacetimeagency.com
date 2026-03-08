@@ -3,7 +3,7 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
-// ─── Nano Banana 2 Noise Engine ──────────────────────────────────────────────
+// ── Nano Banana 2 Noise Engine ──────────────────────────────────────────────
 function smoothstepN(t: number): number {
   // normalized [0,1] → [0,1] smoothstep (no clamping needed at call sites)
   t = Math.max(0, Math.min(1, t));
@@ -31,7 +31,7 @@ function fbm(x: number, y: number, octaves = 6): number {
   return val / max;
 }
 
-// ─── Particle System ─────────────────────────────────────────────────────────
+// ── Particle System ─────────────────────────────────────────────────────────
 interface Particle {
   x: number; y: number; vx: number; vy: number;
   size: number; alpha: number; alphaDir: number; hue: number;
@@ -49,7 +49,7 @@ function createParticle(w: number, h: number): Particle {
   };
 }
 
-// ─── Main Canvas Renderer ─────────────────────────────────────────────────────
+// ── Main Canvas Renderer ─────────────────────────────────────────────────────
 function useHeroCanvas(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
   const rafRef        = useRef<number>(0);
   const particlesRef  = useRef<Particle[]>([]);
@@ -154,7 +154,7 @@ function useHeroCanvas(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
       ctx.globalAlpha = layer.a;
       ctx.fill();
 
-      // Ridge shimmer — Nano Banana 2 material highlight (distance layers only)
+      // Ridge shimmer: Nano Banana 2 material highlight (distance layers only)
       if (li >= 2) {
         ctx.beginPath();
         ctx.moveTo(-2, terrainY(0));
@@ -289,7 +289,7 @@ function useHeroCanvas(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
   }, [draw, canvasRef]);
 }
 
-// ─── Fade-up animation variant ───────────────────────────────────────────────
+// ── Fade-up animation variant ───────────────────────────────────────────────
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
   show: (i: number) => ({
@@ -298,7 +298,7 @@ const fadeUp = {
   }),
 };
 
-// ─── Stats ────────────────────────────────────────────────────────────────────
+// ── Stats ────────────────────────────────────────────────────────────────────
 const stats = [
   { value: '250+',  label: 'Active Creators'  },
   { value: '$45M+', label: 'Network Revenue'  },
@@ -308,7 +308,7 @@ const stats = [
 
 import { Hero3DObject } from "@/components/Hero3DObject";
 
-// ─── Hero Component ───────────────────────────────────────────────────────────
+// ── Hero Component ───────────────────────────────────────────────────────────
 export function Hero() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   useHeroCanvas(canvasRef);
@@ -332,7 +332,7 @@ export function Hero() {
       <div className="absolute top-0 inset-x-0 h-[3.5%] bg-black/85 z-10 pointer-events-none" />
       <div className="absolute bottom-0 inset-x-0 h-[3.5%] bg-black/85 z-10 pointer-events-none" />
 
-      {/* ── UE5 Corner HUD — Top Left ──────────────────────────── */}
+      {/* ── UE5 Corner HUD: Top Left ──────────────────────────── */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -349,7 +349,7 @@ export function Hero() {
         </div>
       </motion.div>
 
-      {/* ── UE5 Corner HUD — Top Right ─────────────────────────── */}
+      {/* ── UE5 Corner HUD: Top Right ─────────────────────────── */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -365,7 +365,7 @@ export function Hero() {
         </div>
       </motion.div>
 
-      {/* ── UE5 Corner HUD — Bottom Left ───────────────────────── */}
+      {/* ── UE5 Corner HUD: Bottom Left ───────────────────────── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -460,7 +460,7 @@ export function Hero() {
           custom={2} initial="hidden" animate="show" variants={fadeUp}
           className="mx-auto max-w-xl text-base sm:text-lg text-white/50 leading-relaxed"
         >
-          We give TikTok LIVE creators the infrastructure, strategy, and community to grow — on their own terms.{' '}
+          We provide the infrastructure, strategy, and community to help you grow on your own terms.{' '}
           <span className="text-white/70">No quotas. No pressure. No predatory contracts.</span>
         </motion.p>
 

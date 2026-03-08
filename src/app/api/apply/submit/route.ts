@@ -20,7 +20,17 @@ export async function POST(req: NextRequest) {
       : "Not Provided";
 
     // Format the Discord message with an embed for a "Black Label" premium feel
-    const embed: any = {
+    interface DiscordEmbed {
+      title?: string;
+      description?: string;
+      color?: number;
+      fields?: { name: string; value: string; inline?: boolean }[];
+      thumbnail?: { url: string };
+      footer?: { text: string; icon_url?: string };
+      timestamp?: string;
+    }
+
+    const embed: DiscordEmbed = {
       title: "🚀 New Talent Application",
       description: `A new creator has applied to join **Peace Time Agency**.`,
       color: 0xE11D48, // Vivid coral/rose color (matches Brand Primary)
@@ -45,7 +55,7 @@ export async function POST(req: NextRequest) {
 
     // Add TikTok Profile details if available from OAuth
     if (tiktokProfile) {
-      embed.fields.push({
+      embed.fields?.push({
         name: "✅ TikTok Verified Data",
         value: `**Display Name:** ${tiktokProfile.display_name}\n**Internal ID:** \`${tiktokProfile.open_id}\``,
         inline: true
@@ -56,7 +66,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Add Goals/Vision section
-    embed.fields.push({
+    embed.fields?.push({
       name: "🎯 The Vision (6-Month Goals)",
       value: goals || "No goals provided.",
       inline: false
