@@ -15,6 +15,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true, message: "Mock submission successful" });
     }
 
+    const discordDisplay = discord 
+      ? (/^\d+$/.test(discord) ? `<@${discord}>` : discord)
+      : "Not Provided";
+
     // Format the Discord message with an embed for a "Black Label" premium feel
     const embed = {
       title: "🚀 New Talent Application",
@@ -23,7 +27,7 @@ export async function POST(req: NextRequest) {
       fields: [
         {
           name: "👤 Creator Information",
-          value: `**Name:** ${name || "N/A"}\n**Email:** ${email || "N/A"}\n**Discord:** ${discord || "Not Provided"}`,
+          value: `**Name:** ${name || "N/A"}\n**Email:** ${email || "N/A"}\n**Discord:** ${discordDisplay}`,
           inline: false
         },
         {
