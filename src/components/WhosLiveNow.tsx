@@ -45,7 +45,7 @@ export default function WhosLiveNow() {
           <h2 className="text-3xl font-black tracking-tight text-foreground">Live Right Now</h2>
           <p className="text-foreground-muted mt-1.5 text-sm">Elite creators currently broadcasting.</p>
         </div>
-        <Link href="/#creators" className="hidden sm:flex items-center gap-1.5 text-sm text-foreground-muted hover:text-foreground transition-colors group font-medium">
+        <Link href="/creators" className="hidden sm:flex items-center gap-1.5 text-sm text-foreground-muted hover:text-foreground transition-colors group font-medium">
           View All
           <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

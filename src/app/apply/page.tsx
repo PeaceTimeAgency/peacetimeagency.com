@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Section } from "@/components/layout/Section";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
 const steps = [
   {
@@ -37,49 +36,10 @@ const steps = [
 ];
 
 function ApplicationForm() {
-  const searchParams = useSearchParams();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isConnecting, setIsConnecting] = useState(searchParams.get("connected") === "true");
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [tiktokProfile, setTiktokProfile] = useState<any>(null);
-
-  useEffect(() => {
-    // Check if we just returned from a successful TikTok connection
-    if (searchParams.get("connected") === "true") {
-      fetchTikTokProfile();
-    }
-  }, [searchParams]);
-
-  const fetchTikTokProfile = async () => {
-    setIsConnecting(true);
-    try {
-      const response = await fetch("/api/tiktok/profile");
-      if (response.ok) {
-        const data = await response.json();
-        setTiktokProfile(data);
-        // Auto-populate form data
-        setFormData(prev => ({
-          ...prev,
-          tiktok: `@${data.username}`,
-          followers: data.follower_count ? `${(data.follower_count / 1000).toFixed(1)}k` : prev.followers,
-          name: data.display_name || prev.name,
-        }));
-        // Switch to the socials step if we're not there already
-        setCurrentStep(1);
-      }
-    } catch (error) {
-      console.error("Failed to fetch TikTok profile", error);
-    } finally {
-      setIsConnecting(false);
-    }
-  };
-
-  const handleConnectTikTok = () => {
-    window.location.href = "/api/auth/tiktok";
-  };
 
   const handleInputChange = (name: string, value: string) => {
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -96,7 +56,6 @@ function ApplicationForm() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             ...formData,
-            tiktokProfile: tiktokProfile // Include the full profile data if available
           }),
         });
 
@@ -174,46 +133,7 @@ function ApplicationForm() {
               </h1>
               <p className="text-foreground-muted mb-10">{step.subtitle}</p>
 
-              {step.id === "socials" && (
-                <div className="mb-8">
-                  {tiktokProfile ? (
-                    <div className="glass-card p-6 flex items-center justify-between border-primary/30 bg-primary/5">
-                      <div className="flex items-center gap-4">
-                        {tiktokProfile.avatar_url && (
-                          <img 
-                            src={tiktokProfile.avatar_url} 
-                            alt={tiktokProfile.username} 
-                            className="w-12 h-12 rounded-full border border-white/10"
-                          />
-                        )}
-                        <div>
-                          <p className="text-xs font-bold text-primary uppercase tracking-widest">Connected</p>
-                          <p className="text-lg font-black text-white">{tiktokProfile.display_name || tiktokProfile.username}</p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-[10px] font-bold text-foreground-subtle uppercase">Followers</p>
-                        <p className="text-sm font-black text-white">
-                          {tiktokProfile.follower_count ? `${(tiktokProfile.follower_count / 1000).toFixed(1)}k` : 'Private'}
-                        </p>
-                      </div>
-                    </div>
-                  ) : (
-                    <button 
-                      onClick={handleConnectTikTok}
-                      disabled={isConnecting}
-                      className="w-full flex items-center justify-center gap-3 py-4 glass-card border-white/20 hover:border-primary/50 hover:bg-white/5 transition-all group"
-                    >
-                      <svg className="w-5 h-5 text-white group-hover:text-primary transition-colors" fill="currentColor" viewBox="0 0 448 512">
-                        <path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/>
-                      </svg>
-                      <span className="font-black text-white uppercase tracking-widest text-sm">
-                        {isConnecting ? "Connecting..." : "Connect with TikTok"}
-                      </span>
-                    </button>
-                  )}
-                </div>
-              )}
+
 
               <div className="space-y-6">
                 {step.fields.map(field => (
@@ -268,12 +188,6 @@ function ApplicationForm() {
 
 export default function ApplicationPage() {
   return (
-    <Suspense fallback={
-      <main className="min-h-screen bg-background flex items-center justify-center p-6">
-        <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-      </main>
-    }>
-      <ApplicationForm />
-    </Suspense>
+    <ApplicationForm />
   );
 }
