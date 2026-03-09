@@ -225,14 +225,9 @@ export function OurCreators() {
                   list={filteredCreators.filter(c => c.tier === 'staff')} 
                 />
                 <CreatorGrid 
-                  title="Top 5 Creators" 
-                  desc="Our highest performing talent on the platform." 
-                  list={filteredCreators.filter(c => c.tier === 'top')} 
-                />
-                <CreatorGrid 
-                  title="5 Newest Accepted" 
-                  desc="The latest talent to join the Peace Time ecosystem." 
-                  list={filteredCreators.filter(c => c.tier === 'new')} 
+                  title="Agency Creators" 
+                  desc="The talent of Peace Time Agency." 
+                  list={filteredCreators.filter(c => c.tier !== 'staff')} 
                 />
               </div>
             )}
