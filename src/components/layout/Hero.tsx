@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 // ── Nano Banana 2 Noise Engine ──────────────────────────────────────────────
 function smoothstepN(t: number): number {
@@ -300,10 +301,10 @@ const fadeUp = {
 
 // ── Stats ────────────────────────────────────────────────────────────────────
 const stats = [
-  { value: '250+',  label: 'Active Creators'  },
-  { value: '$45M+', label: 'Network Revenue'  },
-  { value: '99.9%', label: 'Uptime'           },
-  { value: 'Top 1%',label: 'TikTok Agencies'  },
+  { value: '24/7',  label: 'Creator Support System' },
+  { value: 'Top Tier', label: 'TikTok LIVE Creator Network' },
+  { value: 'Millions', label: 'LIVE Viewers Reached' },
+  { value: '250+', label: 'Active Creators' },
 ];
 
 import { Hero3DObject } from "@/components/Hero3DObject";
@@ -332,38 +333,7 @@ export function Hero() {
       <div className="absolute top-0 inset-x-0 h-[3.5%] bg-black/85 z-10 pointer-events-none" />
       <div className="absolute bottom-0 inset-x-0 h-[3.5%] bg-black/85 z-10 pointer-events-none" />
 
-      {/* ── UE5 Corner HUD: Top Left ──────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.9, delay: 1.2 }}
-        className="absolute top-[4.5%] left-6 z-20 pointer-events-none"
-        aria-hidden="true"
-      >
-        <div className="flex items-center gap-2 font-mono text-[10px] text-white/30 tracking-[0.18em] uppercase">
-          <span className="w-1 h-1 rounded-full bg-primary/60 animate-pulse inline-block" />
-          CINEMATIC · UE 5.5 NANITE
-        </div>
-        <div className="mt-1 text-[9px] font-mono text-white/20 tracking-[0.12em]">
-          ENV_HERO · LUMEN · LODS_HIGH
-        </div>
-      </motion.div>
-
-      {/* ── UE5 Corner HUD: Top Right ─────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.9, delay: 1.3 }}
-        className="absolute top-[4.5%] right-6 z-20 pointer-events-none text-right"
-        aria-hidden="true"
-      >
-        <div className="font-mono text-[10px] text-white/25 tracking-[0.14em] uppercase">
-          FRAME · REALTIME
-        </div>
-        <div className="mt-1 text-[9px] font-mono text-primary/40 tracking-[0.1em]">
-          RES 4K · ULTRA
-        </div>
-      </motion.div>
+      {/* ── UE5 Corner HUD removed ──────────────────────── */}
 
       {/* ── UE5 Corner HUD: Bottom Left ───────────────────────── */}
       <motion.div
@@ -422,7 +392,7 @@ export function Hero() {
               backgroundClip:        'text',
             }}
           >
-            Creator-First · Platform-Official
+            Peace Time Agency
           </span>
         </motion.div>
 
@@ -439,7 +409,7 @@ export function Hero() {
               backgroundClip:       'text',
             }}
           >
-            The #1 TikTok LIVE
+            The Creator Agency
           </span>
           <br />
           <span
@@ -451,7 +421,7 @@ export function Hero() {
               filter:               'drop-shadow(0 0 32px rgba(255,60,95,0.45))',
             }}
           >
-            Creator Agency.
+            Built for Streamers.
           </span>
         </motion.h1>
 
@@ -470,7 +440,7 @@ export function Hero() {
           className="flex flex-col gap-4 sm:flex-row items-center justify-center pt-1 w-full"
         >
           {/* Primary CTA */}
-          <button
+          <Link href="/apply"
             className="group relative inline-flex items-center justify-center h-[52px] px-8 rounded-xl font-bold text-sm text-white overflow-hidden transition-all duration-300"
             style={{
               background:  'linear-gradient(135deg, #FF3C5F 0%, #E0244C 100%)',
@@ -481,10 +451,10 @@ export function Hero() {
           >
             <span className="relative z-10 tracking-wide">Join the Roster</span>
             <div className="absolute inset-0 bg-gradient-to-r from-[#FF3C5F] to-[#FF8FA3] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          </button>
+          </Link>
 
           {/* Secondary CTA */}
-          <button
+          <Link href="/creators"
             className="group inline-flex items-center justify-center h-[52px] px-8 rounded-xl font-semibold text-sm gap-2 transition-all duration-300"
             style={{
               background:     'rgba(255,255,255,0.035)',
@@ -504,7 +474,7 @@ export function Hero() {
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M9 5l7 7-7 7" />
             </svg>
-          </button>
+          </Link>
         </motion.div>
 
         {/* Stats bar */}

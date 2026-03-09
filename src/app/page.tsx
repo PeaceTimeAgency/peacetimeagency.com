@@ -6,7 +6,7 @@ import { FAQ } from "@/components/layout/FAQ";
 import { Footer } from "@/components/layout/Footer";
 import WhosLiveNow from "@/components/WhosLiveNow";
 import CreatorGrowthSystem from "@/components/CreatorGrowthSystem";
-import CommunityGateway from "@/components/CommunityGateway";
+import PreInterview from "@/components/PreInterview";
 import { Section } from "@/components/layout/Section";
 
 export default function Home() {
@@ -34,7 +34,7 @@ export default function Home() {
             <CreatorGrowthSystem />
           </div>
           <div className="h-[460px]">
-            <CommunityGateway />
+            <PreInterview />
           </div>
         </div>
       </Section>

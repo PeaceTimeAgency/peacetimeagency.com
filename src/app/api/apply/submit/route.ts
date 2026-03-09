@@ -1,87 +1,70 @@
 import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
 
-const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL;
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const AGENCY_EMAIL = process.env.AGENCY_EMAIL || "applications@peacetimeagency.com";
+
+const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { name, email, tiktok, followers, goals, discord, tiktokProfile } = body;
 
-    if (!DISCORD_WEBHOOK_URL) {
-      console.warn("DISCORD_WEBHOOK_URL is not set. Mocking success for development.");
-      // In development/mock mode, we'll just log and return success
-      console.log("Mock Discord Submission:", body);
+    const discordDisplay = discord || "Not Provided";
+    const creatorName = name || tiktokProfile?.display_name || "Unknown Creator";
+
+    const emailHtml = `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+        <h2 style="color: #E11D48; border-bottom: 2px solid #E11D48; padding-bottom: 10px;">
+          🚀 New Talent Application
+        </h2>
+        <p>A new creator has applied to join <strong>Peace Time Agency</strong>.</p>
+        
+        <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="margin-top: 0; color: #555;">👤 Creator Information</h3>
+          <p><strong>Name:</strong> ${name || "N/A"}</p>
+          <p><strong>Email:</strong> ${email || "N/A"}</p>
+          <p><strong>Discord:</strong> ${discordDisplay}</p>
+        </div>
+
+        <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="margin-top: 0; color: #555;">📱 TikTok Presence</h3>
+          <p><strong>Handle:</strong> ${tiktok || "N/A"}</p>
+          <p><strong>Followers:</strong> ${followers || "N/A"}</p>
+          ${tiktokProfile ? `
+            <p><strong>Verified Name:</strong> ${tiktokProfile.display_name}</p>
+            <p><strong>Open ID:</strong> <code>${tiktokProfile.open_id}</code></p>
+          ` : ""}
+        </div>
+
+        <div style="background: #f9f9f9; padding: 15px; border-radius: 8px;">
+          <h3 style="margin-top: 0; color: #555;">🎯 The Vision (6-Month Goals)</h3>
+          <p style="white-space: pre-wrap;">${goals || "No goals provided."}</p>
+        </div>
+        
+        <p style="font-size: 12px; color: #999; text-align: center; margin-top: 30px;">
+          Peace Time Agency • Talent Intake System
+        </p>
+      </div>
+    `;
+
+    if (!resend) {
+      console.warn("RESEND_API_KEY is not set. Mocking email submission for development.");
+      console.log("Mock Email Submission HTML:\\n", emailHtml);
       await new Promise(r => setTimeout(r, 1000));
       return NextResponse.json({ success: true, message: "Mock submission successful" });
     }
 
-    const discordDisplay = discord 
-      ? (/^\d+$/.test(discord) ? `<@${discord}>` : discord)
-      : "Not Provided";
-
-    // Format the Discord message with an embed for a "Black Label" premium feel
-    interface DiscordEmbed {
-      title?: string;
-      description?: string;
-      color?: number;
-      fields?: { name: string; value: string; inline?: boolean }[];
-      thumbnail?: { url: string };
-      footer?: { text: string; icon_url?: string };
-      timestamp?: string;
-    }
-
-    const embed: DiscordEmbed = {
-      title: "🚀 New Talent Application",
-      description: `A new creator has applied to join **Peace Time Agency**.`,
-      color: 0xE11D48, // Vivid coral/rose color (matches Brand Primary)
-      fields: [
-        {
-          name: "👤 Creator Information",
-          value: `**Name:** ${name || "N/A"}\n**Email:** ${email || "N/A"}\n**Discord:** ${discordDisplay}`,
-          inline: false
-        },
-        {
-          name: "📱 TikTok Presence",
-          value: `**Handle:** [${tiktok || "@unknown"}](https://tiktok.com/${tiktok?.replace("@", "")})\n**Followers:** ${followers || "N/A"}`,
-          inline: true
-        }
-      ],
-      footer: {
-        text: "Peace Time Agency • Talent Intake System",
-        icon_url: "https://pta-agency.vercel.app/logo.png" // Replace with actual logo URL if available
-      },
-      timestamp: new Date().toISOString()
-    };
-
-    // Add TikTok Profile details if available from OAuth
-    if (tiktokProfile) {
-      embed.fields?.push({
-        name: "✅ TikTok Verified Data",
-        value: `**Display Name:** ${tiktokProfile.display_name}\n**Internal ID:** \`${tiktokProfile.open_id}\``,
-        inline: true
-      });
-      if (tiktokProfile.avatar_url) {
-        embed.thumbnail = { url: tiktokProfile.avatar_url };
-      }
-    }
-
-    // Add Goals/Vision section
-    embed.fields?.push({
-      name: "🎯 The Vision (6-Month Goals)",
-      value: goals || "No goals provided.",
-      inline: false
+    const data = await resend.emails.send({
+      from: "Agency Inbox <onboarding@resend.dev>",
+      to: [AGENCY_EMAIL],
+      subject: `New Application: ${creatorName}`,
+      html: emailHtml,
     });
 
-    const response = await fetch(DISCORD_WEBHOOK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        embeds: [embed]
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Discord Webhook failed: ${response.statusText}`);
+    if (data.error) {
+       throw new Error(`Resend Error: ${data.error.message}`);
     }
 
     return NextResponse.json({ success: true });
@@ -89,7 +72,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error("Submission Error:", error);
     return NextResponse.json(
-      { error: "Failed to submit application. Please reach out to us on Discord." },
+      { error: "Failed to submit application. Please try again later." },
       { status: 500 }
     );
   }

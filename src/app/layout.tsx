@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 
 import { Navigation } from "@/components/layout/Navigation";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import Script from "next/script";
 
 export default function RootLayout({
   children,
@@ -34,6 +35,13 @@ export default function RootLayout({
             {children}
           </div>
         </ThemeProvider>
+        {process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
+          <Script
+            src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL || "https://analytics.umami.is/script.js"}
+            data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+            strategy="lazyOnload"
+          />
+        )}
       </body>
     </html>
   );

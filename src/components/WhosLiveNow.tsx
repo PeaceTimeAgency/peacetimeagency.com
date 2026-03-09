@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { Creator } from '@/types';
 import { SkeletonCard } from '@/components/ui/SkeletonCard';
 
@@ -44,12 +45,12 @@ export default function WhosLiveNow() {
           <h2 className="text-3xl font-black tracking-tight text-foreground">Live Right Now</h2>
           <p className="text-foreground-muted mt-1.5 text-sm">Elite creators currently broadcasting.</p>
         </div>
-        <button className="hidden sm:flex items-center gap-1.5 text-sm text-foreground-muted hover:text-foreground transition-colors group font-medium">
+        <Link href="/creators" className="hidden sm:flex items-center gap-1.5 text-sm text-foreground-muted hover:text-foreground transition-colors group font-medium">
           View All
           <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
-        </button>
+        </Link>
       </div>
 
       {/* Side fades */}

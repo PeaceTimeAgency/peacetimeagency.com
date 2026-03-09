@@ -1,0 +1,156 @@
+
+> pta-agency@0.1.0 lint
+> eslint
+
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\app\api\auth\tiktok\callback\route.ts
+  7:9  warning  'state' is assigned a value but never used       @typescript-eslint/no-unused-vars
+  8:9  warning  'savedState' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\app\apply\page.tsx
+   46:54  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  182:27  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\app\creators\[id]\page.tsx
+   39:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  111:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  116:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\app\creators\page.tsx
+   34:21  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @next/next/no-img-element
+  114:10  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\app\creators\page.tsx:114:10
+  112 |
+  113 |       <Section container={false} className="px-4 md:px-8 lg:px-12">
+> 114 |         <CreatorGrid 
+      |          ^^^^^^^^^^^ This component is created during render
+  115 |           title="PTA Staff" 
+  116 |           desc="The leadership and technical architects powering the infrastructure." 
+  117 |           list={staff} 
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\app\creators\page.tsx:13:23
+  11 |   const newest = creators.filter(c => c.tier === 'new');
+  12 |
+> 13 |   const CreatorGrid = ({ title, desc, list }: { title: string, desc?: string, list: Creator[] }) => {
+     |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 14 |     if (list.length === 0) return null;
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 15 |     return (
+     …
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 79 |     );
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 80 |   };
+     | ^^^^ The component is created during render here
+  81 |
+  82 |   return (
+  83 |     <main className="min-h-screen bg-background pt-12 pb-20">  react-hooks/static-components
+  119:10  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\app\creators\page.tsx:119:10
+  117 |           list={staff} 
+  118 |         />
+> 119 |         <CreatorGrid 
+      |          ^^^^^^^^^^^ This component is created during render
+  120 |           title="Top 5 Performing" 
+  121 |           desc="Our highest-grossing and most engaged creators right now." 
+  122 |           list={top} 
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\app\creators\page.tsx:13:23
+  11 |   const newest = creators.filter(c => c.tier === 'new');
+  12 |
+> 13 |   const CreatorGrid = ({ title, desc, list }: { title: string, desc?: string, list: Creator[] }) => {
+     |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 14 |     if (list.length === 0) return null;
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 15 |     return (
+     …
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 79 |     );
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 80 |   };
+     | ^^^^ The component is created during render here
+  81 |
+  82 |   return (
+  83 |     <main className="min-h-screen bg-background pt-12 pb-20">                                         react-hooks/static-components
+  124:10  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\app\creators\page.tsx:124:10
+  122 |           list={top} 
+  123 |         />
+> 124 |         <CreatorGrid 
+      |          ^^^^^^^^^^^ This component is created during render
+  125 |           title="5 Newest Accepted" 
+  126 |           desc="The latest elite talent globally to join the Peace Time network." 
+  127 |           list={newest} 
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\app\creators\page.tsx:13:23
+  11 |   const newest = creators.filter(c => c.tier === 'new');
+  12 |
+> 13 |   const CreatorGrid = ({ title, desc, list }: { title: string, desc?: string, list: Creator[] }) => {
+     |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 14 |     if (list.length === 0) return null;
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 15 |     return (
+     …
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 79 |     );
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 80 |   };
+     | ^^^^ The component is created during render here
+  81 |
+  82 |   return (
+  83 |     <main className="min-h-screen bg-background pt-12 pb-20">                                react-hooks/static-components
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\app\news\[slug]\page.tsx
+  56:11   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  65:174  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  69:85   error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  69:206  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  69:217  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  89:146  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  89:168  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\app\news\page.tsx
+  35:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  61:42  warning  'i' is defined but never used                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+  65:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\components\PreInterview.tsx
+  42:68  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  42:88  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\components\ThemeProvider.tsx
+  6:10  warning  'mounted' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+  9:5   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\components\ThemeProvider.tsx:9:5
+   7 |
+   8 |   useEffect(() => {
+>  9 |     setMounted(true);
+     |     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  10 |     
+  11 |     // Function to set theme based on user's local time
+  12 |     const checkTimeAndSetTheme = () => {  react-hooks/set-state-in-effect
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\components\WhosLiveNow.tsx
+  85:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\SATCO\OneDrive\Documents\PTA003\pta-agency\src\components\ui\SkeletonCard.tsx
+  5:11  error  An interface declaring no members is equivalent to its supertype  @typescript-eslint/no-empty-object-type
+
+✖ 27 problems (14 errors, 13 warnings)
+

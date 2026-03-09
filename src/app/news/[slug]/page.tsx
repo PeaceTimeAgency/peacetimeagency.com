@@ -62,11 +62,11 @@ export default function ArticlePage() {
                 {article.excerpt}
               </p>
               <p>
-                In the ever-evolving landscape of live broadcasting, the metrics that defined success in 2024 are no longer the benchmarks for 2026. At Peace Time Agency, we've spent the last six months deep-diving into the algorithmic shifts that prioritize retention over raw vanity metrics.
+                In the ever-evolving landscape of live broadcasting, the metrics that defined success in 2024 are no longer the benchmarks for 2026. At Peace Time Agency, we&apos;ve spent the last six months deep-diving into the algorithmic shifts that prioritize retention over raw vanity metrics.
               </p>
               <h2 className="text-2xl font-black text-white uppercase tracking-tight mt-12 mb-4">Strategic Positioning</h2>
               <p>
-                Our core philosophy has always been creator-first. This means we don't just look at how many coins are being dropped, but how many recurring viewers are coming back every single night. The "PTA Method" focuses on the bridge between casual scrolling and dedicated fandom.
+                Our core philosophy has always been creator-first. This means we don&apos;t just look at how many coins are being dropped, but how many recurring viewers are coming back every single night. The &quot;PTA Method&quot; focuses on the bridge between casual scrolling and dedicated fandom.
               </p>
               <div className="glass-card p-8 rounded-3xl border-primary/20 my-12">
                  <h3 className="text-lg font-black text-primary uppercase tracking-widest mb-4">Key Takeaways</h3>
@@ -86,7 +86,7 @@ export default function ArticlePage() {
                  </ul>
               </div>
               <p>
-                As we move further into the year, our commitment to providing the highest fidelity infrastructure remains unchanged. The goal isn't just to be seen; it's to be remembered.
+                As we move further into the year, our commitment to providing the highest fidelity infrastructure remains unchanged. The goal isn&apos;t just to be seen; it&apos;s to be remembered.
               </p>
            </article>
 

@@ -43,6 +43,7 @@ function ApplicationForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isConnecting, setIsConnecting] = useState(searchParams.get("connected") === "true");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [tiktokProfile, setTiktokProfile] = useState<any>(null);
 
   useEffect(() => {
@@ -133,17 +134,9 @@ function ApplicationForm() {
           </div>
           <h1 className="text-4xl font-black text-white mb-4 uppercase tracking-tighter">Application Received</h1>
           <p className="text-foreground-muted mb-12">
-            Our team will review your profile and reach out within 48 hours. 
-            In the meantime, join our elite community.
+            Our team will review your profile and reach out via email within 48 hours.
           </p>
-          <a 
-            href="https://discord.gg/peacetime" 
-            target="_blank"
-            className="block w-full py-4 bg-[#5865F2] hover:bg-[#4752C4] text-white font-black rounded-2xl transition-all duration-300 uppercase tracking-widest shadow-lg shadow-[#5865F2]/20"
-          >
-            Join the Discord
-          </a>
-          <Link href="/" className="inline-block mt-8 text-xs font-bold text-foreground-subtle hover:text-white transition-colors uppercase tracking-widest">
+          <Link href="/" className="block w-full py-4 bg-primary hover:bg-primary-dark text-white font-black rounded-2xl transition-all duration-300 uppercase tracking-widest shadow-lg shadow-primary/20">
             Back to Home
           </Link>
         </motion.div>
