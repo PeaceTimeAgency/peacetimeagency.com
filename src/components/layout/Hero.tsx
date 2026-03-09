@@ -244,6 +244,16 @@ function useHeroCanvas(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Intersection Observer to pause animation when off-screen
+    let isVisible = true;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0 } // trigger as soon as 1px is visible/hidden
+    );
+    observer.observe(canvas);
+
     const resize = () => {
       const dpr = window.devicePixelRatio || 1;
       const w   = canvas.offsetWidth;
@@ -273,17 +283,21 @@ function useHeroCanvas(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
 
     let startTime: number | null = null;
     const loop = (ts: number) => {
+      rafRef.current = requestAnimationFrame(loop);
+      
+      if (!isVisible) return; // Skip drawing when off-screen
+
       if (!startTime) startTime = ts;
       const elapsed = ts - startTime;
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
       draw(ctx, w, h, elapsed);
-      rafRef.current = requestAnimationFrame(loop);
     };
     rafRef.current = requestAnimationFrame(loop);
 
     return () => {
       cancelAnimationFrame(rafRef.current);
+      observer.disconnect();
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMouse);
     };

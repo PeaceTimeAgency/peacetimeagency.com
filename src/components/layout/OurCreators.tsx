@@ -96,7 +96,7 @@ const CreatorGrid = ({ title, desc, list, isLiveSection = false, isUserSection =
   );
 };
 
-export function OurCreators() {
+export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [liveCreators, setLiveCreators] = useState<any[]>([]);
 
@@ -112,18 +112,26 @@ export function OurCreators() {
   }, []);
 
 
+  const staffCreators = creators.filter(c => c.tier === 'staff');
+  const topCreators = creators.filter(c => c.tier === 'top').slice(0, 5);
+  const newCreators = creators.filter(c => c.tier === 'new').slice(0, 5);
+  
+  const displayCreators = isMainPage ? [...staffCreators, ...topCreators, ...newCreators] : creators;
+
   const liveHandles = liveCreators.map(lc => lc.username.toLowerCase());
-  const liveRoster = creators.filter(c => liveHandles.includes(c.handle.toLowerCase()));
+  const liveRoster = displayCreators.filter(c => liveHandles.includes(c.handle.toLowerCase()));
   
   // Extract all unique tags
-  const allTags = Array.from(new Set(creators.flatMap(c => c.tags))).sort();
+  const allTags = isMainPage 
+    ? Array.from(new Set(displayCreators.map(c => c.category))).sort()
+    : Array.from(new Set(creators.flatMap(c => c.tags))).sort();
 
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
   // Filter creators based on the selected tag
   const filteredCreators = selectedTag
-    ? creators.filter(c => c.tags.includes(selectedTag))
-    : creators;
+    ? displayCreators.filter(c => isMainPage ? c.category === selectedTag : c.tags.includes(selectedTag))
+    : displayCreators;
 
   return (
     <Section id="creators" className="relative overflow-hidden bg-background-surface border-y border-border">
@@ -133,8 +141,19 @@ export function OurCreators() {
       <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-secondary/10 blur-[100px] pointer-events-none" />
       <div className="absolute right-1/4 top-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-primary/8 blur-[100px] pointer-events-none" />
 
-      <div className="relative z-10">
-        <div className="mb-12 text-center max-w-4xl mx-auto px-4">
+      <div className="relative z-10 w-full max-w-7xl mx-auto">
+        {isMainPage && (
+          <div className="absolute top-0 left-4 md:left-8 z-50">
+            <Link 
+              href="/creators"
+              className="group flex flex-col sm:flex-row items-center sm:items-start gap-1 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition-all duration-300 text-xs sm:text-sm font-bold text-white/80 hover:text-white backdrop-blur-md"
+            >
+              <span className="text-primary group-hover:-translate-x-1 transition-transform hidden sm:inline">←</span>
+              View All Creators
+            </Link>
+          </div>
+        )}
+        <div className="mb-12 text-center max-w-4xl mx-auto px-4 pt-16 md:pt-4">
           <motion.p
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -224,11 +243,26 @@ export function OurCreators() {
                   desc="The leadership driving Peace Time Agency." 
                   list={filteredCreators.filter(c => c.tier === 'staff')} 
                 />
-                <CreatorGrid 
-                  title="Agency Creators" 
-                  desc="The talent of Peace Time Agency." 
-                  list={filteredCreators.filter(c => c.tier !== 'staff')} 
-                />
+                {!isMainPage ? (
+                  <CreatorGrid 
+                    title="Agency Creators" 
+                    desc="The talent of Peace Time Agency." 
+                    list={filteredCreators.filter(c => c.tier !== 'staff')} 
+                  />
+                ) : (
+                  <>
+                    <CreatorGrid 
+                      title="Top 5 Performing" 
+                      desc="Our highest performing creators." 
+                      list={filteredCreators.filter(c => c.tier === 'top').slice(0, 5)} 
+                    />
+                    <CreatorGrid 
+                      title="5 Newest Accepted" 
+                      desc="The latest additions to our roster." 
+                      list={filteredCreators.filter(c => c.tier === 'new').slice(0, 5)} 
+                    />
+                  </>
+                )}
               </div>
             )}
           </motion.div>

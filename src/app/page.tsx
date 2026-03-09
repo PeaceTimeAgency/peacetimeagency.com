@@ -16,7 +16,7 @@ export default function Home() {
       <WhosLiveNow />
       <Services />
       <GrowthPhases />
-      <OurCreators />
+      <OurCreators isMainPage={true} />
 
       {/* Analytics + Community side by side */}
       <Section id="system" className="bg-background-surface">

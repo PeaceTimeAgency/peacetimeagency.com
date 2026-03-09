@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { 
   MeshDistortMaterial, 
@@ -64,9 +64,27 @@ function Scene() {
 }
 
 export function Hero3DObject() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-      <Canvas>
+    <div ref={containerRef} className="absolute inset-0 z-0 pointer-events-none opacity-40">
+      <Canvas frameloop={isVisible ? "always" : "demand"}>
         <Scene />
       </Canvas>
     </div>
