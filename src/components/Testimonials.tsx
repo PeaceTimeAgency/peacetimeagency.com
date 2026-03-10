@@ -5,26 +5,7 @@ import { Section } from '@/components/layout/Section';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Volume2, VolumeX } from 'lucide-react';
 
-const testimonials = [
-    {
-        id: 1,
-        creatorName: "Alex Rivers",
-        quote: "Peace Time gave me the tools to hit Top 10 on the Daily Rankings.",
-        videoSrc: "https://videos.pexels.com/video-files/3205315/3205315-uhd_2560_1440_25fps.mp4",
-    },
-    {
-        id: 2,
-        creatorName: "Sarah Smiles",
-        quote: "The zero-pressure policy changed everything. I stream on my own terms and doubled my earnings.",
-        videoSrc: "https://videos.pexels.com/video-files/5267077/5267077-hd_1920_1080_30fps.mp4",
-    },
-    {
-        id: 3,
-        creatorName: "Tech Guru",
-        quote: "Best technical support team in the game. Flawless OBS integration.",
-        videoSrc: "https://videos.pexels.com/video-files/5481744/5481744-hd_1920_1080_30fps.mp4",
-    }
-];
+const testimonials: any[] = [];
 
 export default function Testimonials() {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -62,6 +43,8 @@ export default function Testimonials() {
             if (video) video.muted = !isMuted;
         });
     };
+
+    if (testimonials.length === 0) return null;
 
     return (
         <Section id="testimonials" className="bg-background overflow-hidden relative border-t border-border py-24">

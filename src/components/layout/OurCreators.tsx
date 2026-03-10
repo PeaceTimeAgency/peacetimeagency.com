@@ -245,44 +245,50 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            {selectedTag ? (
-              <CreatorGrid
-                title={`${selectedTag} Creators`}
-                desc={`Showing creators specialized in ${selectedTag}.`}
-                list={filteredCreators}
-              />
-            ) : (
-              <div className="flex flex-col">
+            {filteredCreators.length > 0 ? (
+              selectedTag ? (
                 <CreatorGrid
-                  title="Staff Category"
-                  desc="The leadership driving Peace Time Agency."
-                  list={filteredCreators.filter(c => c.tier === 'staff')}
+                  title={`${selectedTag} Creators`}
+                  desc={`Showing creators specialized in ${selectedTag}.`}
+                  list={filteredCreators}
                 />
-                <CreatorGrid
-                  title="Recruiters"
-                  desc="Talent acquisition."
-                  list={filteredCreators.filter(c => c.tier === 'recruiter')}
-                />
-                {!isMainPage ? (
+              ) : (
+                <div className="flex flex-col">
                   <CreatorGrid
-                    title="Creators Category"
-                    desc="The talent of Peace Time Agency."
-                    list={filteredCreators.filter(c => c.tier !== 'staff' && c.tier !== 'recruiter')}
+                    title="Staff Category"
+                    desc="The leadership driving Peace Time Agency."
+                    list={filteredCreators.filter(c => c.tier === 'staff')}
                   />
-                ) : (
-                  <>
+                  <CreatorGrid
+                    title="Recruiters"
+                    desc="Talent acquisition."
+                    list={filteredCreators.filter(c => c.tier === 'recruiter')}
+                  />
+                  {!isMainPage ? (
                     <CreatorGrid
-                      title="Top 5 Performing"
-                      desc="Our highest performing creators."
-                      list={filteredCreators.filter(c => c.tier === 'top').slice(0, 5)}
+                      title="Creators Category"
+                      desc="The talent of Peace Time Agency."
+                      list={filteredCreators.filter(c => c.tier !== 'staff' && c.tier !== 'recruiter')}
                     />
-                    <CreatorGrid
-                      title="5 Newest Accepted"
-                      desc="The latest additions to our roster."
-                      list={filteredCreators.filter(c => c.tier === 'new').slice(0, 5)}
-                    />
-                  </>
-                )}
+                  ) : (
+                    <>
+                      <CreatorGrid
+                        title="Top 5 Performing"
+                        desc="Our highest performing creators."
+                        list={filteredCreators.filter(c => c.tier === 'top').slice(0, 5)}
+                      />
+                      <CreatorGrid
+                        title="5 Newest Accepted"
+                        desc="The latest additions to our roster."
+                        list={filteredCreators.filter(c => c.tier === 'new').slice(0, 5)}
+                      />
+                    </>
+                  )}
+                </div>
+              )
+            ) : (
+              <div className="text-center py-24 glass-card rounded-3xl border border-dashed border-white/10">
+                <p className="text-white/40 font-medium">No creators are currently listed in this category. Check back soon!</p>
               </div>
             )}
           </motion.div>
