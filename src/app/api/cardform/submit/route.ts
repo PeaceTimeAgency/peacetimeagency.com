@@ -22,8 +22,12 @@ export async function POST(req: NextRequest) {
     if (selectedPlatforms && selectedPlatforms.length > 0) {
       socialLinksString = selectedPlatforms.map((p: string) => {
         const detail = socialDetails[p];
+        const platformName = p.toUpperCase();
         const label = detail.label ? ` (${detail.label})` : "";
-        return `**${p.toUpperCase()}${label}:** ${detail.username} - [Link](${detail.link})`;
+        const usernameStr = detail.username ? ` ${detail.username}` : "";
+        const linkStr = detail.link ? ` - [Link](${detail.link})` : "";
+        
+        return `**${platformName}${label}:**${usernameStr}${linkStr}`;
       }).join("\n");
     }
 

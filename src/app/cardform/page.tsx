@@ -374,39 +374,59 @@ function CreatorCardForm() {
                             <span className="text-sm font-bold uppercase">{platform?.name}</span>
                           </div>
                           
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {platformId === "weblink" && (
-                              <div className="space-y-1">
-                                <label className="text-[10px] font-bold text-white/50 uppercase">Link Label</label>
-                                <input
-                                  type="text"
-                                  className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-xs text-white focus:outline-none focus:border-primary/30"
-                                  placeholder="e.g. My Portfolio"
-                                  value={formData.socialDetails[platformId]?.label || ""}
-                                  onChange={(e) => handleSocialDetailChange(platformId, "label", e.target.value)}
-                                />
-                              </div>
+                          <div className={`grid grid-cols-1 ${["playstation", "steam", "xbox", "epicgames", "spotify"].includes(platformId) ? "md:grid-cols-1" : "md:grid-cols-2"} gap-4`}>
+                            {platformId === "weblink" ? (
+                              <>
+                                <div className="space-y-1">
+                                  <label className="text-[10px] font-bold text-white/50 uppercase">Link Label <span className="text-primary">*</span></label>
+                                  <input
+                                    type="text"
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-xs text-white focus:outline-none focus:border-primary/30"
+                                    placeholder="e.g. My Portfolio"
+                                    value={formData.socialDetails[platformId]?.label || ""}
+                                    onChange={(e) => handleSocialDetailChange(platformId, "label", e.target.value)}
+                                    required
+                                  />
+                                </div>
+                                <div className="space-y-1">
+                                  <label className="text-[10px] font-bold text-white/50 uppercase">Actual URL <span className="text-primary">*</span></label>
+                                  <input
+                                    type="url"
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-xs text-white focus:outline-none focus:border-primary/30"
+                                    placeholder="https://..."
+                                    value={formData.socialDetails[platformId]?.link || ""}
+                                    onChange={(e) => handleSocialDetailChange(platformId, "link", e.target.value)}
+                                    required
+                                  />
+                                </div>
+                              </>
+                            ) : (
+                              <>
+                                <div className="space-y-1">
+                                  <label className="text-[10px] font-bold text-white/50 uppercase">Username / Handle <span className="text-primary">*</span></label>
+                                  <input
+                                    type="text"
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-xs text-white focus:outline-none focus:border-primary/30"
+                                    placeholder="Username"
+                                    value={formData.socialDetails[platformId]?.username || ""}
+                                    onChange={(e) => handleSocialDetailChange(platformId, "username", e.target.value)}
+                                    required
+                                  />
+                                </div>
+                                {!["playstation", "steam", "xbox", "epicgames", "spotify"].includes(platformId) && (
+                                  <div className="space-y-1">
+                                    <label className="text-[10px] font-bold text-white/50 uppercase">Profile Link (Optional)</label>
+                                    <input
+                                      type="url"
+                                      className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-xs text-white focus:outline-none focus:border-primary/30"
+                                      placeholder="https://..."
+                                      value={formData.socialDetails[platformId]?.link || ""}
+                                      onChange={(e) => handleSocialDetailChange(platformId, "link", e.target.value)}
+                                    />
+                                  </div>
+                                )}
+                              </>
                             )}
-                            <div className="space-y-1">
-                              <label className="text-[10px] font-bold text-white/50 uppercase">Username / Handle</label>
-                              <input
-                                type="text"
-                                className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-xs text-white focus:outline-none focus:border-primary/30"
-                                placeholder="Username"
-                                value={formData.socialDetails[platformId]?.username || ""}
-                                onChange={(e) => handleSocialDetailChange(platformId, "username", e.target.value)}
-                              />
-                            </div>
-                            <div className="space-y-1">
-                              <label className="text-[10px] font-bold text-white/50 uppercase">Profile Link</label>
-                              <input
-                                type="url"
-                                className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-xs text-white focus:outline-none focus:border-primary/30"
-                                placeholder="https://..."
-                                value={formData.socialDetails[platformId]?.link || ""}
-                                onChange={(e) => handleSocialDetailChange(platformId, "link", e.target.value)}
-                              />
-                            </div>
                           </div>
                         </div>
                       );
