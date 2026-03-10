@@ -202,8 +202,8 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
               <button
                 onClick={() => setSelectedTag(null)}
                 className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 border ${selectedTag === null
-                    ? "bg-primary text-white border-primary shadow-neon-primary"
-                    : "bg-white/5 text-white/60 border-white/10 hover:bg-white/10 hover:text-white"
+                  ? "bg-primary text-white border-primary shadow-neon-primary"
+                  : "bg-white/5 text-white/60 border-white/10 hover:bg-white/10 hover:text-white"
                   }`}
               >
                 All Creators
@@ -213,8 +213,8 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
                   key={tag}
                   onClick={() => setSelectedTag(tag)}
                   className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 border ${selectedTag === tag
-                      ? "bg-primary text-white border-primary shadow-neon-primary"
-                      : "bg-white/5 text-white/60 border-white/10 hover:bg-white/10 hover:text-white"
+                    ? "bg-primary text-white border-primary shadow-neon-primary"
+                    : "bg-white/5 text-white/60 border-white/10 hover:bg-white/10 hover:text-white"
                     }`}
                 >
                   {tag}
@@ -243,8 +243,8 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
                   list={filteredCreators.filter(c => c.tier === 'staff')}
                 />
                 <CreatorGrid
-                  title="Recruiter Category"
-                  desc="Talent acquisition and scouting."
+                  title="Recruiters"
+                  desc="Talent acquisition."
                   list={filteredCreators.filter(c => c.tier === 'recruiter')}
                 />
                 {!isMainPage ? (

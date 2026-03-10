@@ -58,23 +58,22 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 export function FAQ() {
   return (
     <Section id="faq" className="bg-background-surface">
-      <div className="mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-start">
-        <div className="w-full">
-          <div className="text-left mb-10">
-            <p className="text-xs font-semibold text-primary tracking-[0.2em] uppercase mb-3">Got Questions</p>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-foreground">
-              Frequently <span className="text-gradient-primary">Asked</span>
+      <div className="mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-stretch">
+        <div className="w-full flex flex-col justify-center">
+          <div className="text-center md:text-left mb-10">
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-foreground uppercase">
+              Got <span className="text-gradient-primary">Questions?</span>
             </h2>
           </div>
 
-          <div className="glass-card rounded-2xl px-6">
+          <div className="glass-card rounded-2xl px-6 h-full flex flex-col justify-center">
             {faqs.map((faq, i) => (
               <FAQItem key={i} q={faq.q} a={faq.a} />
             ))}
           </div>
         </div>
 
-        <div className="w-full min-h-[500px]">
+        <div className="w-full h-full flex flex-col justify-center">
           <PreInterview />
         </div>
       </div>
@@ -85,18 +84,19 @@ export function FAQ() {
           __html: `
           @keyframes meteor {
             0% { transform: rotate(215deg) translateX(0); opacity: 1; }
-            70% { opacity: 1; }
-            100% { transform: rotate(215deg) translateX(-1000px); opacity: 0; }
+            40% { opacity: 0.8; }
+            100% { transform: rotate(215deg) translateX(-1500px); opacity: 0; }
           }
           .meteor-tail {
             position: absolute;
             transform: rotate(215deg);
-            width: 150px;
+            width: 250px;
             height: 1px;
-            background: linear-gradient(90deg, rgba(255,60,95,0) 0%, rgba(255,60,95,0.8) 100%);
-            animation: meteor 4s linear infinite;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,1) 100%);
+            animation: meteor 3s ease-in infinite;
             opacity: 0;
             z-index: 1;
+            box-shadow: 0 0 8px 1px rgba(255,255,255,0.4);
           }
           .meteor-tail::before {
             content: '';
@@ -104,11 +104,11 @@ export function FAQ() {
             right: 0;
             top: 50%;
             transform: translateY(-50%);
-            width: 4px;
-            height: 4px;
+            width: 3px;
+            height: 3px;
             border-radius: 50%;
             background: #fff;
-            box-shadow: 0 0 10px 2px rgba(255,60,95,0.6);
+            box-shadow: 0 0 15px 3px rgba(255,255,255,0.8);
           }
         ` }} />
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">

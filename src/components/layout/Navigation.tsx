@@ -8,8 +8,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 const NAV_LINKS = [
   { name: "Creators", href: "/creators" },
   { name: "News", href: "/news" },
-  { name: "Services", href: "/#services" },
-  { name: "Community", href: "/#community" },
+  { name: "Recruiters", href: "/recruiters" },
   { name: "FAQ", href: "/#faq" },
 ];
 
@@ -24,11 +23,10 @@ export function Navigation() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
           ? "glass border-b border-white/[0.06] shadow-[0_1px_24px_rgba(0,0,0,0.4)]"
           : "bg-transparent border-b border-transparent"
-      }`}
+        }`}
     >
       <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
 
@@ -59,7 +57,7 @@ export function Navigation() {
         {/* CTA */}
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          
+
           <Link href="/api/auth/tiktok">
             <Button
               size="sm"
