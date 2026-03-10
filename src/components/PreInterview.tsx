@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function PreInterview() {
-  const [formData, setFormData] = useState({ name: '', tiktok: '', email: '' });
+  const [formData, setFormData] = useState({ name: '', tiktok: '', email: '', discordId: '' });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.tiktok || !formData.email) return;
+    if (!formData.name || !formData.tiktok || !formData.email || !formData.discordId) return;
 
     setStatus('submitting');
     try {
@@ -96,6 +96,17 @@ export default function PreInterview() {
                   className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/50 transition-all"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  disabled={status === 'submitting'}
+                  required
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Discord ID"
+                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/50 transition-all"
+                  value={formData.discordId}
+                  onChange={(e) => setFormData({ ...formData, discordId: e.target.value })}
                   disabled={status === 'submitting'}
                   required
                 />

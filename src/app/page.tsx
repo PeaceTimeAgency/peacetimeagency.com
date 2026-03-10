@@ -19,7 +19,7 @@ export default function Home() {
       <Testimonials />
 
       <FAQ />
-      <Footer />
+      <Footer showSocials={false} />
     </main>
   );
 }

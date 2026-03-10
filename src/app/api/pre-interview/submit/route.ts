@@ -9,7 +9,7 @@ const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, tiktok, email } = body;
+    const { name, tiktok, email, discordId } = body;
 
     const emailHtml = `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
           <h3 style="margin-top: 0; color: #555;">Contact Information</h3>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>TikTok Handle:</strong> ${tiktok}</p>
+          <p><strong>Discord ID:</strong> ${discordId}</p>
           <p><strong>Email:</strong> ${email}</p>
         </div>
         
@@ -41,7 +42,7 @@ export async function POST(req: NextRequest) {
     const data = await resend.emails.send({
       from: "Agency Intake <onboarding@resend.dev>",
       to: [AGENCY_EMAIL],
-      subject: `Pre-Interview: ${name} (${tiktok})`,
+      subject: `Pre-Interview: ${name} (${tiktok} / ${discordId})`,
       html: emailHtml,
     });
 

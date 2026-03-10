@@ -166,12 +166,12 @@ function CreatorCardForm() {
             </svg>
           </div>
           <h1 className="text-4xl font-black text-white mb-4 uppercase tracking-tighter">Stay Hydrated! 🚀</h1>
-          <p className="text-foreground-muted mb-12">
-            Thanks for submitting! Your creator card will be processed soon. Check Discord for updates.
+          <p className="text-foreground-muted mb-4 font-black text-primary uppercase tracking-[0.3em]">
+            STAY HYDRATED! 🚀
           </p>
-          <Link href="/" className="block w-full py-4 bg-primary hover:bg-primary-dark text-white font-black rounded-2xl transition-all duration-300 uppercase tracking-widest shadow-lg shadow-primary/20">
-            Back to Agency
-          </Link>
+          <p className="text-white/60 text-sm leading-relaxed">
+            Your creator card will be processed soon. Please stay on this page or check Discord for updates.
+          </p>
         </motion.div>
       </main>
     );
