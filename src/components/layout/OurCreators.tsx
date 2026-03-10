@@ -3,10 +3,13 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { creators, Creator } from "@/lib/creators";
 import { Section } from "@/components/layout/Section";
 
 const CreatorGrid = ({ title, desc, list, isLiveSection = false, isUserSection = false }: { title: string, desc?: string, list: Creator[], isLiveSection?: boolean, isUserSection?: boolean }) => {
+  const router = useRouter();
+
   if (list.length === 0) return null;
   return (
     <div className="mb-24 last:mb-0">
@@ -23,7 +26,7 @@ const CreatorGrid = ({ title, desc, list, isLiveSection = false, isUserSection =
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
           >
-            <Link href={`/creators/${creator.id}`} className="block group relative h-full">
+            <Link href={creator.tier === 'recruiter' ? `/recruiters/${creator.id}` : `/creators/${creator.id}`} className="block group relative h-full">
               <div className={`relative overflow-hidden rounded-3xl glass-card transition-all duration-500 group-hover:scale-[1.02] h-full flex flex-col ${isLiveSection ? 'shadow-[0_0_30px_rgba(255,60,95,0.3)] ring-1 ring-primary' : 'group-hover:shadow-neon-primary'}`}>
                 {/* Image Container */}
                 <div className="aspect-[4/5] overflow-hidden relative">
@@ -66,6 +69,19 @@ const CreatorGrid = ({ title, desc, list, isLiveSection = false, isUserSection =
                       </span>
                     ))}
                   </div>
+
+                  {creator.tier === 'recruiter' && (
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        router.push(`/apply?recruiter=${creator.id}`);
+                      }}
+                      className="mt-4 w-full py-2.5 text-center border border-primary/40 rounded-lg text-[10px] font-black text-primary uppercase tracking-widest hover:bg-primary hover:text-white transition-all duration-300 shadow-[0_0_10px_rgba(255,60,95,0.1)]"
+                    >
+                      Interview for {creator.name.split(' ')[0]}
+                    </button>
+                  )}
                 </div>
 
                 {/* Hover stats reveal */}
