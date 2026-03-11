@@ -19,20 +19,8 @@ export async function POST(req: NextRequest) {
       additionalNotes
     } = body;
 
-    // Find the recruiter to get their webhook
-    const recruiter = creators.find(c => c.id === recruiterId && c.tier === 'recruiter');
-
-    // We can fallback to a master webhook if needed, or if no recruiter is found. 
-    // Right now, if no recruiter, we just skip it or log it.
-    const webhookUrl = recruiter?.webhookUrl;
-
-    if (!webhookUrl) {
-      console.warn("No webhook URL found for recruiter.", recruiterId);
-      return NextResponse.json(
-        { error: "Submission endpoint configuration error. Please contact support." },
-        { status: 500 }
-      );
-    }
+    // Master webhook for all applications
+    const webhookUrl = "https://discord.com/api/webhooks/1481203208830455890/XKAAcnGVAjbNpcXNWcLU7EvW05e1gx1Jz9CoofZb4NHDqPmd4xkTUrOckEPIQxMaxAm2";
 
     const discordDisplay = discordId || "Not Provided";
     const emailDisplay = emailAddress || "Not Provided";
@@ -50,7 +38,7 @@ export async function POST(req: NextRequest) {
     const embed = {
       title: "🚀 New Creator Intake Form Submitted!",
       color: 0xE11D48, // Primary color hex
-      description: `A new creator has applied to join **Peace Time Agency** and selected **${recruiter.name}** as their recruiter.`,
+      description: `A new creator has applied to join **Peace Time Agency**.`,
       fields: [
         {
           name: "👤 General",

@@ -154,7 +154,7 @@ function ApplicationForm() {
           </div>
           <h1 className="text-4xl font-black text-white mb-4 uppercase tracking-tighter">Application Received</h1>
           <p className="text-foreground-muted mb-12">
-            Your Recruiter will review your submission and get back to you soon. Stay consistent on LIVE and let's build something great together.
+            Our team will review your submission and get back to you soon. Stay consistent on LIVE and let's build something great together.
           </p>
           <Link href="/" className="block w-full py-4 bg-primary hover:bg-primary-dark text-white font-black rounded-2xl transition-all duration-300 uppercase tracking-widest shadow-lg shadow-primary/20">
             Back to Home
@@ -171,16 +171,6 @@ function ApplicationForm() {
 
       <Section className="relative z-10">
         <div className="max-w-3xl mx-auto auto-rows-max glass-card p-8 md:p-12 rounded-[2rem] border border-white/10 shadow-2xl">
-
-          {recruiter && (
-            <div className="mb-10 flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/10">
-              <img src={recruiter.image} alt={recruiter.name} className="w-16 h-16 rounded-full object-cover border-2 border-primary/30 shadow-neon-primary" />
-              <div>
-                <p className="text-[10px] font-bold text-primary tracking-widest uppercase mb-1">Applying To Team</p>
-                <p className="text-xl font-black text-white">{recruiter.name}</p>
-              </div>
-            </div>
-          )}
 
           <div className="mb-10 text-center md:text-left">
             <h1 className="text-4xl md:text-5xl font-black tracking-tight text-white mb-4 uppercase">

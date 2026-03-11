@@ -402,7 +402,7 @@ export function Hero() {
         {/* Headline */}
         <motion.h1
           custom={1} initial="hidden" animate="show" variants={fadeUp}
-          className="text-5xl font-black tracking-tighter sm:text-6xl md:text-7xl lg:text-[88px] leading-[0.93]"
+          className="text-5xl font-black tracking-tighter sm:text-6xl md:text-7xl lg:text-[88px] leading-[0.93] text-white"
         >
             <span
               style={{
@@ -444,7 +444,7 @@ export function Hero() {
           className="flex flex-col gap-4 sm:flex-row items-center justify-center pt-1 w-full"
         >
           {/* Primary CTA */}
-          <Link href="/recruiters"
+          <Link href="/apply"
             className="group relative inline-flex items-center justify-center h-[52px] px-8 rounded-xl font-bold text-sm text-white overflow-hidden transition-all duration-300"
             style={{
               background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%)',
@@ -501,7 +501,7 @@ export function Hero() {
                 }`}
             >
               <span
-                className="text-2xl md:text-3xl font-black transition-all duration-300"
+                className="text-2xl md:text-3xl font-black transition-all duration-300 text-white"
                 style={{
                   background: 'linear-gradient(135deg, #FFFFFF 30%, rgba(167,139,250,0.8) 100%)',
                   WebkitBackgroundClip: 'text',

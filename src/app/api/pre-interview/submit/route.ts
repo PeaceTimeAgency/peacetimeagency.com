@@ -1,53 +1,51 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
-
-const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const AGENCY_EMAIL = process.env.AGENCY_EMAIL || "applications@peacetimeagency.com";
-
-const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { name, tiktok, email, discordId } = body;
 
-    const emailHtml = `
-      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
-        <h2 style="color: #E11D48; border-bottom: 2px solid #E11D48; padding-bottom: 10px;">
-          👀 Pre-Interview Request
-        </h2>
-        <p>A creator has requested a pre-interview discussion with <strong>Peace Time Agency</strong>.</p>
-        
-        <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-          <h3 style="margin-top: 0; color: #555;">Contact Information</h3>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>TikTok Handle:</strong> ${tiktok}</p>
-          <p><strong>Discord ID:</strong> ${discordId}</p>
-          <p><strong>Email:</strong> ${email}</p>
-        </div>
-        
-        <p style="font-size: 12px; color: #999; text-align: center; margin-top: 30px;">
-          Peace Time Agency • Talent Intake System
-        </p>
-      </div>
-    `;
+    // Discord Webhook for Pre-Interview Requests
+    const webhookUrl = "https://discord.com/api/webhooks/1481204206307250220/UvzLEBPPQd9oBBHpzwAnQ6uBzAN599WKb11zBEk968OiVoACm5YKU2CNkvegL0onvrgb";
 
-    if (!resend) {
-      console.warn("RESEND_API_KEY is not set. Mocking email submission for development.");
-      console.log("Mock Pre-Interview Email:\\n", emailHtml);
-      await new Promise(r => setTimeout(r, 800));
-      return NextResponse.json({ success: true, message: "Mock submission successful" });
-    }
+    const embed = {
+      title: "👀 New Pre-Interview Request!",
+      color: 0xE11D48, // Primary color hex
+      description: `A creator has requested a pre-interview discussion with **Peace Time Agency**.`,
+      fields: [
+        {
+          name: "👤 Candidate",
+          value: `**Name:** ${name}\n**TikTok Handle:** ${tiktok}`,
+          inline: false
+        },
+        {
+          name: "📞 Contact Details",
+          value: `**Discord ID:** ${discordId}\n**Email:** ${email}`,
+          inline: false
+        }
+      ],
+      timestamp: new Date().toISOString(),
+      footer: {
+        text: "Peace Time Agency • Talent Intake System",
+      }
+    };
 
-    const data = await resend.emails.send({
-      from: "Agency Intake <onboarding@resend.dev>",
-      to: [AGENCY_EMAIL],
-      subject: `Pre-Interview: ${name} (${tiktok} / ${discordId})`,
-      html: emailHtml,
+    const discordPayload = {
+      embeds: [embed]
+    };
+
+    // Send the POST request to the Discord Webhook
+    const discordResponse = await fetch(webhookUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(discordPayload),
     });
 
-    if (data.error) {
-       throw new Error(`Resend Error: ${data.error.message}`);
+    if (!discordResponse.ok) {
+      console.error("Discord Webhook Error:", discordResponse.status, discordResponse.statusText);
+      throw new Error(`Discord Webhook failed with status ${discordResponse.status}`);
     }
 
     return NextResponse.json({ success: true });

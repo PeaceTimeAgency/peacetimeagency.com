@@ -68,10 +68,10 @@ export function Navigation() {
 
           {!isCardForm && (
             <>
-              <Link href="/recruiters">
+              <Link href="/apply">
                 <Button
                   size="sm"
-                  className="hidden sm:inline-flex rounded-lg px-5 h-9 font-semibold text-sm bg-primary hover:bg-primary-dark text-foreground-inverse transition-all duration-200 hover:shadow-neon-primary"
+                  className="hidden sm:inline-flex rounded-lg px-5 h-9 font-semibold text-sm bg-primary hover:bg-primary-dark text-white transition-all duration-200 hover:shadow-neon-primary"
                 >
                   Join the Roster
                 </Button>
@@ -117,8 +117,8 @@ export function Navigation() {
                 </Link>
               ))}
               <div className="pt-2 pb-1 border-t border-white/[0.06] mt-2">
-                <Link href="/recruiters" onClick={() => setMobileMenuOpen(false)}>
-                  <Button className="w-full rounded-lg h-10 font-semibold text-sm bg-primary hover:bg-primary-dark text-foreground-inverse transition-all duration-200">
+                <Link href="/apply" onClick={() => setMobileMenuOpen(false)}>
+                  <Button className="w-full rounded-lg h-10 font-semibold text-sm bg-primary hover:bg-primary-dark text-white transition-all duration-200">
                     Join the Roster
                   </Button>
                 </Link>
