@@ -51,7 +51,7 @@ export default async function RecruiterPage({ params }: RecruiterPageProps) {
 
                     {/* Left Column: Image */}
                     <div className="lg:col-span-5 flex flex-col h-full">
-                        <div className="relative w-full h-full min-h-[500px] lg:min-h-[700px] rounded-[2rem] overflow-hidden glass-card shadow-lg shadow-black/50 border border-white/10 group">
+                        <div className="relative w-full h-full min-h-[500px] lg:min-h-[700px] rounded-[2rem] overflow-hidden glass-card shadow-lg shadow-black/50 border border-foreground/10 group">
                             <img
                                 src={creator.image}
                                 alt={creator.name}
@@ -61,7 +61,7 @@ export default async function RecruiterPage({ params }: RecruiterPageProps) {
 
                             {/* Category Badge */}
                             <div className="absolute top-6 left-6 flex items-center gap-2 z-10">
-                                <span className="px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-[10px] font-black text-primary uppercase tracking-widest shadow-[0_0_15px_rgba(255,60,95,0.4)]">
+                                <span className="px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-foreground/10 text-[10px] font-black text-primary uppercase tracking-widest shadow-[0_0_15px_rgba(255,60,95,0.4)]">
                                     {creator.category}
                                 </span>
                             </div>
@@ -74,7 +74,7 @@ export default async function RecruiterPage({ params }: RecruiterPageProps) {
 
                         <div className="mb-8">
                             <p className="text-xs font-semibold text-primary tracking-[0.2em] uppercase mb-4">Official Recruiter</p>
-                            <h1 className="text-5xl lg:text-7xl font-black text-white tracking-tight mb-2 flex items-center gap-4 flex-wrap">
+                            <h1 className="text-5xl lg:text-7xl font-black text-foreground tracking-tight mb-2 flex items-center gap-4 flex-wrap">
                                 {creator.name}
                             </h1>
                             <a
@@ -90,19 +90,19 @@ export default async function RecruiterPage({ params }: RecruiterPageProps) {
                         {/* Social Links */}
                         <div className="mb-10 flex gap-4">
                             {creator.socials.tiktok && (
-                                <a href={creator.socials.tiktok} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-primary/20 hover:border-primary/50 hover:text-primary transition-all text-white/60">
+                                <a href={creator.socials.tiktok} target="_blank" rel="noopener noreferrer" className="p-3 bg-foreground/5 border border-foreground/10 rounded-full hover:bg-primary/20 hover:border-primary/50 hover:text-primary transition-all text-foreground/60">
                                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 15.68a6.34 6.34 0 006.27 6.36 6.33 6.33 0 006.25-6.32V8.75a8.31 8.31 0 003.5.88V6.26a6.84 6.84 0 00-1.43-.1 6.89 6.89 0 00-0.49.03z"></path>
                                     </svg>
                                 </a>
                             )}
                             {creator.socials.instagram && (
-                                <a href={creator.socials.instagram} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-pink-500/20 hover:border-pink-500/50 hover:text-pink-400 transition-all text-white/60">
+                                <a href={creator.socials.instagram} target="_blank" rel="noopener noreferrer" className="p-3 bg-foreground/5 border border-foreground/10 rounded-full hover:bg-pink-500/20 hover:border-pink-500/50 hover:text-pink-400 transition-all text-foreground/60">
                                     <Instagram className="w-5 h-5" />
                                 </a>
                             )}
                             {creator.socials.twitter && (
-                                <a href={creator.socials.twitter} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-blue-500/20 hover:border-blue-500/50 hover:text-blue-400 transition-all text-white/60">
+                                <a href={creator.socials.twitter} target="_blank" rel="noopener noreferrer" className="p-3 bg-foreground/5 border border-foreground/10 rounded-full hover:bg-blue-500/20 hover:border-blue-500/50 hover:text-blue-400 transition-all text-foreground/60">
                                     <Twitter className="w-5 h-5" />
                                 </a>
                             )}
@@ -110,7 +110,7 @@ export default async function RecruiterPage({ params }: RecruiterPageProps) {
 
                         <div className="mb-10">
                             <h3 className="text-sm font-semibold text-foreground-muted uppercase tracking-widest mb-4">About Me</h3>
-                            <p className="text-lg text-white/80 leading-relaxed font-medium">
+                            <p className="text-lg text-foreground/80 leading-relaxed font-medium">
                                 {creator.description}
                             </p>
                         </div>
@@ -121,7 +121,7 @@ export default async function RecruiterPage({ params }: RecruiterPageProps) {
                                 {creator.tags.map(tag => (
                                     <span
                                         key={tag}
-                                        className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm font-bold text-white/70 uppercase tracking-wider"
+                                        className="px-4 py-2 rounded-lg bg-foreground/5 border border-foreground/10 text-sm font-bold text-foreground/70 uppercase tracking-wider"
                                     >
                                         {tag}
                                     </span>
@@ -134,22 +134,22 @@ export default async function RecruiterPage({ params }: RecruiterPageProps) {
                             <h3 className="text-sm font-semibold text-foreground-muted uppercase tracking-widest mb-4">Portfolio Stats</h3>
                             <div className="grid grid-cols-2 gap-4">
 
-                                <div className="p-5 rounded-2xl bg-white/5 border border-white/10 glass-panel">
+                                <div className="p-5 rounded-2xl bg-foreground/5 border border-foreground/10 glass-panel">
                                     <div className="flex items-center gap-2 mb-2">
                                         <Users className="w-4 h-4 text-primary" />
-                                        <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Followers</span>
+                                        <span className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest">Followers</span>
                                     </div>
-                                    <div className="text-2xl font-black text-white">{creator.stats.followers}</div>
+                                    <div className="text-2xl font-black text-foreground">{creator.stats.followers}</div>
                                 </div>
 
                             </div>
                         </div>
 
                         {/* Interview CTA */}
-                        <div className="pt-8 border-t border-white/10">
+                        <div className="pt-8 border-t border-foreground/10">
                             <Link
                                 href={`/apply?recruiter=${creator.id}`}
-                                className="inline-flex items-center justify-center h-16 px-10 rounded-xl font-black text-base text-white bg-primary hover:bg-primary-dark transition-all duration-300 hover:shadow-neon-primary uppercase tracking-widest w-full sm:w-auto shadow-xl shadow-primary/20"
+                                className="inline-flex items-center justify-center h-16 px-10 rounded-xl font-black text-base text-foreground-inverse bg-primary hover:bg-primary-dark transition-all duration-300 hover:shadow-neon-primary uppercase tracking-widest w-full sm:w-auto shadow-xl shadow-primary/20"
                             >
                                 Interview for {creator.name}
                             </Link>

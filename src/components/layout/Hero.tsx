@@ -318,7 +318,7 @@ const stats = [
   { value: '24/7', label: 'Creator Support System' },
   { value: 'Top Tier', label: 'TikTok LIVE Creator Network' },
   { value: 'Millions', label: 'LIVE Viewers Reached' },
-  { value: '250+', label: 'Active Creators' },
+  { value: '147', label: 'Active Members' },
 ];
 
 import { Hero3DObject } from "@/components/Hero3DObject";
@@ -330,7 +330,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#01020A] pt-20"
+      className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-background pt-20"
       style={{ isolation: 'isolate' }}
     >
       {/* ── 3D Visual Layer ────────────────────────────────────── */}
@@ -375,9 +375,9 @@ export function Hero() {
           custom={0} initial="hidden" animate="show" variants={fadeUp}
           className="inline-flex items-center gap-2.5 rounded-full px-5 py-2 text-xs font-bold tracking-[0.22em] uppercase"
           style={{
-            background: 'linear-gradient(135deg, rgba(255,60,95,0.12) 0%, rgba(167,139,250,0.08) 100%)',
-            border: '1px solid rgba(255,60,95,0.28)',
-            boxShadow: '0 0 24px rgba(255,60,95,0.15), inset 0 1px 0 rgba(255,255,255,0.06)',
+            background: 'linear-gradient(135deg, color-mix(in srgb, var(--color-primary), transparent 88%) 0%, color-mix(in srgb, var(--color-secondary), transparent 92%) 100%)',
+            border: '1px solid color-mix(in srgb, var(--color-primary), transparent 72%)',
+            boxShadow: '0 0 24px color-mix(in srgb, var(--color-primary), transparent 85%), inset 0 1px 0 color-mix(in srgb, var(--color-foreground), transparent 94%)',
           }}
         >
           <span className="relative flex h-2 w-2" aria-hidden="true">
@@ -404,14 +404,15 @@ export function Hero() {
           custom={1} initial="hidden" animate="show" variants={fadeUp}
           className="text-5xl font-black tracking-tighter sm:text-6xl md:text-7xl lg:text-[88px] leading-[0.93]"
         >
-          <span
-            style={{
-              background: 'linear-gradient(180deg, #FFFFFF 0%, rgba(210,225,255,0.82) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
+            <span
+              style={{
+                background: 'linear-gradient(180deg, var(--color-foreground) 0%, color-mix(in srgb, var(--color-foreground), transparent 18%) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                textShadow: '0 0 1px rgba(0,0,0,0.8)',
+              }}
+            >
             The Creator Agency
           </span>
           <br />
@@ -431,10 +432,10 @@ export function Hero() {
         {/* Subheadline */}
         <motion.p
           custom={2} initial="hidden" animate="show" variants={fadeUp}
-          className="mx-auto max-w-xl text-base sm:text-lg text-white/50 leading-relaxed"
+          className="mx-auto max-w-xl text-base sm:text-lg text-foreground/50 leading-relaxed [text-shadow:0_0_1px_rgba(0,0,0,0.8)]"
         >
           We provide the infrastructure, strategy, and community to help you grow on your own terms.{' '}
-          <span className="text-white/70">No quotas. No pressure. No predatory contracts.</span>
+          <span className="text-foreground/70">No quotas. No pressure. No predatory contracts.</span>
         </motion.p>
 
         {/* CTAs */}
@@ -444,13 +445,13 @@ export function Hero() {
         >
           {/* Primary CTA */}
           <Link href="/recruiters"
-            className="group relative inline-flex items-center justify-center h-[52px] px-8 rounded-xl font-bold text-sm text-white overflow-hidden transition-all duration-300"
+            className="group relative inline-flex items-center justify-center h-[52px] px-8 rounded-xl font-bold text-sm text-foreground-inverse overflow-hidden transition-all duration-300"
             style={{
-              background: 'linear-gradient(135deg, #FF3C5F 0%, #E0244C 100%)',
-              boxShadow: '0 0 0 1px rgba(255,60,95,0.4), 0 4px 24px rgba(255,60,95,0.3)',
+              background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%)',
+              boxShadow: '0 0 0 1px color-mix(in srgb, var(--color-primary), transparent 60%), 0 4px 24px color-mix(in srgb, var(--color-primary), transparent 70%)',
             }}
-            onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 0 1px rgba(255,60,95,0.6), 0 8px 40px rgba(255,60,95,0.5)')}
-            onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 0 1px rgba(255,60,95,0.4), 0 4px 24px rgba(255,60,95,0.3)')}
+            onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 0 1px color-mix(in srgb, var(--color-primary), transparent 40%), 0 8px 40px color-mix(in srgb, var(--color-primary), transparent 50%)')}
+            onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 0 1px color-mix(in srgb, var(--color-primary), transparent 60%), 0 4px 24px color-mix(in srgb, var(--color-primary), transparent 70%)')}
           >
             <span className="relative z-10 tracking-wide">Join the Roster</span>
             <div className="absolute inset-0 bg-gradient-to-r from-[#FF3C5F] to-[#FF8FA3] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -460,15 +461,15 @@ export function Hero() {
           <Link href="/#creators"
             className="group inline-flex items-center justify-center h-[52px] px-8 rounded-xl font-semibold text-sm gap-2 transition-all duration-300"
             style={{
-              background: 'rgba(255,255,255,0.035)',
-              border: '1px solid rgba(255,255,255,0.1)',
+              background: 'color-mix(in srgb, var(--color-foreground), transparent 96.5%)',
+              border: '1px solid color-mix(in srgb, var(--color-foreground), transparent 90%)',
               backdropFilter: 'blur(12px)',
-              color: 'rgba(255,255,255,0.75)',
+              color: 'color-mix(in srgb, var(--color-foreground), transparent 25%)',
             }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.035)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'color-mix(in srgb, var(--color-foreground), transparent 93%)'; e.currentTarget.style.borderColor = 'color-mix(in srgb, var(--color-foreground), transparent 80%)'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'color-mix(in srgb, var(--color-foreground), transparent 96.5%)'; e.currentTarget.style.borderColor = 'color-mix(in srgb, var(--color-foreground), transparent 90%)'; }}
           >
-            <span className="group-hover:text-white transition-colors">View Creators</span>
+            <span className="group-hover:text-foreground transition-colors">View Creators</span>
             {/* Fixed: single transition class, removed duplicate */}
             <svg
               className="w-4 h-4 group-hover:translate-x-0.5 transition-all"
@@ -485,16 +486,16 @@ export function Hero() {
           custom={5} initial="hidden" animate="show" variants={fadeUp}
           className="grid grid-cols-2 md:grid-cols-4 mt-14 w-full max-w-3xl rounded-2xl overflow-hidden"
           style={{
-            background: 'linear-gradient(145deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.02) 100%)',
+            background: 'linear-gradient(145deg, color-mix(in srgb, var(--color-foreground), transparent 95.5%) 0%, color-mix(in srgb, var(--color-foreground), transparent 98%) 100%)',
             backdropFilter: 'blur(24px)',
-            border: '1px solid rgba(255,255,255,0.075)',
-            boxShadow: '0 8px 48px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06)',
+            border: '1px solid color-mix(in srgb, var(--color-foreground), transparent 92.5%)',
+            boxShadow: '0 8px 48px rgba(0,0,0,0.55), inset 0 1px 0 color-mix(in srgb, var(--color-foreground), transparent 94%)',
           }}
         >
           {stats.map((s, i) => (
             <div
               key={s.label}
-              className={`group flex flex-col items-center justify-center py-7 px-4 cursor-default transition-all duration-300 hover:bg-white/[0.03] border-white/[0.06] ${i === 0 ? 'border-r border-b md:border-b-0' :
+              className={`group flex flex-col items-center justify-center py-7 px-4 cursor-default transition-all duration-300 hover:bg-foreground/[0.03] border-foreground/[0.06] ${i === 0 ? 'border-r border-b md:border-b-0' :
                 i === 1 ? 'border-b md:border-b-0 md:border-r' :
                   i === 2 ? 'border-r' : ''
                 }`}
@@ -502,16 +503,17 @@ export function Hero() {
               <span
                 className="text-2xl md:text-3xl font-black transition-all duration-300"
                 style={{
-                  background: 'linear-gradient(135deg, #FFFFFF 30%, rgba(167,139,250,0.8) 100%)',
+                  background: 'linear-gradient(135deg, var(--color-foreground) 30%, color-mix(in srgb, var(--color-secondary), transparent 20%) 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
-                  filter: 'drop-shadow(0 0 12px rgba(255,255,255,0.15))',
+                  filter: `drop-shadow(0 0 12px color-mix(in srgb, var(--color-foreground), transparent 85%))`,
+                  textShadow: '0 0 1px rgba(0,0,0,0.8)',
                 }}
               >
                 {s.value}
               </span>
-              <span className="text-[10px] mt-1.5 font-semibold text-white/30 uppercase tracking-[0.18em] group-hover:text-white/50 transition-colors">
+              <span className="text-[10px] mt-1.5 font-semibold text-foreground/30 uppercase tracking-[0.18em] group-hover:text-foreground/50 transition-colors">
                 {s.label}
               </span>
             </div>

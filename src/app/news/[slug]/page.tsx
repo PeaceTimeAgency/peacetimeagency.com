@@ -32,15 +32,15 @@ export default function ArticlePage() {
               <span className="h-px w-6 bg-border" />
               <span className="text-xs font-mono text-foreground-subtle uppercase">{article.date}</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tighter leading-tight">
+            <h1 className="text-4xl md:text-6xl font-black text-foreground mb-8 tracking-tighter leading-tight">
               {article.title}
             </h1>
-            <div className="flex items-center gap-4 mb-12 border-b border-white/5 pb-8">
-              <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-black text-primary">
+            <div className="flex items-center gap-4 mb-12 border-b border-foreground/5 pb-8">
+              <div className="w-10 h-10 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center text-[10px] font-black text-primary">
                 PTA
               </div>
               <div>
-                <div className="text-xs font-black text-white uppercase tracking-widest">{article.author}</div>
+                <div className="text-xs font-black text-foreground uppercase tracking-widest">{article.author}</div>
                 <div className="text-[10px] text-foreground-subtle uppercase tracking-widest">Agency Staff</div>
               </div>
             </div>
@@ -57,14 +57,14 @@ export default function ArticlePage() {
         </motion.div>
 
         <div className="max-w-2xl mx-auto">
-          <article className="prose prose-invert prose-p:text-foreground-muted prose-p:text-lg prose-p:leading-relaxed space-y-8">
-            <p className="text-xl text-white font-medium leading-relaxed italic border-l-4 border-primary pl-6 py-2 bg-white/5 rounded-r-2xl">
+          <article className="prose dark:prose-invert prose-p:text-foreground-muted prose-p:text-lg prose-p:leading-relaxed space-y-8">
+            <p className="text-xl text-foreground font-medium leading-relaxed italic border-l-4 border-primary pl-6 py-2 bg-foreground/5 rounded-r-2xl">
               {article.excerpt}
             </p>
             <p>
               In the ever-evolving landscape of live broadcasting, the metrics that defined success in 2024 are no longer the benchmarks for 2026. At Peace Time Agency, we&apos;ve spent the last six months deep-diving into the algorithmic shifts that prioritize retention over raw vanity metrics.
             </p>
-            <h2 className="text-2xl font-black text-white uppercase tracking-tight mt-12 mb-4">Strategic Positioning</h2>
+            <h2 className="text-2xl font-black text-foreground uppercase tracking-tight mt-12 mb-4">Strategic Positioning</h2>
             <p>
               Our core philosophy has always been creator-first. This means we don&apos;t just look at how many coins are being dropped, but how many recurring viewers are coming back every single night. The &quot;PTA Method&quot; focuses on the bridge between casual scrolling and dedicated fandom.
             </p>
@@ -90,9 +90,9 @@ export default function ArticlePage() {
             </p>
           </article>
 
-          <div className="mt-20 pt-12 border-t border-white/5 flex flex-col items-center">
-            <h3 className="text-sm font-black text-white uppercase tracking-[0.3em] mb-6">Ready to scale?</h3>
-            <Link href="/recruiters" className="px-12 py-4 bg-primary hover:bg-primary-dark text-white font-black rounded-2xl transition-all uppercase tracking-[0.2em] shadow-xl shadow-primary/20">
+          <div className="mt-20 pt-12 border-t border-foreground/5 flex flex-col items-center">
+            <h3 className="text-sm font-black text-foreground uppercase tracking-[0.3em] mb-6">Ready to scale?</h3>
+            <Link href="/recruiters" className="px-12 py-4 bg-primary hover:bg-primary-dark text-foreground-inverse font-black rounded-2xl transition-all uppercase tracking-[0.2em] shadow-xl shadow-primary/20">
               Join the Roster
             </Link>
           </div>

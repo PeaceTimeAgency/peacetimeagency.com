@@ -96,7 +96,7 @@ export default function CreatorGrowthSystem() {
           { label: "Avg Session", value: "47m" },
           { label: "Gifting Rate", value: "8.3%" },
         ].map((s) => (
-          <div key={s.label} className="rounded-xl bg-white/[0.04] border border-border p-3 text-center">
+          <div key={s.label} className="rounded-xl bg-foreground/[0.04] border border-border p-3 text-center">
             <div className="text-base font-black text-foreground">{s.value}</div>
             <div className="text-[10px] text-foreground-muted mt-0.5 font-medium">{s.label}</div>
           </div>

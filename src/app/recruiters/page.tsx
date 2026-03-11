@@ -27,7 +27,7 @@ export default function RecruitersPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-5xl md:text-7xl font-black tracking-tight text-white mb-6 uppercase"
+                        className="text-5xl md:text-7xl font-black tracking-tight text-foreground mb-6 uppercase"
                     >
                         Pick Your <span className="text-gradient-primary">Recruiter.</span>
                     </motion.h1>
@@ -50,7 +50,7 @@ export default function RecruitersPage() {
                             transition={{ delay: i * 0.1 }}
                         >
                             <Link href={`/recruiters/${creator.id}`} className="block group relative h-full">
-                                <div className="relative overflow-hidden rounded-3xl glass-card transition-all duration-500 group-hover:scale-[1.02] h-full flex flex-col group-hover:shadow-neon-primary bg-white/[0.02] border border-white/10">
+                                <div className="relative overflow-hidden rounded-3xl glass-card transition-all duration-500 group-hover:scale-[1.02] h-full flex flex-col group-hover:shadow-neon-primary bg-foreground/[0.02] border border-foreground/10">
                                     {/* Image Container */}
                                     <div className="aspect-[4/3] overflow-hidden relative">
                                         <img
@@ -67,10 +67,10 @@ export default function RecruitersPage() {
                                             <span className="h-px w-4 bg-primary" />
                                             <span className="text-[10px] font-bold text-primary tracking-widest uppercase">{creator.category}</span>
                                         </div>
-                                        <h4 className="text-2xl font-black text-white group-hover:text-primary transition-colors duration-300">
+                                        <h4 className="text-2xl font-black text-foreground group-hover:text-primary transition-colors duration-300">
                                             {creator.name}
                                         </h4>
-                                        <p className="text-xs text-white/50 font-mono mb-4">
+                                        <p className="text-xs text-foreground/50 font-mono mb-4">
                                             {creator.handle}
                                         </p>
 
@@ -81,13 +81,13 @@ export default function RecruitersPage() {
                                         <div className="mt-auto space-y-5">
                                             <div className="flex flex-wrap gap-2">
                                                 {creator.tags.map(tag => (
-                                                    <span key={tag} className="text-[10px] font-bold px-2 py-1 rounded-md bg-white/5 text-white/60 border border-white/10 uppercase tracking-tighter">
+                                                    <span key={tag} className="text-[10px] font-bold px-2 py-1 rounded-md bg-foreground/5 text-foreground/60 border border-foreground/10 uppercase tracking-tighter">
                                                         {tag}
                                                     </span>
                                                 ))}
                                             </div>
 
-                                            <div className="w-full py-3.5 text-center border border-primary/40 rounded-xl text-xs font-black text-primary uppercase tracking-widest group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                            <div className="w-full py-3.5 text-center border border-primary/40 rounded-xl text-xs font-black text-primary uppercase tracking-widest group-hover:bg-primary group-hover:text-foreground-inverse transition-all duration-300">
                                                 View Profile
                                             </div>
                                         </div>
@@ -99,7 +99,7 @@ export default function RecruitersPage() {
                 </div>
 
                 {recruiterCreators.length === 0 && (
-                    <div className="w-full text-center text-white/50 py-24 border border-dashed border-white/10 rounded-2xl glass-card">
+                    <div className="w-full text-center text-foreground/50 py-24 border border-dashed border-foreground/10 rounded-2xl glass-card">
                         No recruiters currently available to display.
                     </div>
                 )}

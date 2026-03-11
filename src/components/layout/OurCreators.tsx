@@ -13,8 +13,8 @@ const CreatorGrid = ({ title, desc, list, isLiveSection = false, isUserSection =
   if (list.length === 0) return null;
   return (
     <div className="mb-24 last:mb-0">
-      <div className="mb-8 border-b border-white/10 pb-4">
-        <h3 className="text-3xl font-black text-white tracking-tight">{title}</h3>
+      <div className="mb-8 border-b border-foreground/10 pb-4">
+        <h3 className="text-3xl font-black text-foreground tracking-tight [text-shadow:0_0_1.5px_rgba(0,0,0,0.8)]">{title}</h3>
         {desc && <p className="text-foreground-muted mt-2 text-sm">{desc}</p>}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
@@ -32,8 +32,8 @@ const CreatorGrid = ({ title, desc, list, isLiveSection = false, isUserSection =
                 <div className="aspect-[4/5] overflow-hidden relative">
                   {isLiveSection && (
                     <div className="absolute top-3 left-4 z-20 flex items-center gap-1.5 bg-primary px-2.5 py-1 rounded shadow-lg shadow-black/50">
-                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                      <span className="text-[10px] font-black text-white tracking-widest uppercase">Live</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-foreground-inverse animate-pulse" />
+                      <span className="text-[10px] font-black text-foreground-inverse tracking-widest uppercase">Live</span>
                     </div>
                   )}
                   {isUserSection && (
@@ -55,16 +55,16 @@ const CreatorGrid = ({ title, desc, list, isLiveSection = false, isUserSection =
                     <span className="h-px w-4 bg-primary" />
                     <span className="text-[10px] font-bold text-primary tracking-widest uppercase truncate">{creator.category}</span>
                   </div>
-                  <h4 className="text-xl font-black text-white group-hover:text-primary transition-colors duration-300 truncate">
+                  <h4 className="text-xl font-black text-foreground group-hover:text-primary transition-colors duration-300 truncate [text-shadow:0_0_1.5px_rgba(0,0,0,0.8)]">
                     {creator.name}
                   </h4>
-                  <p className="text-xs text-white/50 font-mono mt-0.5 group-hover:text-white/80 transition-colors truncate">
+                  <p className="text-xs text-foreground/50 font-mono mt-0.5 group-hover:text-foreground/80 transition-colors truncate">
                     {creator.handle}
                   </p>
 
                   <div className="mt-3 flex flex-wrap gap-1.5">
                     {creator.tags.slice(0, 2).map(tag => (
-                      <span key={tag} className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-white/5 text-white/40 border border-white/10 uppercase tracking-tighter truncate max-w-full">
+                      <span key={tag} className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-foreground/5 text-foreground/40 border border-foreground/10 uppercase tracking-tighter truncate max-w-full">
                         {tag}
                       </span>
                     ))}
@@ -89,15 +89,15 @@ const CreatorGrid = ({ title, desc, list, isLiveSection = false, isUserSection =
                   <div className="text-lg font-black text-primary drop-shadow-md">
                     {creator.stats.followers}
                   </div>
-                  <div className="text-[9px] font-bold text-white/40 uppercase tracking-widest leading-tight">
+                  <div className="text-[9px] font-bold text-foreground/40 uppercase tracking-widest leading-tight">
                     Followers
                   </div>
                   {creator.stats.totalLikes && creator.stats.totalLikes !== "0" && (
                     <div className="mt-2">
-                      <div className="text-sm font-black text-white drop-shadow-md">
+                      <div className="text-sm font-black text-foreground drop-shadow-md">
                         {creator.stats.totalLikes}
                       </div>
-                      <div className="text-[9px] font-bold text-white/40 uppercase tracking-widest leading-tight">
+                      <div className="text-[9px] font-bold text-foreground/40 uppercase tracking-widest leading-tight">
                         Likes
                       </div>
                     </div>
@@ -163,7 +163,7 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
           <div className="absolute top-0 left-4 md:left-8 z-50">
             <Link
               href="/creators"
-              className="group flex flex-col sm:flex-row items-center sm:items-start gap-1 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition-all duration-300 text-xs sm:text-sm font-bold text-white/80 hover:text-white backdrop-blur-md"
+              className="group flex flex-col sm:flex-row items-center sm:items-start gap-1 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-foreground/5 hover:bg-foreground/10 border border-foreground/10 rounded-full transition-all duration-300 text-xs sm:text-sm font-bold text-foreground/80 hover:text-foreground backdrop-blur-md"
             >
               <span className="text-primary group-hover:-translate-x-1 transition-transform hidden sm:inline">←</span>
               View All Creators
@@ -184,7 +184,7 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl font-black tracking-tight text-white mb-6"
+            className="text-5xl md:text-7xl font-black tracking-tight text-foreground mb-6 [text-shadow:0_0_1.5px_rgba(0,0,0,0.8)]"
           >
             Our <span className="text-gradient-primary">Creators.</span>
           </motion.h2>
@@ -218,8 +218,8 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
               <button
                 onClick={() => setSelectedTag(null)}
                 className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 border ${selectedTag === null
-                  ? "bg-primary text-white border-primary shadow-neon-primary"
-                  : "bg-white/5 text-white/60 border-white/10 hover:bg-white/10 hover:text-white"
+                  ? "bg-primary text-foreground-inverse border-primary shadow-neon-primary"
+                  : "bg-foreground/5 text-foreground/60 border-foreground/10 hover:bg-foreground/10 hover:text-foreground"
                   }`}
               >
                 All Creators
@@ -229,8 +229,8 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
                   key={tag}
                   onClick={() => setSelectedTag(tag)}
                   className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 border ${selectedTag === tag
-                    ? "bg-primary text-white border-primary shadow-neon-primary"
-                    : "bg-white/5 text-white/60 border-white/10 hover:bg-white/10 hover:text-white"
+                    ? "bg-primary text-foreground-inverse border-primary shadow-neon-primary"
+                    : "bg-foreground/5 text-foreground/60 border-foreground/10 hover:bg-foreground/10 hover:text-foreground"
                     }`}
                 >
                   {tag}
@@ -287,8 +287,8 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
                 </div>
               )
             ) : (
-              <div className="text-center py-24 glass-card rounded-3xl border border-dashed border-white/10">
-                <p className="text-white/40 font-medium">No creators are currently listed in this category. Check back soon!</p>
+              <div className="text-center py-24 glass-card rounded-3xl border border-dashed border-foreground/10">
+                <p className="text-foreground/40 font-medium">No creators are currently listed in this category. Check back soon!</p>
               </div>
             )}
           </motion.div>

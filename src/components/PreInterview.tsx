@@ -57,7 +57,7 @@ export default function PreInterview() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h4 className="font-bold text-white mb-2">Request Received</h4>
+              <h4 className="font-bold text-foreground mb-2">Request Received</h4>
               <p className="text-xs text-foreground-muted">Our talent team will review your profile.</p>
             </motion.div>
           ) : (
@@ -73,7 +73,7 @@ export default function PreInterview() {
                 <input
                   type="text"
                   placeholder="Your Name"
-                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/50 transition-all"
+                  className="w-full bg-foreground/[0.03] border border-foreground/10 rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary/50 transition-all"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   disabled={status === 'submitting'}
@@ -84,7 +84,7 @@ export default function PreInterview() {
                 <input
                   type="text"
                   placeholder="TikTok Handle"
-                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/50 transition-all"
+                  className="w-full bg-foreground/[0.03] border border-foreground/10 rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary/50 transition-all"
                   value={formData.tiktok}
                   onChange={(e) => setFormData({ ...formData, tiktok: e.target.value })}
                   disabled={status === 'submitting'}
@@ -93,7 +93,7 @@ export default function PreInterview() {
                 <input
                   type="email"
                   placeholder="Email Address"
-                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/50 transition-all"
+                  className="w-full bg-foreground/[0.03] border border-foreground/10 rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary/50 transition-all"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   disabled={status === 'submitting'}
@@ -104,7 +104,7 @@ export default function PreInterview() {
                 <input
                   type="text"
                   placeholder="Discord ID"
-                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/50 transition-all"
+                  className="w-full bg-foreground/[0.03] border border-foreground/10 rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary/50 transition-all"
                   value={formData.discordId}
                   onChange={(e) => setFormData({ ...formData, discordId: e.target.value })}
                   disabled={status === 'submitting'}
@@ -114,7 +114,7 @@ export default function PreInterview() {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="w-full h-11 rounded-xl font-bold text-sm text-white bg-primary hover:bg-primary-dark transition-all duration-200 hover:shadow-[0_0_20px_rgba(255,60,95,0.4)] disabled:opacity-50"
+                className="w-full h-11 rounded-xl font-bold text-sm text-foreground-inverse bg-primary hover:bg-primary-dark transition-all duration-200 hover:shadow-[0_0_20px_rgba(255,60,95,0.4)] disabled:opacity-50"
               >
                 {status === 'submitting' ? 'Sending...' : 'Request Pre-Interview'}
               </button>

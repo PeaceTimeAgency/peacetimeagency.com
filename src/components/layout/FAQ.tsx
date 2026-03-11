@@ -79,7 +79,12 @@ export function FAQ() {
       </div>
 
       {/* Final CTA Banner */}
-      <div className="mt-24 relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#1A0B12] via-[#1F0D18] to-[#0F0B1A] border border-primary/20 p-12 text-center group">
+      <div 
+        className="mt-24 relative overflow-hidden rounded-3xl border border-primary/20 p-12 text-center group"
+        style={{
+          background: 'linear-gradient(135deg, color-mix(in srgb, var(--color-background-surface), var(--color-primary) 8%) 0%, color-mix(in srgb, var(--color-background-surface), var(--color-secondary) 8%) 100%)',
+        }}
+      >
         <style dangerouslySetInnerHTML={{
           __html: `
           @keyframes meteor {
@@ -92,11 +97,11 @@ export function FAQ() {
             transform: rotate(215deg);
             width: 250px;
             height: 1px;
-            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,1) 100%);
+            background: linear-gradient(90deg, transparent 0%, color-mix(in srgb, var(--color-foreground), transparent 20%) 50%, var(--color-foreground) 100%);
             animation: meteor 3s ease-in infinite;
             opacity: 0;
             z-index: 1;
-            box-shadow: 0 0 8px 1px rgba(255,255,255,0.4);
+            box-shadow: 0 0 8px 1px color-mix(in srgb, var(--color-foreground), transparent 60%);
           }
           .meteor-tail::before {
             content: '';
@@ -107,8 +112,8 @@ export function FAQ() {
             width: 3px;
             height: 3px;
             border-radius: 50%;
-            background: #fff;
-            box-shadow: 0 0 15px 3px rgba(255,255,255,0.8);
+            background: var(--color-foreground);
+            box-shadow: 0 0 15px 3px color-mix(in srgb, var(--color-foreground), transparent 20%);
           }
         ` }} />
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">

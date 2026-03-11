@@ -67,7 +67,7 @@ export default function Testimonials() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-5xl font-black tracking-tight text-white mb-6"
+                        className="text-4xl md:text-5xl font-black tracking-tight text-foreground mb-6 [text-shadow:0_0_1.5px_rgba(0,0,0,0.8)]"
                     >
                         Hear from our <span className="text-gradient-primary">Creators.</span>
                     </motion.h2>
@@ -78,7 +78,7 @@ export default function Testimonials() {
                     {/* Navigation Arrows */}
                     <button
                         onClick={handlePrev}
-                        className="absolute left-[-2rem] md:left-[-4rem] top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-primary/20 hover:border-primary/50 transition-all backdrop-blur-md hidden sm:flex items-center justify-center hover:scale-110 active:scale-95"
+                        className="absolute left-[-2rem] md:left-[-4rem] top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-foreground/5 border border-foreground/10 text-foreground/70 hover:text-foreground hover:bg-primary/20 hover:border-primary/50 transition-all backdrop-blur-md hidden sm:flex items-center justify-center hover:scale-110 active:scale-95"
                         aria-label="Previous Testimonial"
                     >
                         <ChevronLeft className="w-6 h-6" />
@@ -86,14 +86,14 @@ export default function Testimonials() {
 
                     <button
                         onClick={handleNext}
-                        className="absolute right-[-2rem] md:right-[-4rem] top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-primary/20 hover:border-primary/50 transition-all backdrop-blur-md hidden sm:flex items-center justify-center hover:scale-110 active:scale-95"
+                        className="absolute right-[-2rem] md:right-[-4rem] top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-foreground/5 border border-foreground/10 text-foreground/70 hover:text-foreground hover:bg-primary/20 hover:border-primary/50 transition-all backdrop-blur-md hidden sm:flex items-center justify-center hover:scale-110 active:scale-95"
                         aria-label="Next Testimonial"
                     >
                         <ChevronRight className="w-6 h-6" />
                     </button>
 
                     {/* Video Container */}
-                    <div className="relative aspect-[9/16] sm:aspect-[4/5] md:aspect-video rounded-3xl overflow-hidden glass-card shadow-[0_0_50px_rgba(0,0,0,0.5)] border-white/10 ring-1 ring-white/5">
+                    <div className="relative aspect-[9/16] sm:aspect-[4/5] md:aspect-video rounded-3xl overflow-hidden glass-card shadow-[0_0_50px_rgba(0,0,0,0.5)] border-foreground/10 ring-1 ring-foreground/5">
 
                         <AnimatePresence initial={false} mode="wait" custom={direction}>
                             <motion.div
@@ -124,7 +124,7 @@ export default function Testimonials() {
                                 {/* Content Overlay */}
                                 <div className="absolute inset-x-0 bottom-0 p-6 md:p-10 pointer-events-none">
                                     <div className="max-w-2xl">
-                                        <p className="text-xl md:text-3xl font-bold text-white mb-4 leading-snug drop-shadow-md">
+                                        <p className="text-xl md:text-3xl font-bold text-white mb-4 leading-snug drop-shadow-md [text-shadow:0_0_1.5px_rgba(0,0,0,0.8)]">
                                             "{testimonials[currentIndex].quote}"
                                         </p>
                                         <div className="flex items-center gap-3">
@@ -141,7 +141,7 @@ export default function Testimonials() {
                         {/* Mute/Unmute UI */}
                         <button
                             onClick={toggleMute}
-                            className="absolute top-6 right-6 z-20 p-3 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all hover:scale-105 active:scale-95 shadow-lg flex items-center gap-2 group"
+                            className="absolute top-6 right-6 z-20 p-3 rounded-full bg-black/40 backdrop-blur-md border border-foreground/10 text-white hover:bg-foreground/10 hover:border-foreground/20 transition-all hover:scale-105 active:scale-95 shadow-lg flex items-center gap-2 group"
                         >
                             {isMuted ? <VolumeX className="w-5 h-5 text-white/70 group-hover:text-primary transition-colors" /> : <Volume2 className="w-5 h-5 group-hover:text-primary transition-colors" />}
                         </button>
@@ -163,7 +163,7 @@ export default function Testimonials() {
                                 }}
                                 className={`transition-all duration-300 rounded-full ${i === currentIndex
                                         ? "w-8 h-2 bg-primary shadow-neon-primary"
-                                        : "w-2 h-2 bg-white/20 hover:bg-white/40"
+                                        : "w-2 h-2 bg-foreground/20 hover:bg-foreground/40"
                                     }`}
                                 aria-label={`Go to slide ${i + 1}`}
                             />
