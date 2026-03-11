@@ -16,6 +16,7 @@ export interface Creator {
   tags: string[];
   tier?: 'staff' | 'top' | 'new' | 'recruiter';
   webhookUrl?: string;
+  liveUrl?: string;
   socials: {
     tiktok: string;
     instagram?: string;
@@ -30,7 +31,7 @@ export const creators: Creator[] = [
     handle: "@baked.laze",
     description: "Hi, I’m Nick, founder of Peace Time Agency. I work directly with creators to help them grow on TikTok LIVE through stream strategy, setup guidance, and community support. My goal is simple, help creators stay consistent, improve their content, and turn streaming into real opportunity.",
     image: "/creators/baked.jpg",
-    category: "Gaming / Staff",
+    category: "Agency Staff",
     stats: {
       followers: "N/A",
       avgWatchTime: "N/A",
@@ -39,8 +40,10 @@ export const creators: Creator[] = [
     },
     tags: ["Staff", "Gaming"],
     tier: "staff",
+    liveUrl: "https://www.tiktok.com/@baked.laze/live",
     socials: {
       tiktok: "https://www.tiktok.com/@baked.laze"
     }
   }
 ];
+

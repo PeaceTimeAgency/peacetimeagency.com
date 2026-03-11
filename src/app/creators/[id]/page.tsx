@@ -97,27 +97,6 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
             </a>
           </div>
 
-          {/* Social Links */}
-          <div className="mb-10 flex gap-4">
-            {creator.socials.tiktok && (
-              <a href={creator.socials.tiktok} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-primary/20 hover:border-primary/50 hover:text-primary transition-all text-white/60">
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 15.68a6.34 6.34 0 006.27 6.36 6.33 6.33 0 006.25-6.32V8.75a8.31 8.31 0 003.5.88V6.26a6.84 6.84 0 00-1.43-.1 6.89 6.89 0 00-0.49.03z"></path>
-                </svg>
-              </a>
-            )}
-            {creator.socials.instagram && (
-              <a href={creator.socials.instagram} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-pink-500/20 hover:border-pink-500/50 hover:text-pink-400 transition-all text-white/60">
-                <Instagram className="w-5 h-5" />
-              </a>
-            )}
-            {creator.socials.twitter && (
-              <a href={creator.socials.twitter} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-blue-500/20 hover:border-blue-500/50 hover:text-blue-400 transition-all text-white/60">
-                <Twitter className="w-5 h-5" />
-              </a>
-            )}
-          </div>
-
           <div className="mb-10">
             <h3 className="text-sm font-semibold text-foreground-muted uppercase tracking-widest mb-4">About</h3>
             <p className="text-lg text-white/80 leading-relaxed font-medium">
@@ -139,22 +118,44 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
             </div>
           </div>
 
-          {/* Stats Grid */}
+          {/* Social Links - Moved to bottom */}
+          <div className="mb-10 flex gap-4">
+            {creator.socials.tiktok && (
+              <a href={creator.socials.tiktok} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-primary/20 hover:border-primary/50 hover:text-primary transition-all text-white/60">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 15.68a6.34 6.34 0 006.27 6.36 6.33 6.33 0 006.25-6.32V8.75a8.31 8.31 0 003.5.88V6.26a6.84 6.84 0 00-1.43-.1 6.89 6.89 0 00-0.49.03z"></path>
+                </svg>
+              </a>
+            )}
+            {creator.socials.instagram && (
+              <a href={creator.socials.instagram} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-pink-500/20 hover:border-pink-500/50 hover:text-pink-400 transition-all text-white/60">
+                <Instagram className="w-5 h-5" />
+              </a>
+            )}
+            {creator.socials.twitter && (
+              <a href={creator.socials.twitter} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-blue-500/20 hover:border-blue-500/50 hover:text-blue-400 transition-all text-white/60">
+                <Twitter className="w-5 h-5" />
+              </a>
+            )}
+          </div>
+
+          {/* Stats Grid - Hidden until API key goes live */}
+          {/* 
           <div>
             <h3 className="text-sm font-semibold text-foreground-muted uppercase tracking-widest mb-4">Performance Metrics</h3>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
 
               {/* Followers */}
-              <div className="p-5 rounded-2xl bg-white/5 border border-white/10 glass-panel">
+              {/* <div className="p-5 rounded-2xl bg-white/5 border border-white/10 glass-panel">
                 <div className="flex items-center gap-2 mb-2">
                   <Users className="w-4 h-4 text-primary" />
                   <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Followers</span>
                 </div>
                 <div className="text-2xl font-black text-white">{creator.stats.followers}</div>
-              </div>
+              </div> */}
 
               {/* Total Likes */}
-              <div className="p-5 rounded-2xl bg-white/5 border border-white/10 glass-panel">
+              {/* <div className="p-5 rounded-2xl bg-white/5 border border-white/10 glass-panel">
                 <div className="flex items-center gap-2 mb-2">
                   <Heart className="w-4 h-4 text-pink-500" />
                   <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Total Likes</span>
@@ -164,6 +165,8 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
 
             </div>
           </div>
+          */}
+
 
         </div>
       </Section>

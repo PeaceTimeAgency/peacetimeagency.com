@@ -138,7 +138,10 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
   const displayCreators = isMainPage ? [...staffCreators, ...recruiterCreators, ...topCreators, ...newCreators] : creators;
 
   const liveHandles = liveCreators.map(lc => lc.username.toLowerCase());
-  const liveRoster = displayCreators.filter(c => liveHandles.includes(c.handle.toLowerCase()));
+  const liveRoster = displayCreators.filter(c => 
+    liveHandles.includes(c.handle.toLowerCase()) || 
+    (c.liveUrl && liveHandles.some(lh => c.liveUrl?.toLowerCase().includes(lh)))
+  );
 
   // Extract all unique tags
   const allTags = isMainPage
@@ -257,7 +260,7 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
               ) : (
                 <div className="flex flex-col">
                   <CreatorGrid
-                    title="Staff Category"
+                    title="Agency Staff"
                     desc="The leadership driving Peace Time Agency."
                     list={filteredCreators.filter(c => c.tier === 'staff')}
                   />
