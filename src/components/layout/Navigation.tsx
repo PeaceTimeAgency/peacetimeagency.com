@@ -29,8 +29,8 @@ export function Navigation() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-        ? "bg-[#01020A]/80 backdrop-blur-md border-b border-white/[0.06] shadow-[0_1px_24px_rgba(0,0,0,0.4)]"
-        : "bg-transparent border-b border-transparent"
+        ? "bg-[#01020A]/85 backdrop-blur-md border-b border-white/[0.08] shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
+        : "bg-[#01020A]/20 backdrop-blur-[2px] border-b border-transparent"
         }`}
     >
       <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -38,8 +38,8 @@ export function Navigation() {
         {/* Logo */}
         {!isCardForm ? (
           <Link href="/" className="flex items-center group">
-            <span className="text-xl font-bold tracking-tighter [text-shadow:0_0_1px_rgba(0,0,0,0.8)]">
-              <span className="text-white">Peace Time</span>
+            <span className="text-xl font-bold tracking-tighter" style={{ textShadow: '0 0 1px rgba(0,0,0,0.8)' }}>
+              <span style={{ color: '#FFFFFF' }}>Peace Time</span>
               <span className="text-primary"> Agency</span>
             </span>
           </Link>
@@ -54,7 +54,8 @@ export function Navigation() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="px-4 py-2 text-sm font-semibold text-white hover:text-white rounded-lg hover:bg-white/[0.06] transition-all duration-200 [text-shadow:0_0_8px_rgba(255,255,255,0.1)]"
+                className="px-4 py-2 text-sm font-semibold rounded-lg hover:bg-white/[0.08] transition-all duration-200"
+                style={{ color: '#FFFFFF', textShadow: '0 0 10px rgba(255,255,255,0.1)' }}
               >
                 {link.name}
               </Link>
@@ -111,7 +112,8 @@ export function Navigation() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-3 text-sm font-semibold text-white hover:bg-white/[0.06] rounded-lg transition-all duration-200"
+                  className="px-4 py-3 text-sm font-bold rounded-lg hover:bg-white/[0.08] transition-all duration-200"
+                  style={{ color: '#FFFFFF' }}
                 >
                   {link.name}
                 </Link>

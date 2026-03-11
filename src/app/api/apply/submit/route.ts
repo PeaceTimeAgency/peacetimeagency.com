@@ -8,11 +8,22 @@ export async function POST(req: NextRequest) {
       recruiterId,
       is18Plus,
       isUSCA,
+      streamingCountry,
       contentTypes,
       otherContentType,
       nicheDescription,
       liveFrequency,
       averageSessionLength,
+      streamingDuration,
+      streamingGoals,
+      improvements,
+      otherImprovement,
+      followerCount,
+      receivesGifts,
+      biggestChallenge,
+      openToCoaching,
+      otherAgency,
+      otherAgencyName,
       tiktokHandle,
       discordId,
       emailAddress,
@@ -34,6 +45,21 @@ export async function POST(req: NextRequest) {
       contentTypesString += ` (Other: ${otherContentType})`;
     }
 
+    // Format improvements
+    let improvementsString = "None";
+    if (improvements && Array.isArray(improvements)) {
+      improvementsString = improvements.join(", ");
+    }
+    if (otherImprovement) {
+      improvementsString += ` (Other: ${otherImprovement})`;
+    }
+
+    // Location display
+    const locationDisplay = isUSCA === "Yes" ? "US/CA" : `International (${streamingCountry || "Unknown"})`;
+
+    // Agency status display
+    const agencyDisplay = otherAgency === "Yes" ? `Currently in Agency: ${otherAgencyName}` : "Not in an agency";
+
     // Prepare Discord Webhook Payload
     const embed = {
       title: "🚀 New Creator Intake Form Submitted!",
@@ -42,13 +68,18 @@ export async function POST(req: NextRequest) {
       fields: [
         {
           name: "👤 General",
-          value: `**TikTok Handle:** ${tiktokHandle}\n**18+:** ${is18Plus}\n**Location (US/CA):** ${isUSCA}`,
+          value: `**TikTok Handle:** ${tiktokHandle}\n**18+:** ${is18Plus}\n**Location:** ${locationDisplay}\n**Followers:** ${followerCount}`,
           inline: false
         },
         {
           name: "Contact Info",
           value: `**Discord:** ${discordDisplay}\n**Email:** ${emailDisplay}`,
-          inline: false
+          inline: true
+        },
+        {
+          name: "Agency Status",
+          value: agencyDisplay,
+          inline: true
         },
         {
           name: "📱 Content Details",
@@ -56,8 +87,13 @@ export async function POST(req: NextRequest) {
           inline: false
         },
         {
-          name: "🎥 LIVE Habits",
-          value: `**Frequency:** ${liveFrequency}\n**Avg Session Length:** ${averageSessionLength}`,
+          name: "🎥 LIVE Experience",
+          value: `**Duration:** ${streamingDuration}\n**Frequency:** ${liveFrequency}\n**Avg Session:** ${averageSessionLength}\n**Receives Gifts:** ${receivesGifts}`,
+          inline: false
+        },
+        {
+          name: "🎯 Goals & Challenges",
+          value: `**Goals:** ${streamingGoals}\n**Improvements:** ${improvementsString}\n**Challenge:** ${biggestChallenge}\n**Open to Coaching:** ${openToCoaching}`,
           inline: false
         }
       ],

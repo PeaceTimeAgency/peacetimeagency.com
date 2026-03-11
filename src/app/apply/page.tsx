@@ -22,6 +22,30 @@ const RADIO_OPTIONS = ["Yes", "No"];
 const FREQUENCY_OPTIONS = ["0–2 times", "3–5 times", "6–10 times", "10+ times / Almost daily"];
 const LENGTH_OPTIONS = ["Under 1 hour", "1–2 hours", "2–4 hours", "4+ hours"];
 
+const STREAMING_DURATION_OPTIONS = [
+  "Less than 1 month",
+  "1 to 3 months",
+  "3 to 6 months",
+  "6 to 12 months",
+  "1+ years"
+];
+
+const IMPROVEMENT_OPTIONS = [
+  "Growing followers",
+  "Monetization",
+  "Viewer engagement",
+  "Stream setup / overlays",
+  "Content strategy",
+  "Other"
+];
+
+const GIFT_OPTIONS = [
+  "Yes regularly",
+  "Sometimes",
+  "Rarely",
+  "Not yet"
+];
+
 function ApplicationForm() {
   const searchParams = useSearchParams();
   const recruiterId = searchParams.get('recruiter');
@@ -30,11 +54,22 @@ function ApplicationForm() {
   const [formData, setFormData] = useState({
     is18Plus: "",
     isUSCA: "",
+    streamingCountry: "",
     contentTypes: [] as string[],
     otherContentType: "",
     nicheDescription: "",
     liveFrequency: "",
     averageSessionLength: "",
+    streamingDuration: "",
+    streamingGoals: "",
+    improvements: [] as string[],
+    otherImprovement: "",
+    followerCount: "",
+    receivesGifts: "",
+    biggestChallenge: "",
+    openToCoaching: "",
+    otherAgency: "",
+    otherAgencyName: "",
     tiktokHandle: "",
     discordId: "",
     emailAddress: "",
@@ -79,11 +114,34 @@ function ApplicationForm() {
     });
   };
 
+  const handleImprovementToggle = (opt: string) => {
+    setFormData(prev => {
+      const isSelected = prev.improvements.includes(opt);
+      let newOpts = [...prev.improvements];
+
+      if (isSelected) {
+        newOpts = newOpts.filter(o => o !== opt);
+      } else {
+        newOpts.push(opt);
+      }
+
+      if (newOpts.length > 0 && errors.improvements) {
+        setErrors(e => { const newE = { ...e }; delete newE.improvements; return newE; });
+      }
+
+      return { ...prev, improvements: newOpts };
+    });
+  };
+
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
     if (!formData.is18Plus) newErrors.is18Plus = "Required";
     if (!formData.isUSCA) newErrors.isUSCA = "Required";
+
+    if (formData.isUSCA === "No" && !formData.streamingCountry.trim()) {
+      newErrors.streamingCountry = "Required";
+    }
 
     if (formData.contentTypes.length === 0) {
       newErrors.contentTypes = "Please select at least one content type.";
@@ -96,6 +154,28 @@ function ApplicationForm() {
     if (!formData.nicheDescription.trim()) newErrors.nicheDescription = "Required";
     if (!formData.liveFrequency) newErrors.liveFrequency = "Required";
     if (!formData.averageSessionLength) newErrors.averageSessionLength = "Required";
+
+    if (!formData.streamingDuration) newErrors.streamingDuration = "Required";
+    if (!formData.streamingGoals.trim()) newErrors.streamingGoals = "Required";
+
+    if (formData.improvements.length === 0) {
+      newErrors.improvements = "Please select at least one area to improve.";
+    }
+
+    if (formData.improvements.includes("Other") && !formData.otherImprovement.trim()) {
+      newErrors.otherImprovement = "Please specify your other improvement goal.";
+    }
+
+    if (!formData.followerCount.trim()) newErrors.followerCount = "Required";
+    if (!formData.receivesGifts) newErrors.receivesGifts = "Required";
+    if (!formData.biggestChallenge.trim()) newErrors.biggestChallenge = "Required";
+    if (!formData.openToCoaching) newErrors.openToCoaching = "Required";
+    if (!formData.otherAgency) newErrors.otherAgency = "Required";
+
+    if (formData.otherAgency === "Yes" && !formData.otherAgencyName.trim()) {
+      newErrors.otherAgencyName = "Required";
+    }
+
     if (!formData.tiktokHandle.trim()) newErrors.tiktokHandle = "Required";
 
     if (!formData.discordId.trim() && !formData.emailAddress.trim()) {
@@ -229,6 +309,28 @@ function ApplicationForm() {
               </div>
               {errors.isUSCA && <p className="text-xs text-primary font-bold">{errors.isUSCA}</p>}
               <p className="text-xs text-white/40 italic">Our primary support and features focus on US/CA creators at this time.</p>
+
+              {/* Conditional Country Textbox */}
+              <AnimatePresence>
+                {formData.isUSCA === "No" && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="pt-2"
+                  >
+                    <label className="block text-xs font-bold text-white/60 mb-2">What country are you streaming from? <span className="text-primary">*</span></label>
+                    <input
+                      type="text"
+                      placeholder="Enter your country"
+                      className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-primary/50 transition-all"
+                      value={formData.streamingCountry}
+                      onChange={(e) => handleInputChange("streamingCountry", e.target.value)}
+                    />
+                    {errors.streamingCountry && <p className="text-xs text-primary font-bold mt-1">{errors.streamingCountry}</p>}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* 3. Content Types */}
@@ -314,7 +416,7 @@ function ApplicationForm() {
               <p className="text-xs text-white/40 italic">Consistency helps us plan support and campaigns for you.</p>
             </div>
 
-            {/* 6. Session Length */}
+            {/* Session Length */}
             <div className="space-y-3">
               <label className="block text-sm font-bold text-white tracking-wide">
                 6. What is your average LIVE session length? <span className="text-primary">*</span>
@@ -338,10 +440,212 @@ function ApplicationForm() {
               <p className="text-xs text-white/40 italic">This helps us tailor tips and scheduling advice.</p>
             </div>
 
-            {/* 7. TikTok Handle */}
+            {/* NEW QUESTIONS */}
+
+            {/* Streaming Duration */}
             <div className="space-y-3">
               <label className="block text-sm font-bold text-white tracking-wide">
-                7. TikTok Username (@) <span className="text-primary">*</span>
+                7. How long have you been streaming on TikTok LIVE? <span className="text-primary">*</span>
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                {STREAMING_DURATION_OPTIONS.map(opt => (
+                  <label key={opt} className="flex items-center gap-2 cursor-pointer p-3 rounded-xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
+                    <input
+                      type="radio"
+                      name="streamingDuration"
+                      value={opt}
+                      checked={formData.streamingDuration === opt}
+                      onChange={(e) => handleInputChange("streamingDuration", e.target.value)}
+                      className="w-4 h-4 text-primary bg-white/5 border-white/20 focus:ring-primary focus:ring-2"
+                    />
+                    <span className="text-sm text-white/80">{opt}</span>
+                  </label>
+                ))}
+              </div>
+              {errors.streamingDuration && <p className="text-xs text-primary font-bold">{errors.streamingDuration}</p>}
+            </div>
+
+            {/* Streaming Goals */}
+            <div className="space-y-3">
+              <label className="block text-sm font-bold text-white tracking-wide">
+                8. What are your goals for streaming? <span className="text-primary">*</span>
+              </label>
+              <p className="text-xs text-white/40 italic">(Example: full-time income, growing a community, content creation, gaming career, etc.)</p>
+              <textarea
+                className="w-full min-h-[100px] bg-white/[0.03] border border-white/10 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all"
+                placeholder="Tell us what you want to achieve..."
+                value={formData.streamingGoals}
+                onChange={(e) => handleInputChange("streamingGoals", e.target.value)}
+              />
+              {errors.streamingGoals && <p className="text-xs text-primary font-bold">{errors.streamingGoals}</p>}
+            </div>
+
+            {/* Improvements */}
+            <div className="space-y-3">
+              <label className="block text-sm font-bold text-white tracking-wide">
+                9. What do you want to improve most right now? (Select all that apply) <span className="text-primary">*</span>
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {IMPROVEMENT_OPTIONS.map(opt => (
+                  <label key={opt} className="flex items-start gap-3 p-3 rounded-xl border border-white/10 bg-white/[0.02] cursor-pointer hover:bg-white/[0.05] transition-colors">
+                    <input
+                      type="checkbox"
+                      checked={formData.improvements.includes(opt)}
+                      onChange={() => handleImprovementToggle(opt)}
+                      className="mt-1 w-4 h-4 rounded text-primary bg-white/5 border-white/20 focus:ring-primary focus:ring-2"
+                    />
+                    <span className="text-sm text-white/80 leading-snug">{opt}</span>
+                  </label>
+                ))}
+              </div>
+              {errors.improvements && <p className="text-xs text-primary font-bold">{errors.improvements}</p>}
+
+              {/* Conditional Other Textbox */}
+              <AnimatePresence>
+                {formData.improvements.includes("Other") && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="pt-2"
+                  >
+                    <input
+                      type="text"
+                      placeholder="Please specify what else you want to improve"
+                      className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-primary/50 transition-all"
+                      value={formData.otherImprovement}
+                      onChange={(e) => handleInputChange("otherImprovement", e.target.value)}
+                    />
+                    {errors.otherImprovement && <p className="text-xs text-primary font-bold mt-1">{errors.otherImprovement}</p>}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Follower Count */}
+            <div className="space-y-3">
+              <label className="block text-sm font-bold text-white tracking-wide">
+                10. What is your current follower count? <span className="text-primary">*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="e.g. 5,000"
+                className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all"
+                value={formData.followerCount}
+                onChange={(e) => handleInputChange("followerCount", e.target.value)}
+              />
+              {errors.followerCount && <p className="text-xs text-primary font-bold">{errors.followerCount}</p>}
+            </div>
+
+            {/* Receives Gifts */}
+            <div className="space-y-3">
+              <label className="block text-sm font-bold text-white tracking-wide">
+                11. Do you currently receive gifts on LIVE? <span className="text-primary">*</span>
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                {GIFT_OPTIONS.map(opt => (
+                  <label key={opt} className="flex items-center gap-2 cursor-pointer p-3 rounded-xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
+                    <input
+                      type="radio"
+                      name="receivesGifts"
+                      value={opt}
+                      checked={formData.receivesGifts === opt}
+                      onChange={(e) => handleInputChange("receivesGifts", e.target.value)}
+                      className="w-4 h-4 text-primary bg-white/5 border-white/20 focus:ring-primary focus:ring-2"
+                    />
+                    <span className="text-sm text-white/80">{opt}</span>
+                  </label>
+                ))}
+              </div>
+              {errors.receivesGifts && <p className="text-xs text-primary font-bold">{errors.receivesGifts}</p>}
+            </div>
+
+            {/* Biggest Challenge */}
+            <div className="space-y-3">
+              <label className="block text-sm font-bold text-white tracking-wide">
+                12. What is your biggest challenge with streaming right now? <span className="text-primary">*</span>
+              </label>
+              <textarea
+                className="w-full min-h-[100px] bg-white/[0.03] border border-white/10 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all"
+                placeholder="Tell us what you struggle with most..."
+                value={formData.biggestChallenge}
+                onChange={(e) => handleInputChange("biggestChallenge", e.target.value)}
+              />
+              {errors.biggestChallenge && <p className="text-xs text-primary font-bold">{errors.biggestChallenge}</p>}
+            </div>
+
+            {/* Open to Coaching */}
+            <div className="space-y-3">
+              <label className="block text-sm font-bold text-white tracking-wide">
+                13. Are you open to coaching and feedback to grow your streams? <span className="text-primary">*</span>
+              </label>
+              <div className="flex gap-4">
+                {RADIO_OPTIONS.map(opt => (
+                  <label key={opt} className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="openToCoaching"
+                      value={opt}
+                      checked={formData.openToCoaching === opt}
+                      onChange={(e) => handleInputChange("openToCoaching", e.target.value)}
+                      className="w-4 h-4 text-primary bg-white/5 border-white/20 focus:ring-primary focus:ring-2"
+                    />
+                    <span className="text-white/80">{opt}</span>
+                  </label>
+                ))}
+              </div>
+              {errors.openToCoaching && <p className="text-xs text-primary font-bold">{errors.openToCoaching}</p>}
+            </div>
+
+            {/* Other Agency */}
+            <div className="space-y-3">
+              <label className="block text-sm font-bold text-white tracking-wide">
+                14. Do you currently belong to another TikTok LIVE agency? <span className="text-primary">*</span>
+              </label>
+              <div className="flex gap-4">
+                {RADIO_OPTIONS.map(opt => (
+                  <label key={opt} className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="otherAgency"
+                      value={opt}
+                      checked={formData.otherAgency === opt}
+                      onChange={(e) => handleInputChange("otherAgency", e.target.value)}
+                      className="w-4 h-4 text-primary bg-white/5 border-white/20 focus:ring-primary focus:ring-2"
+                    />
+                    <span className="text-white/80">{opt}</span>
+                  </label>
+                ))}
+              </div>
+              {errors.otherAgency && <p className="text-xs text-primary font-bold">{errors.otherAgency}</p>}
+
+              {/* Conditional Agency Name */}
+              <AnimatePresence>
+                {formData.otherAgency === "Yes" && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="pt-2"
+                  >
+                    <label className="block text-xs font-bold text-white/60 mb-2">Agency Name <span className="text-primary">*</span></label>
+                    <input
+                      type="text"
+                      placeholder="Type the name of your current agency"
+                      className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-primary/50 transition-all"
+                      value={formData.otherAgencyName}
+                      onChange={(e) => handleInputChange("otherAgencyName", e.target.value)}
+                    />
+                    {errors.otherAgencyName && <p className="text-xs text-primary font-bold mt-1">{errors.otherAgencyName}</p>}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* 15. TikTok Handle */}
+            <div className="space-y-3">
+              <label className="block text-sm font-bold text-white tracking-wide">
+                15. TikTok Username (@) <span className="text-primary">*</span>
               </label>
               <input
                 type="text"
@@ -369,7 +673,7 @@ function ApplicationForm() {
               {/* 8. Discord ID */}
               <div className="space-y-2">
                 <label className="block text-sm font-bold text-white/80 tracking-wide">
-                  8. Discord ID
+                  16. Discord ID
                 </label>
                 <input
                   type="text"
@@ -384,7 +688,7 @@ function ApplicationForm() {
               {/* 9. Email Address */}
               <div className="space-y-2">
                 <label className="block text-sm font-bold text-white/80 tracking-wide">
-                  9. Email Address
+                  17. Email Address
                 </label>
                 <input
                   type="email"
