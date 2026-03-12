@@ -4,7 +4,7 @@ import { useState, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Section } from "@/components/layout/Section";
 import Link from "next/link";
-import { Plus, X, Globe, Mail, MessageSquare, Video, Gamepad2, Mic2, Music, Tv, Dumbbell, Palette, Camera, CookingPot, Swords, Youtube, Instagram, Facebook, Disc as DiscordIcon, Laptop, Twitch, Share2 } from "lucide-react";
+import { X, Globe, Video, Gamepad2, Music, Youtube, Instagram, Facebook, Disc as DiscordIcon, Laptop, Twitch, Share2 } from "lucide-react";
 
 // Platform options with icons
 const PLATFORMS = [
@@ -56,7 +56,7 @@ function CreatorCardForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (name: string, value: any) => {
+  const handleInputChange = (name: string, value: string | string[] | Record<string, any>) => {
     setFormData(prev => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors(prev => {
@@ -194,7 +194,7 @@ function CreatorCardForm() {
             </p>
             <div className="mt-4 p-4 rounded-xl bg-white/5 border border-white/10 text-xs text-foreground-muted space-y-1">
               <p>• Use accurate details so your card looks pro.</p>
-              <p>• For photos/GIFs: Provide shareable Google Drive links (set to "Anyone with the link can view").</p>
+              <p>• For photos/GIFs: Provide shareable Google Drive links (set to &quot;Anyone with the link can view&quot;).</p>
               <p>• For videos: DM links directly to @baked.lays or @brandonnotstew on Discord.</p>
               <p className="pt-2">If you run into any issues, contact @iiiiianuiiiii, @brandonnotstew, or @baked.lays on Discord for help.</p>
             </div>
@@ -454,7 +454,7 @@ function CreatorCardForm() {
                     value={formData.mediaLinks}
                     onChange={(e) => handleInputChange("mediaLinks", e.target.value)}
                   />
-                  <p className="text-[10px] text-white/30 italic">Set links to "Anyone with the link can view".</p>
+                  <p className="text-[10px] text-white/30 italic">Set links to &quot;Anyone with the link can view&quot;.</p>
                 </div>
 
                 <div className="p-4 rounded-xl bg-primary/5 border border-primary/20">
@@ -474,7 +474,7 @@ function CreatorCardForm() {
             <div className="pt-8 space-y-8">
               <div className="p-6 rounded-2xl bg-white/[0.01] border border-white/5">
                 <p className="text-center text-[10px] text-white/40 leading-relaxed max-w-lg mx-auto italic">
-                  Privacy Disclaimer: Your submitted information may be displayed publicly on your Peace Time Agency Creator Card and used internally for network/promotion purposes. We respect your privacy and won't sell or misuse your data.
+                  Privacy Disclaimer: Your submitted information may be displayed publicly on your Peace Time Agency Creator Card and used internally for network/promotion purposes. We respect your privacy and won&apos;t sell or misuse your data.
                 </p>
               </div>
 

@@ -2,7 +2,7 @@ import { creators } from "@/lib/creators";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Section } from "@/components/layout/Section";
-import { Twitter, Instagram, ArrowLeft, Users, Heart } from "lucide-react";
+import { Twitter, Instagram, ArrowLeft, Users } from "lucide-react";
 import { CreatorMediaBox } from "@/components/ui/CreatorMediaBox";
 
 interface RecruiterPageProps {

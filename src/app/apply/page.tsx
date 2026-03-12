@@ -234,7 +234,7 @@ function ApplicationForm() {
           </div>
           <h1 className="text-4xl font-black text-white mb-4 uppercase tracking-tighter">Application Received</h1>
           <p className="text-foreground-muted mb-12">
-            Our team will review your submission and get back to you soon. Stay consistent on LIVE and let's build something great together.
+            Our team will review your submission and get back to you soon. Stay consistent on LIVE and let&apos;s build something great together.
           </p>
           <Link href="/" className="block w-full py-4 bg-primary hover:bg-primary-dark text-white font-black rounded-2xl transition-all duration-300 uppercase tracking-widest shadow-lg shadow-primary/20">
             Back to Home
@@ -257,7 +257,7 @@ function ApplicationForm() {
               Creator <span className="text-gradient-primary">Intake Form</span>
             </h1>
             <p className="text-foreground-muted leading-relaxed">
-              Join Peace Time Agency and level up your TikTok LIVE experience! We're here to support your growth, battles, and experiences in a positive creator network. Please fill out the following questions honestly and completely.
+              Join Peace Time Agency and level up your TikTok LIVE experience! We&apos;re here to support your growth, battles, and experiences in a positive creator network. Please fill out the following questions honestly and completely.
             </p>
           </div>
 

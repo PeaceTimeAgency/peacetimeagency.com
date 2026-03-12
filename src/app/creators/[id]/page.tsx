@@ -1,9 +1,8 @@
 import { creators } from "@/lib/creators";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { Section } from "@/components/layout/Section";
-import { Twitter, Instagram, ArrowLeft, Users, Heart, Youtube, Twitch, Globe, Gamepad2, MessageSquare } from "lucide-react";
+import { Twitter, Instagram, ArrowLeft, Youtube, Twitch, Globe, Gamepad2, MessageSquare } from "lucide-react";
 import { CreatorMediaBox } from "@/components/ui/CreatorMediaBox";
 
 interface CreatorPageProps {

@@ -1,9 +1,73 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Section } from "@/components/layout/Section";
 import Link from "next/link";
 import PreInterview from "@/components/PreInterview";
+
+function MeteorBackground() {
+  const [meteors, setMeteors] = useState<{ top: string; left: string; delay: string; duration: string }[]>([]);
+
+  useEffect(() => {
+    const newMeteors = [...Array(15)].map(() => ({
+      top: `${Math.random() * 100}%`,
+      left: `${20 + Math.random() * 130}%`,
+      delay: `${Math.random() * 5}s`,
+      duration: `${2 + Math.random() * 4}s`
+    }));
+    setTimeout(() => setMeteors(newMeteors), 0);
+  }, []);
+
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        @keyframes meteor {
+          0% { transform: rotate(215deg) translateX(0); opacity: 1; }
+          40% { opacity: 0.8; }
+          100% { transform: rotate(215deg) translateX(-1500px); opacity: 0; }
+        }
+        .meteor-tail {
+          position: absolute;
+          transform: rotate(215deg);
+          width: 250px;
+          height: 1px;
+          background: linear-gradient(90deg, transparent 0%, color-mix(in srgb, var(--color-foreground), transparent 20%) 50%, var(--color-foreground) 100%);
+          animation: meteor 3s ease-in infinite;
+          opacity: 0;
+          z-index: 1;
+          box-shadow: 0 0 8px 1px color-mix(in srgb, var(--color-foreground), transparent 60%);
+        }
+        .meteor-tail::before {
+          content: '';
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 3px;
+          height: 3px;
+          border-radius: 50%;
+          background: var(--color-foreground);
+          box-shadow: 0 0 15px 3px color-mix(in srgb, var(--color-foreground), transparent 20%);
+        }
+      ` }} />
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {meteors.map((m, i) => (
+          <div
+            key={i}
+            className="meteor-tail"
+            style={{
+              top: m.top,
+              left: m.left,
+              animationDelay: m.delay,
+              animationDuration: m.duration
+            }}
+          />
+        ))}
+      </div>
+    </>
+  );
+}
 
 const faqs = [
   {
@@ -12,15 +76,15 @@ const faqs = [
   },
   {
     q: "How do I join the agency?",
-    a: "Submission is handled via TikTok's official agency portal. There are no external legal traps or side-contracts. Once we invite you, everything is finalized securely within the app.",
+    a: "Submission is handled via TikTok&apos;s official agency portal. There are no external legal traps or side-contracts. Once we invite you, everything is finalized securely within the app.",
   },
   {
     q: "Are there any restrictive contracts?",
-    a: "Never. We operate exclusively within the official TikTok Agency framework. Transparency is core to our model: no hidden clauses, and no fine print beyond TikTok's standard platform terms.",
+    a: "Never. We operate exclusively within the official TikTok Agency framework. Transparency is core to our model: no hidden clauses, and no fine print beyond TikTok&apos;s standard platform terms.",
   },
   {
     q: "What happens if I decide to leave?",
-    a: "You retain full account ownership. You can leave at any time, subject only to TikTok's own platform-mandated 60-day transition window which applies to all agency moves.",
+    a: "You retain full account ownership. You can leave at any time, subject only to TikTok&apos;s own platform-mandated 60-day transition window which applies to all agency moves.",
   },
   {
     q: "What does the agency actually do for my stream?",
@@ -85,51 +149,7 @@ export function FAQ() {
           background: 'linear-gradient(135deg, color-mix(in srgb, var(--color-background-surface), var(--color-primary) 8%) 0%, color-mix(in srgb, var(--color-background-surface), var(--color-secondary) 8%) 100%)',
         }}
       >
-        <style dangerouslySetInnerHTML={{
-          __html: `
-          @keyframes meteor {
-            0% { transform: rotate(215deg) translateX(0); opacity: 1; }
-            40% { opacity: 0.8; }
-            100% { transform: rotate(215deg) translateX(-1500px); opacity: 0; }
-          }
-          .meteor-tail {
-            position: absolute;
-            transform: rotate(215deg);
-            width: 250px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent 0%, color-mix(in srgb, var(--color-foreground), transparent 20%) 50%, var(--color-foreground) 100%);
-            animation: meteor 3s ease-in infinite;
-            opacity: 0;
-            z-index: 1;
-            box-shadow: 0 0 8px 1px color-mix(in srgb, var(--color-foreground), transparent 60%);
-          }
-          .meteor-tail::before {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 3px;
-            height: 3px;
-            border-radius: 50%;
-            background: var(--color-foreground);
-            box-shadow: 0 0 15px 3px color-mix(in srgb, var(--color-foreground), transparent 20%);
-          }
-        ` }} />
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          {[...Array(15)].map((_, i) => (
-            <div
-              key={i}
-              className="meteor-tail"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${20 + Math.random() * 130}%`,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${2 + Math.random() * 4}s`
-              }}
-            />
-          ))}
-        </div>
+        <MeteorBackground />
         <div className="absolute inset-0 bg-dot-grid opacity-40 pointer-events-none z-0" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-primary/15 blur-[80px] pointer-events-none" />
         <div className="relative z-10">

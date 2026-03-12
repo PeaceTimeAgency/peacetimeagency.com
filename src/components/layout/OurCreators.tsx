@@ -133,9 +133,13 @@ const CreatorGrid = ({ title, desc, list, liveHandles = [], isUserSection = fals
   );
 };
 
+interface LiveCreator {
+  username: string;
+  avatar?: string;
+}
+
 export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [liveCreators, setLiveCreators] = useState<any[]>([]);
+  const [liveCreators, setLiveCreators] = useState<LiveCreator[]>([]);
 
   useEffect(() => {
     fetch('/api/tiktok/live')

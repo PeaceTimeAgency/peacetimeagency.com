@@ -1,13 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { articles } from "@/lib/news";
 import { Section } from "@/components/layout/Section";
 
 export default function NewsPage() {
-  const featuredArticle = articles[0];
-  const regularArticles = articles.slice(1);
 
   return (
     <main className="min-h-screen bg-background pt-12">

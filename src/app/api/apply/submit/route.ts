@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { creators } from "@/lib/creators";
 
 export async function POST(req: NextRequest) {
   try {
@@ -107,6 +106,14 @@ export async function POST(req: NextRequest) {
       embed.fields.push({
         name: "📝 Additional Notes",
         value: additionalNotes,
+        inline: false
+      });
+    }
+
+    if (recruiterId) {
+      embed.fields.push({
+        name: "🤝 Recruiter",
+        value: `Managed by recruiter: **${recruiterId}**`,
         inline: false
       });
     }

@@ -5,7 +5,13 @@ import { Section } from '@/components/layout/Section';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Volume2, VolumeX } from 'lucide-react';
 
-const testimonials: any[] = [];
+interface Testimonial {
+  videoSrc: string;
+  quote: string;
+  creatorName: string;
+}
+
+const testimonials: Testimonial[] = [];
 
 export default function Testimonials() {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -125,7 +131,7 @@ export default function Testimonials() {
                                 <div className="absolute inset-x-0 bottom-0 p-6 md:p-10 pointer-events-none">
                                     <div className="max-w-2xl">
                                         <p className="text-xl md:text-3xl font-bold text-white mb-4 leading-snug drop-shadow-md [text-shadow:0_0_1.5px_rgba(0,0,0,0.8)]">
-                                            "{testimonials[currentIndex].quote}"
+                                            &quot;{testimonials[currentIndex].quote}&quot;
                                         </p>
                                         <div className="flex items-center gap-3">
                                             <span className="h-px w-6 bg-primary" />

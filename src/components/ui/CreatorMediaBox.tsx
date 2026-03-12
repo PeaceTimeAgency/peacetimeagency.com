@@ -29,7 +29,7 @@ export const CreatorMediaBox = ({
 
   useEffect(() => {
     if (displayImages.length <= 1) {
-      setCurrentIndex(0);
+      if (currentIndex !== 0) setCurrentIndex(0);
       return;
     }
 
