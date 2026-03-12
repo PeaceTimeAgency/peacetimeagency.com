@@ -110,7 +110,7 @@ export const creators: Creator[] = [
     name: "Trash (aka Lindsey)",
     handle: "@trashsoupgaming",
     description: "Lindsey, also known as Trash (@TrashSoupGaming), is a full-time TikTok streamer who focuses on story-driven games like RPGs and well-written horror. Over time, she has built a strong, loyal community that doesn’t just show up for the games, but for the conversations, reactions, and shared experiences that happen during every stream. Lindsey believes that growth on TikTok LIVE isn’t just about numbers. It’s about building a space where people want to come back, where viewers feel part of something, and where creators can develop confidence in what they’re doing. For Lindsey, streaming isn’t just about going live. It’s about helping others find their place and grow along the way.",
-    image: "/creators/trashsoupgaming.png",
+    image: "/branding/KYRAX425.png",
     category: "Staff / Gaming / Just Chatting",
     stats: {
       followers: "Full-time",
