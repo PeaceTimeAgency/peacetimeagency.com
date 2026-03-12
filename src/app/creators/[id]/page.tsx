@@ -61,7 +61,7 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
               {/* Category Badge */}
               <div className="absolute top-6 left-6 flex items-center gap-2 z-10">
                 <span className="px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-[10px] font-black text-primary uppercase tracking-widest">
-                  {creator.category}
+                  {creator.title || creator.category}
                 </span>
                 {creator.tier === 'top' && (
                   <span className="px-3 py-1.5 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 text-[10px] font-black text-primary uppercase tracking-widest shadow-[0_0_15px_rgba(255,60,95,0.4)]">
@@ -121,44 +121,44 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
           {/* Social Links - Moved to bottom */}
           <div className="mb-10 flex gap-4">
             {creator.socials.tiktok && (
-              <a href={creator.socials.tiktok} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-primary/20 hover:border-primary/50 hover:text-primary transition-all text-white/60">
+              <a href={creator.socials.tiktok} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-[#ff0050]/20 hover:border-[#ff0050]/50 hover:text-[#ff0050] transition-all text-white/60">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 15.68a6.34 6.34 0 006.27 6.36 6.33 6.33 0 006.25-6.32V8.75a8.31 8.31 0 003.5.88V6.26a6.84 6.84 0 00-1.43-.1 6.89 6.89 0 00-0.49.03z"></path>
                 </svg>
               </a>
             )}
             {creator.socials.instagram && (
-              <a href={creator.socials.instagram} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-pink-500/20 hover:border-pink-500/50 hover:text-pink-400 transition-all text-white/60">
+              <a href={creator.socials.instagram} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-[#E1306C]/20 hover:border-[#E1306C]/50 hover:text-[#E1306C] transition-all text-white/60">
                 <Instagram className="w-5 h-5" />
               </a>
             )}
             {creator.socials.twitter && (
-              <a href={creator.socials.twitter} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-blue-500/20 hover:border-blue-500/50 hover:text-blue-400 transition-all text-white/60">
+              <a href={creator.socials.twitter} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-[#1DA1F2]/20 hover:border-[#1DA1F2]/50 hover:text-[#1DA1F2] transition-all text-white/60">
                 <Twitter className="w-5 h-5" />
               </a>
             )}
             {creator.socials.youtube && (
-              <a href={creator.socials.youtube} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-red-500/20 hover:border-red-500/50 hover:text-red-400 transition-all text-white/60">
+              <a href={creator.socials.youtube} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-[#FF0000]/20 hover:border-[#FF0000]/50 hover:text-[#FF0000] transition-all text-white/60">
                 <Youtube className="w-5 h-5" />
               </a>
             )}
             {creator.socials.twitch && (
-              <a href={creator.socials.twitch} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-purple-500/20 hover:border-purple-500/50 hover:text-purple-400 transition-all text-white/60">
+              <a href={creator.socials.twitch} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-[#9146FF]/20 hover:border-[#9146FF]/50 hover:text-[#9146FF] transition-all text-white/60">
                 <Twitch className="w-5 h-5" />
               </a>
             )}
             {creator.socials.discord && (
-              <a href={creator.socials.discord} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-indigo-500/20 hover:border-indigo-500/50 hover:text-indigo-400 transition-all text-white/60">
+              <a href={creator.socials.discord} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-[#5865F2]/20 hover:border-[#5865F2]/50 hover:text-[#5865F2] transition-all text-white/60">
                 <MessageSquare className="w-5 h-5" />
               </a>
             )}
             {creator.socials.steam && (
-              <a href={creator.socials.steam} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-slate-500/20 hover:border-slate-500/50 hover:text-slate-400 transition-all text-white/60">
+              <a href={creator.socials.steam} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-[#171a21]/40 hover:border-[#66c0f4]/50 hover:text-[#66c0f4] transition-all text-white/60">
                 <Gamepad2 className="w-5 h-5" />
               </a>
             )}
             {creator.socials.website && (
-              <a href={creator.socials.website} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-emerald-500/20 hover:border-emerald-500/50 hover:text-emerald-400 transition-all text-white/60">
+              <a href={creator.socials.website} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-[#10b981]/20 hover:border-[#10b981]/50 hover:text-[#10b981] transition-all text-white/60">
                 <Globe className="w-5 h-5" />
               </a>
             )}

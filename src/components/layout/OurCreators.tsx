@@ -7,6 +7,37 @@ import { useRouter } from "next/navigation";
 import { creators, Creator } from "@/lib/creators";
 import { Section } from "@/components/layout/Section";
 
+const CreatorCardImage = ({ creator }: { creator: Creator }) => {
+  const images = creator.images && creator.images.length > 0 ? creator.images : [creator.image];
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 4000); // 4 seconds for a slow transition
+
+    return () => clearInterval(interval);
+  }, [images]);
+
+  return (
+    <div className="relative w-full h-full">
+      {images.map((img, idx) => (
+        <motion.img
+          key={img}
+          src={img}
+          alt={`${creator.name} ${idx}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: currentIndex === idx ? 1 : 0 }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 blur-sm group-hover:blur-none"
+        />
+      ))}
+    </div>
+  );
+};
+
 const CreatorGrid = ({ title, desc, list, isLiveSection = false, isUserSection = false }: { title: string, desc?: string, list: Creator[], isLiveSection?: boolean, isUserSection?: boolean }) => {
   const router = useRouter();
 
@@ -41,11 +72,7 @@ const CreatorGrid = ({ title, desc, list, isLiveSection = false, isUserSection =
                       <span className="text-[10px] font-black text-white tracking-widest uppercase">You</span>
                     </div>
                   )}
-                  <img
-                    src={creator.image}
-                    alt={creator.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 blur-sm group-hover:blur-none"
-                  />
+                  <CreatorCardImage creator={creator} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-black/20 to-transparent opacity-80" />
                 </div>
 
@@ -54,7 +81,7 @@ const CreatorGrid = ({ title, desc, list, isLiveSection = false, isUserSection =
                   <div className="flex items-center gap-2 mb-1.5">
                     <span className="h-px w-4 bg-primary" />
                     <span className="text-[10px] font-bold text-primary tracking-widest uppercase truncate">
-                      {creator.category.replace(/\s+and\s+/gi, ' / ')}
+                      {creator.title ? creator.title : creator.category.replace('Agency Staff', 'Staff').replace(/\s+and\s+/gi, ' / ')}
                     </span>
                   </div>
                   <h4 className="text-xl font-black text-foreground group-hover:text-primary transition-colors duration-300 truncate [text-shadow:0_0_1.5px_rgba(0,0,0,0.8)]">

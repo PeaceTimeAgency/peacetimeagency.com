@@ -90,19 +90,19 @@ export default async function RecruiterPage({ params }: RecruiterPageProps) {
                         {/* Social Links */}
                         <div className="mb-10 flex gap-4">
                             {creator.socials.tiktok && (
-                                <a href={creator.socials.tiktok} target="_blank" rel="noopener noreferrer" className="p-3 bg-foreground/5 border border-foreground/10 rounded-full hover:bg-primary/20 hover:border-primary/50 hover:text-primary transition-all text-foreground/60">
+                                <a href={creator.socials.tiktok} target="_blank" rel="noopener noreferrer" className="p-3 bg-foreground/5 border border-foreground/10 rounded-full hover:bg-[#ff0050]/20 hover:border-[#ff0050]/50 hover:text-[#ff0050] transition-all text-foreground/60">
                                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 15.68a6.34 6.34 0 006.27 6.36 6.33 6.33 0 006.25-6.32V8.75a8.31 8.31 0 003.5.88V6.26a6.84 6.84 0 00-1.43-.1 6.89 6.89 0 00-0.49.03z"></path>
                                     </svg>
                                 </a>
                             )}
                             {creator.socials.instagram && (
-                                <a href={creator.socials.instagram} target="_blank" rel="noopener noreferrer" className="p-3 bg-foreground/5 border border-foreground/10 rounded-full hover:bg-pink-500/20 hover:border-pink-500/50 hover:text-pink-400 transition-all text-foreground/60">
+                                <a href={creator.socials.instagram} target="_blank" rel="noopener noreferrer" className="p-3 bg-foreground/5 border border-foreground/10 rounded-full hover:bg-[#E1306C]/20 hover:border-[#E1306C]/50 hover:text-[#E1306C] transition-all text-foreground/60">
                                     <Instagram className="w-5 h-5" />
                                 </a>
                             )}
                             {creator.socials.twitter && (
-                                <a href={creator.socials.twitter} target="_blank" rel="noopener noreferrer" className="p-3 bg-foreground/5 border border-foreground/10 rounded-full hover:bg-blue-500/20 hover:border-blue-500/50 hover:text-blue-400 transition-all text-foreground/60">
+                                <a href={creator.socials.twitter} target="_blank" rel="noopener noreferrer" className="p-3 bg-foreground/5 border border-foreground/10 rounded-full hover:bg-[#1DA1F2]/20 hover:border-[#1DA1F2]/50 hover:text-[#1DA1F2] transition-all text-foreground/60">
                                     <Twitter className="w-5 h-5" />
                                 </a>
                             )}

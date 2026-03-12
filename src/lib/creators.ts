@@ -9,6 +9,7 @@ export interface Creator {
   id: string;
   name: string;
   handle: string;
+  title?: string;
   description: string;
   image: string;
   category: string;
@@ -17,6 +18,7 @@ export interface Creator {
   tier?: 'staff' | 'top' | 'new' | 'recruiter';
   webhookUrl?: string;
   liveUrl?: string;
+  images?: string[];
   socials: {
     tiktok: string;
     instagram?: string;
@@ -34,9 +36,10 @@ export const creators: Creator[] = [
     id: "baked",
     name: "Baked",
     handle: "@baked.laze",
+    title: "Founder",
     description: "Hi, I’m Nick, founder of Peace Time Agency. I work directly with creators to help them grow on TikTok LIVE through stream strategy, setup guidance, and community support. My goal is simple, help creators stay consistent, improve their content, and turn streaming into real opportunity.",
     image: "/creators/baked.jpg",
-    category: "Agency Staff",
+    category: "Staff / Gaming",
     stats: {
       followers: "N/A",
       avgWatchTime: "N/A",
@@ -50,6 +53,7 @@ export const creators: Creator[] = [
       tiktok: "https://www.tiktok.com/@baked.laze"
     }
   },
+
   {
     id: "oopsitsjrpgtime",
     name: "OopsItsJRPGTime",
@@ -73,6 +77,32 @@ export const creators: Creator[] = [
       discord: "https://discordapp.com/users/oopsitsjrpgtime",
       steam: "https://steamcommunity.com/id/OopsItsJRPGTIME",
       website: "https://www.oopsitsjrpgtime.com/"
+    }
+  },
+  {
+    id: "mrleftythehand",
+    name: "Mr. Lefty the Hand",
+    handle: "@mrleftythehand",
+    description: "I’m Mr. Lefty, a hand that somehow ended up flying planes, driving tanks, and making questionable tactical decisions in War Thunder. Whether it’s clutch moments, terrible aim, or Gaijin doing Gaijin things, Lefty’s here for random bits of chaos along the way.",
+    image: "/creators/mrleftythehand.jpg",
+    category: "Gaming",
+    stats: {
+      followers: "New",
+      avgWatchTime: "N/A",
+      peakCCV: "N/A",
+      totalLikes: "0"
+    },
+    tags: ["Gaming", "War Thunder", "Tanks", "Planes"],
+    tier: "new",
+    liveUrl: "https://www.tiktok.com/@mrleftythehand/live",
+    images: [
+      "/creators/mrleftythehand.jpg",
+      "/creators/mrleftythehand_tank.png",
+      "/creators/mrleftythehand_plane.png"
+    ],
+    socials: {
+      tiktok: "https://www.tiktok.com/@mrleftythehand",
+      twitch: "https://www.twitch.tv/mrleftythehand"
     }
   }
 ];
