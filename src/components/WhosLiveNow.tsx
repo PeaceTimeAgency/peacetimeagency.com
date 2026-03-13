@@ -128,7 +128,8 @@ export default function WhosLiveNow() {
                         transition={{ repeat: Infinity, duration: 1.8 }}
                         className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0"
                       />
-                      {formatViewers(creator.viewerCount)} watching
+                      {/* {formatViewers(creator.viewerCount)} watching */}
+                      Live Now
                     </div>
                     <span className="text-[10px] text-foreground-subtle font-medium">PTA</span>
                   </div>

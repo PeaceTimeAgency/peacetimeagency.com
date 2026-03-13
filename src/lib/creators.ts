@@ -154,7 +154,7 @@ export const creators: Creator[] = [
     name: "ItsJakee_78",
     handle: "@itsjakee_78",
     description: "I’m a gaming creator posting Warzone gameplay, gaming memes, and fun squad moments.",
-    image: "/branding/KYRAX425.png",
+    image: "/creators/image.png",
     category: "Gaming",
     stats: {
       followers: "New",

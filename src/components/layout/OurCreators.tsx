@@ -104,25 +104,27 @@ const CreatorGrid = ({ title, desc, list, liveHandles = [], isUserSection = fals
                     )}
                   </div>
 
-                  {/* Hover stats reveal */}
-                  <div className="absolute top-4 right-4 text-right transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                    <div className="text-lg font-black text-primary drop-shadow-md">
-                      {creator.stats.followers}
-                    </div>
-                    <div className="text-[9px] font-bold text-foreground/40 uppercase tracking-widest leading-tight">
-                      Followers
-                    </div>
-                    {creator.stats.totalLikes && creator.stats.totalLikes !== "0" && (
-                      <div className="mt-2">
-                        <div className="text-sm font-black text-foreground drop-shadow-md">
-                          {creator.stats.totalLikes}
-                        </div>
-                        <div className="text-[9px] font-bold text-foreground/40 uppercase tracking-widest leading-tight">
-                          Likes
-                        </div>
+                  {/* Hover stats reveal - Hidden when live */}
+                  {!isLive && (
+                    <div className="absolute top-4 right-4 text-right transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                      <div className="text-lg font-black text-primary drop-shadow-md">
+                        {creator.stats.followers}
                       </div>
-                    )}
-                  </div>
+                      <div className="text-[9px] font-bold text-foreground/40 uppercase tracking-widest leading-tight">
+                        Followers
+                      </div>
+                      {creator.stats.totalLikes && creator.stats.totalLikes !== "0" && (
+                        <div className="mt-2">
+                          <div className="text-sm font-black text-foreground drop-shadow-md">
+                            {creator.stats.totalLikes}
+                          </div>
+                          <div className="text-[9px] font-bold text-foreground/40 uppercase tracking-widest leading-tight">
+                            Likes
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </Link>
             </motion.div>

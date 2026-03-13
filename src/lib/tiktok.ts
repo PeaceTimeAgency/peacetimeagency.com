@@ -103,3 +103,46 @@ export async function getTikTokProfile(accessToken: string): Promise<TikTokProfi
     likes_count: data.user.likes_count,
   };
 }
+
+/**
+ * Checks if a TikTok user is currently live by scraping their live page.
+ * This is an unofficial method used when official API access is limited.
+ */
+export async function fetchTikTokLiveStatus(handle: string) {
+  const username = handle.startsWith('@') ? handle.slice(1) : handle;
+  const url = `https://www.tiktok.com/@${username}/live`;
+
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
+      },
+      next: { revalidate: 0 } // Disable Next.js fetch cache
+    });
+
+    if (!response.ok) return { isLive: false, viewerCount: 0 };
+
+    const html = await response.text();
+    
+    // Check for common indicators of a live stream in the HTML
+    // TikTok often includes "RENDER_DATA" or specific live meta tags
+    const isLive = html.includes('"liveRoom":') || 
+                   html.includes('"status":2') || // 2 usually means live
+                   html.includes('watching');
+
+    // Attempt to extract viewer count (highly variable, using a loose regex)
+    let viewerCount = 0;
+    const viewerMatch = html.match(/"userCount":(\d+)/) || html.match(/"viewerCount":(\d+)/);
+    if (viewerMatch) {
+      viewerCount = parseInt(viewerMatch[1], 10);
+    }
+
+    return { isLive, viewerCount };
+  } catch (error) {
+    console.error(`Error checking live status for ${username}:`, error);
+    return { isLive: false, viewerCount: 0 };
+  }
+}
