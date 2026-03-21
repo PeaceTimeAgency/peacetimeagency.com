@@ -313,18 +313,12 @@ const fadeUp = {
   }),
 };
 
-// ── Stats ────────────────────────────────────────────────────────────────────
-const stats = [
-  { value: '24/7', label: 'Creator Support System' },
-  { value: 'Top Tier', label: 'TikTok LIVE Creator Network' },
-  { value: 'Millions', label: 'LIVE Viewers Reached' },
-  { value: '147', label: 'Active Members' },
-];
+import { SiteSettings } from "@/lib/creators-db";
 
 import { Hero3DObject } from "@/components/Hero3DObject";
 
 // ── Hero Component ───────────────────────────────────────────────────────────
-export function Hero() {
+export function Hero({ settings }: { settings: SiteSettings['hero'] }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   useHeroCanvas(canvasRef);
 
@@ -413,7 +407,7 @@ export function Hero() {
               backgroundClip: 'text',
             }}
           >
-            The Creator Agency
+            {settings.headlineLine1}
           </span>
           <br />
           <span
@@ -425,7 +419,7 @@ export function Hero() {
               filter: 'drop-shadow(0 0 32px rgba(255,60,95,0.45))',
             }}
           >
-            Built for Streamers.
+            {settings.headlineLine2}
           </span>
         </motion.h1>
 
@@ -434,8 +428,7 @@ export function Hero() {
           custom={2} initial="hidden" animate="show" variants={fadeUp}
           className="mx-auto max-w-xl text-base sm:text-lg text-white/50 leading-relaxed [text-shadow:0_0_1px_rgba(0,0,0,0.8)]"
         >
-          We provide the infrastructure, strategy, and community to help you grow on your own terms.{' '}
-          <span className="text-white/70">No quotas. No pressure. No predatory contracts.</span>
+          {settings.subheadline}
         </motion.p>
 
         {/* CTAs */}
@@ -492,7 +485,7 @@ export function Hero() {
             boxShadow: '0 8px 48px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06)',
           }}
         >
-          {stats.map((s, i) => (
+          {settings.stats.map((s, i) => (
             <div
               key={s.label}
               className={`group flex flex-col items-center justify-center py-7 px-4 cursor-default transition-all duration-300 hover:bg-white/[0.03] border-white/[0.06] ${i === 0 ? 'border-r border-b md:border-b-0' :

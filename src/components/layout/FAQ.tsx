@@ -69,33 +69,7 @@ function MeteorBackground() {
   );
 }
 
-const faqs = [
-  {
-    q: "What are the expectations and quotas?",
-    a: "None. Peace Time operates on a Zero-Pressure Policy: no minimum hours, no gifting benchmarks, and no quotas. We provide the tools; you determine the velocity.",
-  },
-  {
-    q: "How do I join the agency?",
-    a: "Submission is handled via TikTok&apos;s official agency portal. There are no external legal traps or side-contracts. Once we invite you, everything is finalized securely within the app.",
-  },
-  {
-    q: "Are there any restrictive contracts?",
-    a: "Never. We operate exclusively within the official TikTok Agency framework. Transparency is core to our model: no hidden clauses, and no fine print beyond TikTok&apos;s standard platform terms.",
-  },
-  {
-    q: "What happens if I decide to leave?",
-    a: "You retain full account ownership. You can leave at any time, subject only to TikTok&apos;s own platform-mandated 60-day transition window which applies to all agency moves.",
-  },
-  {
-    q: "What does the agency actually do for my stream?",
-    a: "We provide professional technical audits, data-driven strategy sessions, and 24/7 administrative support for account safety and platform compliance.",
-  },
-  {
-    q: "What do I get immediately upon joining?",
-    a: "Instant access to our 50+ module Education Center, a full technical setup audit, and entry into our private Discord network for strategy and collaboration.",
-  },
-];
-
+import { SiteSettings } from "@/lib/creators-db";
 
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
@@ -119,7 +93,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-export function FAQ() {
+export function FAQ({ settings }: { settings: SiteSettings['faqs'] }) {
   return (
     <Section id="faq" className="bg-background-surface">
       <div className="mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-stretch">
@@ -131,7 +105,7 @@ export function FAQ() {
           </div>
 
           <div className="glass-card rounded-2xl px-6 h-full flex flex-col justify-center">
-            {faqs.map((faq, i) => (
+            {settings.map((faq, i) => (
               <FAQItem key={i} q={faq.q} a={faq.a} />
             ))}
           </div>

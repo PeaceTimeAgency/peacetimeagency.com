@@ -1,3 +1,4 @@
+import { getCreatorsFromDb, getSiteSettingsFromDb } from "@/lib/creators-db";
 import { OurCreators } from "@/components/layout/OurCreators";
 import { Footer } from "@/components/layout/Footer";
 
@@ -6,13 +7,16 @@ export const metadata = {
   description: "Meet the elite creators of the Peace Time Agency roster.",
 };
 
-export default function CreatorsPage() {
+export default async function CreatorsPage() {
+  const creators = await getCreatorsFromDb();
+  const settings = await getSiteSettingsFromDb();
+  
   return (
     <main className="flex min-h-screen flex-col bg-background">
       <div className="flex-grow">
-        <OurCreators />
+        <OurCreators initialCreators={creators} settings={settings.rosterSettings} />
       </div>
-      <Footer />
+      <Footer settings={settings.footer} />
     </main>
   );
 }

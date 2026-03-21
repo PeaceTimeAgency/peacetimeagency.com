@@ -3,41 +3,7 @@
 import { Section } from "@/components/layout/Section";
 import { motion } from "framer-motion";
 
-const phases = [
-  {
-    number: "01",
-    name: "Foundation",
-    focus: "Tech & Environment",
-    role: "The baseline for professional broadcasting. We audit your technical environment to ensure your setup meets the high-fidelity standards required for elite platform push.",
-    accent: "text-primary",
-    border: "border-primary/30",
-    bg: "bg-primary/10",
-    glow: "shadow-[0_0_40px_rgba(108,92,231,0.15)]",
-    connector: "from-primary/40",
-  },
-  {
-    number: "02",
-    name: "Engagement",
-    focus: "Algorithmic Reach",
-    role: "Transitioning from technical stability to psychological reach. We focus on viewer retention patterns and interaction loops that trigger the platform's distribution algorithm.",
-    accent: "text-secondary",
-    border: "border-secondary/30",
-    bg: "bg-secondary/10",
-    glow: "shadow-[0_0_40px_rgba(253,121,168,0.15)]",
-    connector: "from-secondary/40",
-  },
-  {
-    number: "03",
-    name: "Expansion",
-    focus: "Community & Revenue",
-    role: "Scaling your influence into a sustainable ecosystem. This phase refines your relationship with your core audience to drive consistent growth and long-term monetization.",
-    accent: "text-accent",
-    border: "border-accent/30",
-    bg: "bg-accent/10",
-    glow: "shadow-[0_0_40px_rgba(0,206,201,0.15)]",
-    connector: "from-accent/40",
-  },
-];
+import { SiteSettings } from "@/lib/creators-db";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -48,7 +14,10 @@ const fadeUp = {
   }),
 };
 
-export function GrowthPhases() {
+export function GrowthPhases({ settings }: { settings: SiteSettings['growthPhases'] }) {
+  if (!settings) return null;
+  const { tag, title, titleGradient, description, phases, bottomCallout } = settings;
+
   return (
     <Section id="growth-phases" className="relative overflow-hidden bg-background-surface">
       {/* Background */}
@@ -60,15 +29,15 @@ export function GrowthPhases() {
         {/* Header */}
         <div className="mb-16 flex flex-col items-center text-center max-w-2xl mx-auto">
           <p className="text-xs font-semibold text-primary tracking-[0.2em] uppercase mb-3">
-            Creator Journey
+            {tag}
           </p>
           <h2 className="text-4xl md:text-5xl font-black tracking-tight text-foreground mb-4">
-            Three phases.
+            {title}
             <br />
-            <span className="text-gradient-primary">One clear path forward.</span>
+            <span className="text-gradient-primary">{titleGradient}</span>
           </h2>
           <p className="text-foreground-muted text-base leading-relaxed">
-            Every creator moves through the same journey. We know exactly how to guide each phase.
+            {description}
           </p>
         </div>
 
@@ -138,9 +107,7 @@ export function GrowthPhases() {
           className="mt-12 text-center"
         >
           <p className="text-foreground-muted text-sm">
-            <span className="text-foreground font-semibold">Growth at your pace. </span>
-            Transparent by design.{" "}
-            <span className="text-foreground font-semibold">Built for creators.</span>
+            {bottomCallout}
           </p>
         </motion.div>
       </div>

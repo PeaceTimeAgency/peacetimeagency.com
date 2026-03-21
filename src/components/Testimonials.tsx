@@ -11,14 +11,16 @@ interface Testimonial {
   creatorName: string;
 }
 
-const testimonials: Testimonial[] = [];
+import { SiteSettings } from '@/lib/creators-db';
 
-export default function Testimonials() {
+export default function Testimonials({ settings }: { settings: SiteSettings['testimonials'] }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isMuted, setIsMuted] = useState(true);
     const [direction, setDirection] = useState(0);
 
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+    const testimonials = settings?.items || [];
 
     useEffect(() => {
         // Play current video, pause others
@@ -66,7 +68,7 @@ export default function Testimonials() {
                         viewport={{ once: true }}
                         className="text-xs font-semibold text-primary tracking-[0.2em] uppercase mb-4"
                     >
-                        Proof of Work
+                        {settings.tag}
                     </motion.p>
                     <motion.h2
                         initial={{ opacity: 0, y: 10 }}
@@ -75,7 +77,7 @@ export default function Testimonials() {
                         transition={{ delay: 0.1 }}
                         className="text-4xl md:text-5xl font-black tracking-tight text-foreground mb-6 [text-shadow:0_0_1.5px_rgba(0,0,0,0.8)]"
                     >
-                        Hear from our <span className="text-gradient-primary">Creators.</span>
+                        {settings.title} <span className="text-gradient-primary">{settings.titleGradient}</span>
                     </motion.h2>
                 </div>
 

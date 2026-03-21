@@ -21,11 +21,18 @@ export const CreatorMediaBox = ({
   transitionDuration = 1.5,
 }: CreatorMediaBoxProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [failedIndices, setFailedIndices] = useState<Set<number>>(new Set());
 
   const placeholder = "/branding/KYRAX425.png";
   const displayImages = images.length > 0 && images.every(img => img && img.trim() !== "") 
     ? images 
     : [placeholder];
+
+  // Reset state when images change
+  useEffect(() => {
+    setFailedIndices(new Set());
+    setCurrentIndex(0);
+  }, [images]);
 
   useEffect(() => {
     if (displayImages.length <= 1) {
@@ -42,18 +49,25 @@ export const CreatorMediaBox = ({
 
   if (displayImages.length === 0) return null;
 
+  const currentSrc = failedIndices.has(currentIndex) ? placeholder : displayImages[currentIndex];
+
   return (
     <div className={className}>
       <AnimatePresence initial={false} mode="popLayout">
         <motion.img
-          key={displayImages[currentIndex]}
-          src={displayImages[currentIndex]}
+          key={`${currentIndex}-${currentSrc}`}
+          src={currentSrc}
           alt={`${name} - ${currentIndex + 1}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: transitionDuration, ease: "easeInOut" }}
           className={imageClassName}
+          onError={() => {
+            if (!failedIndices.has(currentIndex)) {
+              setFailedIndices((prev) => new Set(prev).add(currentIndex));
+            }
+          }}
         />
       </AnimatePresence>
     </div>

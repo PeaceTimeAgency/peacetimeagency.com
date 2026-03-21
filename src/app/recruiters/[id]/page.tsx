@@ -1,4 +1,4 @@
-import { creators } from "@/lib/creators";
+import { getCreatorsFromDb } from "@/lib/creators-db";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Section } from "@/components/layout/Section";
@@ -10,7 +10,8 @@ interface RecruiterPageProps {
 }
 
 // Generate static params for build time optimization
-export function generateStaticParams() {
+export async function generateStaticParams() {
+    const creators = await getCreatorsFromDb();
     return creators
         .filter((creator) => creator.tier === 'recruiter')
         .map((creator) => ({
@@ -20,6 +21,7 @@ export function generateStaticParams() {
 
 export default async function RecruiterPage({ params }: RecruiterPageProps) {
     const { id } = await params;
+    const creators = await getCreatorsFromDb();
     const creator = creators.find((c) => c.id === id && c.tier === 'recruiter');
 
     if (!creator) {

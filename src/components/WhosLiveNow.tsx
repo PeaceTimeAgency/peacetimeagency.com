@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { creators } from '@/lib/creators';
+import { Creator } from '@/lib/creators';
 import { SkeletonCard } from '@/components/ui/SkeletonCard';
 
 interface LiveCreator {
@@ -15,7 +15,9 @@ interface LiveCreator {
   stream_title: string;
 }
 
-export default function WhosLiveNow() {
+import { SiteSettings } from '@/lib/creators-db';
+
+export default function WhosLiveNow({ initialCreators = [], settings }: { initialCreators?: Creator[], settings: SiteSettings['liveSection'] }) {
   const [loading, setLoading] = useState(true);
   const [liveCreators, setLiveCreators] = useState<LiveCreator[]>([]);
 
@@ -45,7 +47,7 @@ export default function WhosLiveNow() {
   };
 
   const getCreatorAvatar = (id: string, username: string) => {
-    const creator = creators.find(c => c.id === id || c.handle.toLowerCase() === username.toLowerCase());
+    const creator = initialCreators.find(c => c.id === id || c.handle.toLowerCase() === username.toLowerCase());
     return creator?.image || `https://i.pravatar.cc/150?u=${id}`;
   };
 
@@ -60,8 +62,8 @@ export default function WhosLiveNow() {
       {/* Header */}
       <div className="container mx-auto px-4 mb-10 flex justify-between items-end relative z-10">
         <div>
-          <p className="text-xs font-semibold text-primary tracking-[0.2em] uppercase mb-2">Live Now</p>
-          <h2 className="text-3xl font-black tracking-tight text-foreground">Elite Creators Broadcasting</h2>
+          <p className="text-xs font-semibold text-primary tracking-[0.2em] uppercase mb-2">{settings?.tag || "Live Now"}</p>
+          <h2 className="text-3xl font-black tracking-tight text-foreground">{settings?.title || "Elite Creators Broadcasting"}</h2>
         </div>
         <Link href="/creators" className="hidden sm:flex items-center gap-1.5 text-sm text-foreground-muted hover:text-foreground transition-colors group font-medium">
           View All Roster

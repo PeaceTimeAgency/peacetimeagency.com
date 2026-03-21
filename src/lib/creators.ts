@@ -19,6 +19,7 @@ export interface Creator {
   webhookUrl?: string;
   liveUrl?: string;
   images?: string[];
+  accentColor?: string;
   socials: {
     tiktok: string;
     instagram?: string;
@@ -226,16 +227,8 @@ export const creators: Creator[] = [
     handle: "@stealyn.vr",
     title: "Recruiter",
     description: "The Content Coach with no fluff, Stealyn believes great creators are built through knowledge, positivity, and mental fortitude. He is a War Thunder VR creator by passion and a blue-collar worker by trade; he knows the value of discipline, balance, and consistency. Here at PeaceTime, his focus is to build strategies around YOUR success as an individual creator! He’s not looking for just anybody; he’s looking for those ready to earn their place as an Agent of PeaceTime.",
-    image: "/creators/stealyn_1.png",
-    images: [
-      "/creators/stealyn_1.png",
-      "/creators/stealyn_2.png",
-      "/creators/stealyn_3.png",
-      "/creators/stealyn_4.png",
-      "/creators/stealyn_5.png",
-      "/creators/stealyn_6.png",
-      "/creators/stealyn_7.png"
-    ],
+    image: "/branding/KYRAX425.png",
+    images: [],
     category: ["Gaming", "Recruiter"],
     stats: {
       followers: "New",
@@ -249,6 +242,36 @@ export const creators: Creator[] = [
     socials: {
       tiktok: "https://www.tiktok.com/@stealyn.vr",
       discord: "https://discord.gg/UajNn4KaQP"
+    }
+  },
+  {
+    id: "internettourguide",
+    name: "Internet Tour Guide",
+    handle: "@internettourguide",
+    description: "Internet Tour Guide is a creator with rare range: live energy, real audience interaction, and genuinely high-production content off-stream, all backed by the discipline to build both a personal brand and a daily content business for small business owners that don't want to become influencers to survive. Take the Tour :v:",
+    image: "/creators/internettourguide.png",
+    images: [
+      "/creators/internettourguide.png",
+      "/creators/internettourguide_moody.jpg",
+      "/creators/internettourguide_banner_1.png",
+      "/creators/internettourguide_banner_2.png"
+    ],
+    category: ["Gaming", "Just Chatting", "IRL", "Comedy", "Skits"],
+    stats: {
+      followers: "New",
+      avgWatchTime: "N/A",
+      peakCCV: "N/A",
+      totalLikes: "0"
+    },
+    tags: ["Gaming", "Just Chatting", "IRL", "Comedy", "Skits", "Small Business"],
+    tier: "new",
+    liveUrl: "https://www.tiktok.com/@internettourguide/live",
+    socials: {
+      tiktok: "https://www.tiktok.com/@internettourguide",
+      youtube: "https://www.youtube.com/@colethetourguide",
+      discord: "https://discord.gg/T2bsJapnfC",
+      instagram: "https://www.instagram.com/internettourguide/",
+      website: "https://internettour.guide/"
     }
   }
 ];

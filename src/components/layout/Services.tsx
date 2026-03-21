@@ -1,57 +1,8 @@
 import { Section } from "@/components/layout/Section";
 
-const services = [
-  {
-    index: "01",
-    title: "Technical & Aesthetic",
-    description: "Full-spectrum broadcast optimization. We refine your lighting architecture, camera positioning, and audio processing to maximize viewer retention from the first second.",
-    accent: "text-primary",
-    bar: "bg-primary",
-    tag: "Department",
-  },
-  {
-    index: "02",
-    title: "Data-Driven Strategy",
-    description: "Algorithmic positioning based on real-time analytics. We optimize your stream hooks and retention loops to capture and hold platform-wide momentum.",
-    accent: "text-secondary",
-    bar: "bg-secondary",
-    tag: "Department",
-  },
-  {
-    index: "03",
-    title: "Admin & Account Safety",
-    description: "Direct handling of platform policy and account security. We manage ban appeals, flag resolution, and compliance so you can focus exclusively on creation.",
-    accent: "text-primary",
-    bar: "bg-primary",
-    tag: "Department",
-  },
-  {
-    index: "04",
-    title: "The Exit Guarantee",
-    description: "Total creator autonomy. You retain 100% control over your account. If you choose to leave, we facilitate a clean transition with no hidden restrictions.",
-    accent: "text-secondary",
-    bar: "bg-secondary",
-    tag: "Creator-First",
-  },
-  {
-    index: "05",
-    title: "Zero-Pressure Policy",
-    description: "No mandatory hours or performance benchmarks. We provide the infrastructure; you decide the pace. Our support remains constant regardless of your streaming volume.",
-    accent: "text-primary",
-    bar: "bg-primary",
-    tag: "Creator-First",
-  },
-  {
-    index: "06",
-    title: "Education Center",
-    description: "Exclusive access to our private resource library. Over 50+ modules covering advanced TikTok LIVE strategy, technical setup, and community management.",
-    accent: "text-secondary",
-    bar: "bg-secondary",
-    tag: "Onboarding",
-  },
-];
+import { SiteSettings } from "@/lib/creators-db";
 
-export function Services() {
+export function Services({ settings }: { settings: SiteSettings['services'] }) {
   return (
     <Section id="services" className="bg-background relative overflow-hidden">
       {/* Background pattern */}
@@ -74,9 +25,9 @@ export function Services() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {services.map((s) => (
+          {settings.map((s, i) => (
             <div
-              key={s.index}
+              key={i}
               className="group relative glass-card rounded-2xl p-6 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
             >
               {/* Left accent bar on hover */}

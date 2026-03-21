@@ -8,7 +8,7 @@ export interface Article {
   author: string;
 }
 
-export const articles: Article[] = [
+export const defaultArticles: Article[] = [
   {
     slug: "redefining-creator-revenue",
     title: "Redefining Creator Revenue: The PTA Growth System",
@@ -37,3 +37,5 @@ export const articles: Article[] = [
     author: "Community Director"
   }
 ];
+
+export const articles = defaultArticles;

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { creators, Creator } from "@/lib/creators";
+import { Creator } from "@/lib/creators";
 import { Section } from "@/components/layout/Section";
 
 import { CreatorMediaBox } from "@/components/ui/CreatorMediaBox";
@@ -140,7 +140,10 @@ interface LiveCreator {
   avatar?: string;
 }
 
-export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
+import { SiteSettings } from "@/lib/creators-db";
+
+export function OurCreators({ isMainPage = false, initialCreators = [], settings }: { isMainPage?: boolean, initialCreators?: Creator[], settings: SiteSettings['rosterSettings'] }) {
+  const creators = initialCreators;
   const [liveCreators, setLiveCreators] = useState<LiveCreator[]>([]);
 
   useEffect(() => {
@@ -180,6 +183,8 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
     ? displayCreators.filter(c => isMainPage ? c.category.includes(selectedTag) : c.tags.includes(selectedTag))
     : displayCreators;
 
+  const s = settings;
+
   return (
     <Section id="creators" className="relative overflow-hidden bg-background-surface border-y border-border">
       <div className="absolute inset-0 bg-dot-grid opacity-40 pointer-events-none" />
@@ -207,7 +212,7 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
             viewport={{ once: true }}
             className="text-xs font-semibold text-primary tracking-[0.2em] uppercase mb-4"
           >
-            The Network
+            {s.mainTag}
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -216,7 +221,7 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
             transition={{ delay: 0.1 }}
             className="text-5xl md:text-7xl font-black tracking-tight text-foreground mb-6 [text-shadow:0_0_1.5px_rgba(0,0,0,0.8)]"
           >
-            Our <span className="text-primary">Creators.</span>
+            {s.mainTitle} <span className="text-primary">{s.mainTitleAccent}</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -225,8 +230,7 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
             transition={{ delay: 0.2 }}
             className="text-foreground-muted text-lg max-w-2xl mx-auto leading-relaxed"
           >
-            The Peace Time roster is home to the most dedicated, high-growth creators on TikTok LIVE.
-            We provide the infrastructure; they provide the talent.
+            {s.mainDescription}
           </motion.p>
         </div>
 
@@ -234,8 +238,8 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
 
           {liveRoster.length > 0 && (
             <CreatorGrid
-              title="Live Now"
-              desc="Roster members currently broadcasting."
+              title={s.sections.liveNow.title}
+              desc={s.sections.liveNow.desc}
               list={liveRoster}
               liveHandles={liveHandles}
             />
@@ -286,29 +290,29 @@ export function OurCreators({ isMainPage = false }: { isMainPage?: boolean }) {
               ) : (
                 <div className="flex flex-col">
                   <CreatorGrid
-                    title="Agency Staff"
-                    desc="The leadership driving Peace Time Agency."
+                    title={s.sections.agencyStaff.title}
+                    desc={s.sections.agencyStaff.desc}
                     list={filteredCreators.filter(c => c.tier === 'staff' || c.tier === 'recruiter')}
                     liveHandles={liveHandles}
                   />
                   {!isMainPage ? (
                     <CreatorGrid
-                      title="Creators Category"
-                      desc="The talent of Peace Time Agency."
+                      title={s.sections.allCreators.title}
+                      desc={s.sections.allCreators.desc}
                       list={filteredCreators.filter(c => c.tier !== 'staff' && c.tier !== 'recruiter')}
                       liveHandles={liveHandles}
                     />
                   ) : (
                     <>
                       <CreatorGrid
-                        title="Top 5 Performing"
-                        desc="Our highest performing creators."
+                        title={s.sections.topPerforming.title}
+                        desc={s.sections.topPerforming.desc}
                         list={filteredCreators.filter(c => c.tier === 'top').slice(0, 5)}
                         liveHandles={liveHandles}
                       />
                       <CreatorGrid
-                        title="5 Newest Accepted"
-                        desc="The latest additions to our roster."
+                        title={s.sections.newests.title}
+                        desc={s.sections.newests.desc}
                         list={filteredCreators.filter(c => c.tier === 'new').slice(0, 5)}
                         liveHandles={liveHandles}
                       />

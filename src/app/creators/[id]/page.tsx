@@ -1,16 +1,20 @@
-import { creators } from "@/lib/creators";
+import { getCreatorsFromDb } from "@/lib/creators-db";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Section } from "@/components/layout/Section";
 import { Twitter, Instagram, ArrowLeft, Youtube, Twitch, Globe, Gamepad2, MessageSquare } from "lucide-react";
 import { CreatorMediaBox } from "@/components/ui/CreatorMediaBox";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 interface CreatorPageProps {
   params: Promise<{ id: string }>;
 }
 
 // Generate static params for build time optimization
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const creators = await getCreatorsFromDb();
   return creators.map((creator) => ({
     id: creator.id,
   }));
@@ -18,6 +22,7 @@ export function generateStaticParams() {
 
 export default async function CreatorPage({ params }: CreatorPageProps) {
   const { id } = await params;
+  const creators = await getCreatorsFromDb();
   const creator = creators.find((c) => c.id === id);
 
   if (!creator) {
@@ -25,13 +30,19 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground pt-24 pb-12">
+    <div 
+      className="min-h-screen bg-background text-foreground pt-24 pb-12"
+      style={{ "--accent-color": creator.accentColor || "var(--color-primary)" } as React.CSSProperties}
+    >
       {/* Background Effects */}
       <div className="fixed inset-0 bg-dot-grid opacity-20 pointer-events-none mix-blend-screen" />
       <div className="fixed inset-0 bg-gradient-to-b from-background via-background/90 to-background pointer-events-none" />
 
       {/* Hero ambient glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-primary/20 blur-[150px] pointer-events-none rounded-full" />
+      <div 
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] blur-[150px] pointer-events-none rounded-full" 
+        style={{ backgroundColor: `color-mix(in srgb, var(--accent-color), transparent 80%)` }}
+      />
 
       <Section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -39,7 +50,8 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
         <div className="mb-12">
           <Link
             href="/#creators"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-foreground-muted hover:text-primary transition-colors group"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-foreground-muted transition-colors group"
+            style={{ color: 'var(--accent-color)' }}
           >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             Back to Network
@@ -60,11 +72,22 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
 
               {/* Category Badge */}
               <div className="absolute top-6 left-6 flex items-center gap-2 z-10">
-                <span className="px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-[10px] font-black text-primary uppercase tracking-widest">
+                <span 
+                  className="px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-[10px] font-black uppercase tracking-widest"
+                  style={{ color: 'var(--accent-color)' }}
+                >
                   {creator.title || creator.category.join(' / ')}
                 </span>
                 {creator.tier === 'top' && (
-                  <span className="px-3 py-1.5 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 text-[10px] font-black text-primary uppercase tracking-widest shadow-[0_0_15px_rgba(255,60,95,0.4)]">
+                  <span 
+                    className="px-3 py-1.5 rounded-full backdrop-blur-md border text-[10px] font-black uppercase tracking-widest"
+                    style={{ 
+                      backgroundColor: `color-mix(in srgb, var(--accent-color), transparent 80%)`,
+                      borderColor: `color-mix(in srgb, var(--accent-color), transparent 70%)`,
+                      color: 'var(--accent-color)',
+                      boxShadow: `0 0 15px color-mix(in srgb, var(--accent-color), transparent 60%)`
+                    }}
+                  >
                     Top Performance
                   </span>
                 )}
@@ -91,7 +114,8 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
               href={creator.socials.tiktok}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xl font-mono text-primary tracking-wide hover:underline inline-block"
+              className="text-xl font-mono tracking-wide hover:underline inline-block"
+              style={{ color: 'var(--accent-color)' }}
             >
               {creator.handle}
             </a>

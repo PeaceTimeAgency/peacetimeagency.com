@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { creators } from "@/lib/creators";
+import { getCreatorsFromDb } from "@/lib/creators-db";
 import { fetchTikTokLiveStatus } from "@/lib/tiktok";
 import { redis } from "@/lib/redis";
 
@@ -26,6 +26,7 @@ export async function GET(req: NextRequest) {
 
     // 2. If no cache, perform real-time checks for all creators
     // We do this in parallel to keep response times reasonable
+    const creators = await getCreatorsFromDb();
     const liveChecks = await Promise.all(
       creators.map(async (creator) => {
         // Skip creators without a TikTok handle or those that are staff/recruiters 
