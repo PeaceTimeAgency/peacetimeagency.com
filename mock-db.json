@@ -119,13 +119,7 @@
       "tag": "Proof of Work",
       "title": "Hear from our",
       "titleGradient": "Creators.",
-      "items": [
-        {
-          "videoSrc": "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
-          "quote": "Joining Peace Time was the single best decision for my streaming career. The data insights and community support are unmatched.",
-          "creatorName": "SarahStreamer"
-        }
-      ]
+      "items": []
     },
     "rosterSettings": {
       "mainTag": "The Network",

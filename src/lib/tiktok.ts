@@ -130,8 +130,7 @@ export async function fetchTikTokLiveStatus(handle: string) {
     // Check for common indicators of a live stream in the HTML
     // TikTok often includes "RENDER_DATA" or specific live meta tags
     const isLive = html.includes('"liveRoom":') || 
-                   html.includes('"status":2') || // 2 usually means live
-                   html.includes('watching');
+                   html.includes('"status":2'); // 2 usually means live
 
     // Attempt to extract viewer count (highly variable, using a loose regex)
     let viewerCount = 0;

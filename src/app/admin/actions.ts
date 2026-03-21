@@ -37,10 +37,9 @@ export async function loginWithPin(pin: string) {
     console.error("Rate limit check failed", e);
   }
 
-  const correctPin = process.env.ADMIN_PIN || "1234";
-  const isCorrect = pin === correctPin || (process.env.NODE_ENV !== "production" && pin === "1234");
+  const correctPin = process.env.ADMIN_PIN;
   
-  if (!isCorrect) {
+  if (!correctPin || pin !== correctPin) {
     return { error: "Invalid PIN" };
   }
 
@@ -65,7 +64,7 @@ export async function loginWithPin(pin: string) {
   }
 
   const cookieStore = await cookies();
-  cookieStore.set(SESSIONCookieName, (redisUrl && redisToken) ? sessionId : 'local_debug_session', {
+  cookieStore.set(SESSIONCookieName, sessionId, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     path: "/",
@@ -93,12 +92,10 @@ export async function checkSession() {
   const redisUrl = process.env.UPSTASH_REDIS_REST_URL;
   const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
 
-  // If we are in local dev and missing Redis, just allow the session to pass
-  if (process.env.NODE_ENV !== "production" && !(redisUrl && redisToken)) {
-      return true;
+  // If we are missing Redis, we can't verify the session
+  if (!(redisUrl && redisToken)) {
+      return false;
   }
-
-  if (sessionId === 'local_debug_session') return true;
 
   try {
     const isValid = await redis.get(`admin_session:${sessionId}`);
