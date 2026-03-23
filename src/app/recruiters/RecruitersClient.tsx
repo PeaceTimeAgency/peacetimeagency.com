@@ -66,7 +66,9 @@ export default function RecruitersClient({ initialCreators }: { initialCreators:
                                     <div className="p-6 flex-1 flex flex-col relative z-10 -mt-8">
                                         <div className="flex items-center gap-2 mb-2">
                                             <span className="h-px w-4 bg-primary" />
-                                            <span className="text-[10px] font-bold text-primary tracking-widest uppercase">{creator.category}</span>
+                                            <span className="text-[10px] font-bold text-primary tracking-widest uppercase">
+                                                {creator.title ? creator.title.replace(/\/Recruiter|Recruiter/g, '').trim() : (Array.isArray(creator.category) ? creator.category[0] : creator.category)}
+                                            </span>
                                         </div>
                                         <h4 className="text-2xl font-black text-foreground group-hover:text-primary transition-colors duration-300">
                                             {creator.name}

@@ -76,7 +76,9 @@ export default async function RecruiterPage({ params }: RecruiterPageProps) {
                     <div className="lg:col-span-7 flex flex-col justify-center">
 
                         <div className="mb-8">
-                            <p className="text-xs font-semibold text-primary tracking-[0.2em] uppercase mb-4">Official Recruiter</p>
+                            <p className="text-xs font-semibold text-primary tracking-[0.2em] uppercase mb-4">
+                                {creator.title ? creator.title.replace(/\/Recruiter|Recruiter/g, '').trim() : 'Official Recruiter'}
+                            </p>
                             <h1 className="text-5xl lg:text-7xl font-black text-foreground tracking-tight mb-2 flex items-center gap-4 flex-wrap">
                                 {creator.name}
                             </h1>
