@@ -54,7 +54,50 @@ export const creators: Creator[] = [
       tiktok: "https://www.tiktok.com/@baked.laze"
     }
   },
-
+  {
+    id: "coldp1zza",
+    name: "ColdP1zza",
+    handle: "@coldp1zza",
+    description: "Boy dad • Husband • FPS & RPG/RPGMMO gamer • Full-time worker • Streaming when I can 🍕🎮",
+    image: "/branding/KYRAX425.png",
+    category: ["Gaming"],
+    stats: {
+      followers: "New",
+      avgWatchTime: "N/A",
+      peakCCV: "N/A",
+      totalLikes: "0"
+    },
+    tags: ["Gaming", "FPS", "RPG", "MMO"],
+    tier: "new",
+    liveUrl: "https://www.tiktok.com/@coldp1zza/live",
+    socials: {
+      tiktok: "https://www.tiktok.com/@coldp1zza",
+      twitch: "https://www.twitch.tv/ColdP1zza",
+      twitter: "https://x.com/CP1zza",
+      website: "https://kick.com/ColdP1zza"
+    }
+  },
+  {
+    id: "slingin6_0",
+    name: "Slingin6.0",
+    handle: "@macdaddy6.0",
+    description: "I like streaming and having fun doing it",
+    image: "/branding/KYRAX425.png",
+    category: ["Gaming"],
+    stats: {
+      followers: "New",
+      avgWatchTime: "N/A",
+      peakCCV: "N/A",
+      totalLikes: "0"
+    },
+    tags: ["Gaming"],
+    tier: "new",
+    liveUrl: "https://www.tiktok.com/@macdaddy6.0/live",
+    socials: {
+      tiktok: "https://www.tiktok.com/@macdaddy6.0",
+      twitch: "https://www.twitch.tv/slingin6"
+    }
+  },
   {
     id: "oopsitsjrpgtime",
     name: "OopsItsJRPGTime",
@@ -275,4 +318,5 @@ export const creators: Creator[] = [
     }
   }
 ];
+
 
