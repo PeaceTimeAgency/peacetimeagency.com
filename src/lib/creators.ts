@@ -156,7 +156,7 @@ export const creators: Creator[] = [
     description: "Lindsey, also known as Trash (@TrashSoupGaming), is a full-time TikTok streamer who focuses on story-driven games like RPGs and well-written horror. Over time, she has built a strong, loyal community that doesn’t just show up for the games, but for the conversations, reactions, and shared experiences that happen during every stream. Lindsey believes that growth on TikTok LIVE isn’t just about numbers. It’s about building a space where people want to come back, where viewers feel part of something, and where creators can develop confidence in what they’re doing. For Lindsey, streaming isn’t just about going live. It’s about helping others find their place and grow along the way.",
     image: "/creators/IMG_5799.JPG",
     category: ["Staff", "Gaming", "Just Chatting"],
-    title: "Manager",
+    title: "Education Center Manager/Recruiter",
 
     stats: {
       followers: "Full-time",
@@ -165,7 +165,7 @@ export const creators: Creator[] = [
       totalLikes: "0"
     },
     tags: ["Staff", "Gaming", "RPG", "Horror", "Just Chatting"],
-    tier: "staff",
+    tier: "recruiter",
     liveUrl: "https://www.tiktok.com/@trashsoupgaming/live",
     socials: {
       tiktok: "https://www.tiktok.com/@trashsoupgaming",
@@ -223,7 +223,7 @@ export const creators: Creator[] = [
     id: "thej3ssexpress",
     name: "Jessica",
     handle: "@TheJ3ssExpress",
-    title: "Group Leader",
+    title: "Creator Retention Manager/Recruiter",
     description: "Hey! I’m Jessica, aka TheJ3ssExpress. I’m a recruiter and The Creator Retention Manager with Peacetime, where I help support and grow creators on TikTok. Seeing creators succeed is something I’m really passionate about.\n\nOn my own streams, you’ll usually find me cozy gaming while jamming to some rock or EDM. Every now and then I’ll dive into a horror game and suffer through a few jumpscares. I also like to pop in with occasional IRL lives whether it’s just chatting or a “cook dinner with me” stream.",
     image: "/creators/564674.jpg",
     category: ["Gaming", "Just Chatting", "IRL", "Recruiter"],
@@ -244,7 +244,7 @@ export const creators: Creator[] = [
     id: "generalspuds",
     name: "General Spuds",
     handle: "@generalspuds",
-    title: "General Manager",
+    title: "Virtual Training/Recruiter",
     description: "HI! I am general Spuds. I have been creating for years and play a variety of games from FPS to RPGS. I enjoy creating a positive environment and inspiring the people I meet. Rather I am streaming or helping another creator, I love lifting people up. Positive times and Vibes",
     image: "/creators/generalspuds.jpg",
     category: ["Gaming", "Just Chatting", "IRL", "Staff"],
@@ -255,7 +255,7 @@ export const creators: Creator[] = [
       totalLikes: "0"
     },
     tags: ["Staff", "Gaming", "Just Chatting", "IRL"],
-    tier: "staff",
+    tier: "recruiter",
     liveUrl: "https://www.tiktok.com/@generalspuds",
     socials: {
       tiktok: "https://www.tiktok.com/@generalspuds",
@@ -268,7 +268,7 @@ export const creators: Creator[] = [
     id: "stealyn",
     name: "STEALYN",
     handle: "@stealyn.vr",
-    title: "Recruiter",
+    title: "Algorithm Coach/Recruiter",
     description: "The Content Coach with no fluff, Stealyn believes great creators are built through knowledge, positivity, and mental fortitude. He is a War Thunder VR creator by passion and a blue-collar worker by trade; he knows the value of discipline, balance, and consistency. Here at PeaceTime, his focus is to build strategies around YOUR success as an individual creator! He’s not looking for just anybody; he’s looking for those ready to earn their place as an Agent of PeaceTime.",
     image: "/branding/KYRAX425.png",
     images: [],
@@ -280,7 +280,7 @@ export const creators: Creator[] = [
       totalLikes: "0"
     },
     tags: ["Staff", "Gaming", "War Thunder VR", "Coach"],
-    tier: "staff",
+    tier: "recruiter",
     liveUrl: "https://www.tiktok.com/@stealyn.vr/live",
     socials: {
       tiktok: "https://www.tiktok.com/@stealyn.vr",
