@@ -72,7 +72,8 @@ function ApplicationForm({ initialCreators = [] }: { initialCreators: any[] }) {
     tiktokHandle: "",
     discordId: "",
     emailAddress: "",
-    additionalNotes: ""
+    additionalNotes: "",
+    isCertified: false
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -179,6 +180,10 @@ function ApplicationForm({ initialCreators = [] }: { initialCreators: any[] }) {
 
     if (!formData.discordId.trim() && !formData.emailAddress.trim()) {
       newErrors.contact = "Either Discord ID or Email Address must be provided.";
+    }
+
+    if (!formData.isCertified) {
+      newErrors.isCertified = "Please certify that your information is accurate.";
     }
 
     setErrors(newErrors);
@@ -710,6 +715,43 @@ function ApplicationForm({ initialCreators = [] }: { initialCreators: any[] }) {
                 value={formData.additionalNotes}
                 onChange={(e) => handleInputChange("additionalNotes", e.target.value)}
               />
+            </div>
+
+            <div className="pt-6">
+              <label className="flex items-start gap-4 cursor-pointer p-4 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all group">
+                <div className="relative flex items-center mt-0.5">
+                  <input
+                    type="checkbox"
+                    checked={formData.isCertified}
+                    onChange={(e) => handleInputChange("isCertified", (e.target.checked as any))}
+                    className="w-5 h-5 rounded border-white/20 bg-white/5 text-primary focus:ring-primary focus:ring-offset-0 transition-all cursor-pointer peer appearance-none border-2 checked:bg-primary checked:border-primary"
+                  />
+                  <svg 
+                    className="absolute w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 pointer-events-none left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor" 
+                    strokeWidth={4}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-sm font-bold text-white group-hover:text-primary transition-colors">Certification <span className="text-primary">*</span></span>
+                  <p className="text-sm text-white/70 leading-relaxed">
+                    I certify that all information provided is accurate and belongs to me.
+                  </p>
+                </div>
+              </label>
+              {errors.isCertified && (
+                <motion.p 
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-xs text-primary font-bold mt-2 ml-2"
+                >
+                  {errors.isCertified}
+                </motion.p>
+              )}
             </div>
 
             <div className="pt-8">
