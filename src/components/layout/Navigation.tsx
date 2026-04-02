@@ -111,16 +111,7 @@ export function Navigation() {
 
             {!isCardForm && (
               <>
-                {!session ? (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setAuthModalOpen(true)}
-                    className="hidden sm:inline-flex rounded-lg px-5 h-9 font-bold text-sm text-white/70 hover:text-white hover:bg-white/5 transition-all duration-200"
-                  >
-                    Sign In
-                  </Button>
-                ) : (
+                {!session ? null : (
                   <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/10">
                     <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
                     <span className="text-[10px] font-bold text-white/60 tracking-wider uppercase">{session.handle}</span>
