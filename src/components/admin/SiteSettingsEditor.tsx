@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { getSiteSettingsAction, saveSiteSettingsAction } from "@/app/admin/actions";
 import { SiteSettings } from "@/lib/creators-db";
-import { Loader2, Save, Layout, Sliders, MessageSquare, Quote, Info, Briefcase, TrendingUp, Video, HelpCircle } from "lucide-react";
+import { Loader2, Save, Layout, Sliders, MessageSquare, Quote, Info, Briefcase, TrendingUp, Video, HelpCircle, FileText } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAdminToast } from "./ui/AdminToast";
 
@@ -16,6 +16,7 @@ import { TestimonialsSettings } from "./settings/TestimonialsSettings";
 import { LiveHudSettings } from "./settings/LiveHudSettings";
 import { FaqSettings } from "./settings/FaqSettings";
 import { FooterSettings } from "./settings/FooterSettings";
+import { ApplySettings } from "./settings/ApplySettings";
 
 export function SiteSettingsEditor() {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
@@ -35,7 +36,7 @@ export function SiteSettingsEditor() {
       setSettings(data);
     } catch (err) {
       console.error(err);
-      showToast("Failed to retrieve encrypted settings.", "error");
+      showToast("Failed to load settings.", "error");
     } finally {
       setLoading(false);
     }
@@ -46,10 +47,10 @@ export function SiteSettingsEditor() {
     setSaving(true);
     try {
       await saveSiteSettingsAction(settings);
-      showToast("Settings synchronized successfully.", "success");
+      showToast("Settings saved successfully.", "success");
     } catch (err) {
       console.error(err);
-      showToast("Encryption/Sync failed. Check terminal logs.", "error");
+      showToast("Failed to save settings.", "error");
     } finally {
       setSaving(false);
     }
@@ -59,20 +60,21 @@ export function SiteSettingsEditor() {
     return (
       <div className="flex-1 flex flex-col items-center justify-center space-y-4 py-20">
         <Loader2 className="w-10 h-10 animate-spin text-primary" />
-        <p className="text-[10px] uppercase tracking-[0.3em] font-black text-foreground-muted animate-pulse">Accessing Encrypted Settings</p>
+        <p className="text-[10px] uppercase tracking-[0.3em] font-black text-foreground-muted animate-pulse">Loading Settings</p>
       </div>
     );
   }
 
   const sections = [
-    { id: "hero", label: "Hero Logic", icon: Layout },
-    { id: "roster", label: "Roster Controls", icon: Sliders },
-    { id: "services", label: "Operations", icon: Briefcase },
-    { id: "growth", label: "Growth Path", icon: TrendingUp },
-    { id: "testimonials", label: "Evidence", icon: Video },
+    { id: "hero", label: "Hero", icon: Layout },
+    { id: "apply", label: "Apply Form", icon: FileText },
+    { id: "roster", label: "Roster", icon: Sliders },
+    { id: "services", label: "Services", icon: Briefcase },
+    { id: "growth", label: "Growth", icon: TrendingUp },
+    { id: "testimonials", label: "Testimonials", icon: Video },
     { id: "livehud", label: "Live HUD", icon: Sliders },
-    { id: "faqs", label: "Intel / FAQ", icon: HelpCircle },
-    { id: "footer", label: "Terminal Base", icon: Layout },
+    { id: "faqs", label: "FAQ", icon: HelpCircle },
+    { id: "footer", label: "Footer", icon: Layout },
   ];
 
   return (
@@ -101,7 +103,7 @@ export function SiteSettingsEditor() {
         <div className="flex items-center gap-4 ml-4">
            <div className="hidden lg:flex items-center gap-2 text-[9px] font-bold text-foreground-subtle tracking-widest uppercase">
               <Info className="w-3 h-3 text-secondary" />
-              Live Preview: <span className="text-white/60">Active</span>
+              Status: <span className="text-white/60">Active</span>
            </div>
            <button
              onClick={handleSave}
@@ -115,7 +117,7 @@ export function SiteSettingsEditor() {
                 <Save className="w-3.5 h-3.5 text-white relative z-10" />
               )}
               <span className="text-white text-[10px] font-black uppercase tracking-widest relative z-10">
-                {saving ? "Syncing..." : "Sync Core"}
+                {saving ? "Saving..." : "Save Settings"}
               </span>
            </button>
         </div>
@@ -132,14 +134,25 @@ export function SiteSettingsEditor() {
             transition={{ duration: 0.2 }}
             className="max-w-5xl mx-auto pb-12"
           >
-            {activeSegment === "hero" && <HeroSettings settings={settings} setSettings={setSettings} />}
-            {activeSegment === "roster" && <RosterSettings settings={settings} setSettings={setSettings} />}
-            {activeSegment === "services" && <ServicesSettings settings={settings} setSettings={setSettings} />}
-            {activeSegment === "growth" && <GrowthSettings settings={settings} setSettings={setSettings} />}
-            {activeSegment === "testimonials" && <TestimonialsSettings settings={settings} setSettings={setSettings} />}
-            {activeSegment === "livehud" && <LiveHudSettings settings={settings} setSettings={setSettings} />}
-            {activeSegment === "faqs" && <FaqSettings settings={settings} setSettings={setSettings} />}
-            {activeSegment === "footer" && <FooterSettings settings={settings} setSettings={setSettings} />}
+            { activeSegment === "hero" ? (
+              <HeroSettings settings={settings} setSettings={setSettings} />
+            ) : activeSegment === "apply" ? (
+              <ApplySettings settings={settings} setSettings={setSettings} />
+            ) : activeSegment === "roster" ? (
+              <RosterSettings settings={settings} setSettings={setSettings} />
+            ) : activeSegment === "services" ? (
+              <ServicesSettings settings={settings} setSettings={setSettings} />
+            ) : activeSegment === "growth" ? (
+              <GrowthSettings settings={settings} setSettings={setSettings} />
+            ) : activeSegment === "testimonials" ? (
+              <TestimonialsSettings settings={settings} setSettings={setSettings} />
+            ) : activeSegment === "livehud" ? (
+              <LiveHudSettings settings={settings} setSettings={setSettings} />
+            ) : activeSegment === "faqs" ? (
+              <FaqSettings settings={settings} setSettings={setSettings} />
+            ) : activeSegment === "footer" ? (
+              <FooterSettings settings={settings} setSettings={setSettings} />
+            ) : null }
           </motion.div>
         </AnimatePresence>
       </div>

@@ -15,7 +15,30 @@ export const CreatorSchema = z.object({
   category: z.enum(["livenow", "staff", "top5", "newests", "all"]),
   liveUrl: z.string().url().optional().or(z.literal("")),
   bio: z.string().optional(),
+  backgroundUrl: z.string().url("Invalid background URL").or(z.string().regex(/^\/.*$/, "Must be a relative path")).optional(),
+  backgroundContrast: z.number().min(0).max(100).optional(),
 });
+
+export const ApplyFormQuestionSchema = z.object({
+  id: z.string(),
+  type: z.enum(["text", "textarea", "radio", "checkbox", "select"]),
+  question: z.string(),
+  required: z.boolean(),
+  options: z.array(z.string()).optional(),
+  helpText: z.string().optional(),
+  showIf: z.object({
+    questionId: z.string(),
+    equals: z.string()
+  }).optional(),
+});
+
+export const ApplyPageSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  certificationText: z.string(),
+  questions: z.array(ApplyFormQuestionSchema),
+});
+
 
 export const ArticleSchema = z.object({
   title: z.string().min(5, "Title too short"),
@@ -100,4 +123,5 @@ export const SiteSettingsSchema = z.object({
       show: z.boolean(),
     })),
   }),
+  applyPage: ApplyPageSchema.optional(),
 });

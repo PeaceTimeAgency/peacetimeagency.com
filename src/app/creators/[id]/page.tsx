@@ -2,8 +2,23 @@ import { getCreatorsFromDb } from "@/lib/creators-db";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Section } from "@/components/layout/Section";
-import { Twitter, Instagram, ArrowLeft, Youtube, Twitch, Globe, Gamepad2, MessageSquare } from "lucide-react";
+import { 
+  Twitter, 
+  Instagram, 
+  ArrowLeft, 
+  Youtube, 
+  Twitch, 
+  Globe, 
+  Gamepad2, 
+  MessageSquare, 
+  ExternalLink,
+  Facebook,
+  Music
+} from "lucide-react";
 import { CreatorMediaBox } from "@/components/ui/CreatorMediaBox";
+import { CountdownTimer } from "@/components/ui/CountdownTimer";
+import { BackgroundEffects } from "@/components/ui/BackgroundEffects";
+import { Metadata } from "next";
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -12,13 +27,58 @@ interface CreatorPageProps {
   params: Promise<{ id: string }>;
 }
 
-// Generate static params for build time optimization
+export async function generateMetadata({ params }: CreatorPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const creators = await getCreatorsFromDb();
+  const creator = creators.find((c) => c.id === id);
+
+  if (!creator) return {};
+
+  return {
+    title: creator.seo?.metaTitle || `${creator.name} | Peace Time Agency`,
+    description: creator.seo?.metaDescription || creator.description,
+    openGraph: {
+      title: creator.seo?.metaTitle || creator.name,
+      description: creator.seo?.metaDescription || creator.description,
+      images: [creator.image],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: creator.seo?.metaTitle || creator.name,
+      description: creator.seo?.metaDescription || creator.description,
+      images: [creator.image],
+    }
+  };
+}
+
 export async function generateStaticParams() {
   const creators = await getCreatorsFromDb();
   return creators.map((creator) => ({
     id: creator.id,
   }));
 }
+
+// Deep Linking Helper
+const getDeepLink = (url: string, platform: string) => {
+  if (!url) return url;
+  try {
+    const uri = new URL(url);
+    const handle = uri.pathname.replace(/\//g, '');
+    
+    switch (platform) {
+      case 'instagram':
+        return `instagram://user?username=${handle}`;
+      case 'tiktok':
+        return `snssdk1233://user/profile/${handle}`; // TikTok scheme varies, but this is a common one
+      case 'discord':
+        return url; // Discord usually handles this via protocol
+      default:
+        return url;
+    }
+  } catch (e) {
+    return url;
+  }
+};
 
 export default async function CreatorPage({ params }: CreatorPageProps) {
   const { id } = await params;
@@ -29,18 +89,51 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
     notFound();
   }
 
+  const accentColor = creator.customization?.themeColor || creator.accentColor || "var(--color-primary)";
+  const fontFamily = creator.customization?.fontFamily || "Inter";
+
+  // A/B Testing Logic (Randomized for demo)
+  const showAlt = creator.abTest?.enabled && Math.random() > 0.5;
+  const displayBio = showAlt && creator.abTest?.altBio ? creator.abTest.altBio : creator.description;
+  const displayImage = showAlt && creator.abTest?.altImage ? creator.abTest.altImage : creator.image;
+
   return (
     <div 
-      className="min-h-screen bg-background text-foreground pt-24 pb-12"
-      style={{ "--accent-color": creator.accentColor || "var(--color-primary)" } as React.CSSProperties}
+      className="min-h-screen bg-background text-foreground pt-24 pb-12 overflow-x-hidden"
+      style={{ 
+        "--accent-color": accentColor,
+        fontFamily: fontFamily === 'Inter' ? 'var(--font-sans)' : `var(--font-${fontFamily.toLowerCase().replace(' ', '-')})`
+      } as React.CSSProperties}
     >
       {/* Background Effects */}
-      <div className="fixed inset-0 bg-dot-grid opacity-20 pointer-events-none mix-blend-screen" />
-      <div className="fixed inset-0 bg-gradient-to-b from-background via-background/90 to-background pointer-events-none" />
+      {creator.backgroundUrl ? (
+        <div 
+          className="fixed inset-0 z-0"
+          style={{ opacity: (creator.backgroundContrast ?? 100) / 100 }}
+        >
+          <img 
+            src={creator.backgroundUrl} 
+            alt="" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+      ) : (
+        <>
+          <div className="fixed inset-0 bg-dot-grid opacity-20 pointer-events-none mix-blend-screen" />
+          <div className="fixed inset-0 bg-gradient-to-b from-background via-background/90 to-background pointer-events-none" />
+        </>
+      )}
+
+      {/* Dynamic Background Animations */}
+      {creator.customization?.bgAnimation === 'stars' && (
+        <div className="fixed inset-0 z-0 pointer-events-none opacity-30">
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] animate-pulse" />
+        </div>
+      )}
 
       {/* Hero ambient glow */}
       <div 
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] blur-[150px] pointer-events-none rounded-full" 
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] blur-[150px] pointer-events-none rounded-full z-0" 
         style={{ backgroundColor: `color-mix(in srgb, var(--accent-color), transparent 80%)` }}
       />
 
@@ -58,13 +151,13 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
 
-          {/* Left Column: Image */}
-          <div className="lg:col-span-5 flex flex-col h-full">
-            <div className="relative w-full h-full min-h-[500px] lg:min-h-[700px] rounded-[2rem] overflow-hidden glass-card shadow-lg shadow-black/50 border border-white/10 group">
+          {/* Left Column: Image & Media */}
+          <div className="lg:col-span-5 flex flex-col gap-8">
+            <div className="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden glass-card shadow-2xl border border-white/10 group">
               <CreatorMediaBox
-                images={creator.images && creator.images.length > 0 ? creator.images : [creator.image]}
+                images={showAlt && creator.abTest?.altImage ? [creator.abTest.altImage] : (creator.images && creator.images.length > 0 ? creator.images : [creator.image])}
                 name={creator.name}
                 imageClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
@@ -78,145 +171,140 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
                 >
                   {creator.title || creator.category.join(' / ')}
                 </span>
-                {creator.tier === 'top' && (
-                  <span 
-                    className="px-3 py-1.5 rounded-full backdrop-blur-md border text-[10px] font-black uppercase tracking-widest"
-                    style={{ 
-                      backgroundColor: `color-mix(in srgb, var(--accent-color), transparent 80%)`,
-                      borderColor: `color-mix(in srgb, var(--accent-color), transparent 70%)`,
-                      color: 'var(--accent-color)',
-                      boxShadow: `0 0 15px color-mix(in srgb, var(--accent-color), transparent 60%)`
-                    }}
-                  >
-                    Top Performance
-                  </span>
-                )}
-                {creator.tier === 'new' && (
-                  <span className="px-3 py-1.5 rounded-full bg-blue-500/20 backdrop-blur-md border border-blue-500/30 text-[10px] font-black text-blue-400 uppercase tracking-widest">
-                    New Arrival
-                  </span>
-                )}
               </div>
             </div>
 
-          </div>
-        </div>
+            {/* Countdown Timer */}
+            {creator.countdown?.targetDate && (
+              <CountdownTimer 
+                targetDate={creator.countdown.targetDate} 
+                label={creator.countdown.label}
+                accentColor={accentColor}
+              />
+            )}
 
-
-        {/* Right Column: Info & Stats */}
-        <div className="lg:col-span-7 flex flex-col justify-center">
-
-          <div className="mb-8">
-            <h1 className="text-5xl lg:text-7xl font-black text-white tracking-tight mb-2 flex items-center gap-4 flex-wrap">
-              {creator.name}
-            </h1>
-            <a
-              href={creator.socials.tiktok}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xl font-mono tracking-wide hover:underline inline-block"
-              style={{ color: 'var(--accent-color)' }}
-            >
-              {creator.handle}
-            </a>
-          </div>
-
-          <div className="mb-10">
-            <h3 className="text-sm font-semibold text-foreground-muted uppercase tracking-widest mb-4">About</h3>
-            <p className="text-lg text-white/80 leading-relaxed font-medium">
-              {creator.description}
-            </p>
+            {/* Spotify Embed */}
+            {creator.embeds?.spotify && (
+              <div className="rounded-3xl overflow-hidden glass-card p-2 border border-white/5">
+                <iframe 
+                  src={creator.embeds.spotify.replace('open.spotify.com', 'open.spotify.com/embed')} 
+                  width="100%" 
+                  height="152" 
+                  frameBorder="0" 
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                  loading="lazy"
+                  className="rounded-2xl"
+                />
+              </div>
+            )}
           </div>
 
-          <div className="mb-10">
-            <h3 className="text-sm font-semibold text-foreground-muted uppercase tracking-widest mb-4">Specialties</h3>
-            <div className="flex flex-wrap gap-2">
-              {creator.tags.map(tag => (
-                <span
-                  key={tag}
-                  className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm font-bold text-white/70 uppercase tracking-wider"
+          {/* Right Column: Info & Links */}
+          <div className="lg:col-span-7 flex flex-col">
+
+            <div className="mb-8">
+              <h1 className="text-6xl lg:text-8xl font-black text-white tracking-tighter mb-4 flex items-center gap-4 flex-wrap leading-none">
+                {creator.name}
+              </h1>
+              <a
+                href={creator.socials.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-2xl font-mono tracking-wide hover:underline inline-block"
+                style={{ color: 'var(--accent-color)' }}
+              >
+                {creator.handle}
+              </a>
+            </div>
+
+            <div className="mb-12">
+              <h3 className="text-xs font-black text-white/30 uppercase tracking-[0.3em] mb-4">Transmission Bio</h3>
+              <p className="text-xl text-white/80 leading-relaxed font-medium">
+                {displayBio}
+              </p>
+            </div>
+
+            {/* Social Icons Row */}
+            <div className="mb-12 flex flex-wrap gap-4">
+              {[
+                { icon: Twitter, url: creator.socials.twitter, color: '#1DA1F2', platform: 'twitter' },
+                { icon: Instagram, url: creator.socials.instagram, color: '#E1306C', platform: 'instagram' },
+                { icon: Youtube, url: creator.socials.youtube, color: '#FF0000', platform: 'youtube' },
+                { icon: Twitch, url: creator.socials.twitch, color: '#9146FF', platform: 'twitch' },
+                { icon: MessageSquare, url: creator.socials.discord, color: '#5865F2', platform: 'discord' },
+                { icon: Globe, url: creator.socials.website, color: '#10b981', platform: 'website' },
+                { icon: Facebook, url: (creator.socials as any).facebook, color: '#1877F2', platform: 'facebook' },
+              ].filter(s => s.url).map((social, i) => (
+                <a 
+                  key={i}
+                  href={getDeepLink(social.url!, social.platform)} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-4 bg-white/5 border border-white/10 rounded-2xl hover:scale-110 transition-all text-white/60 hover:text-white"
+                  style={{ '--hover-color': social.color } as any}
                 >
-                  {tag}
-                </span>
+                  <social.icon className="w-6 h-6 transition-colors group-hover:text-[var(--hover-color)]" />
+                </a>
               ))}
             </div>
-          </div>
 
-          {/* Social Links - Moved to bottom */}
-          <div className="mb-10 flex gap-4">
-            {creator.socials.tiktok && (
-              <a href={creator.socials.tiktok} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-[#ff0050]/20 hover:border-[#ff0050]/50 hover:text-[#ff0050] transition-all text-white/60">
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 15.68a6.34 6.34 0 006.27 6.36 6.33 6.33 0 006.25-6.32V8.75a8.31 8.31 0 003.5.88V6.26a6.84 6.84 0 00-1.43-.1 6.89 6.89 0 00-0.49.03z"></path>
-                </svg>
-              </a>
-            )}
-            {creator.socials.instagram && (
-              <a href={creator.socials.instagram} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-[#E1306C]/20 hover:border-[#E1306C]/50 hover:text-[#E1306C] transition-all text-white/60">
-                <Instagram className="w-5 h-5" />
-              </a>
-            )}
-            {creator.socials.twitter && (
-              <a href={creator.socials.twitter} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-[#1DA1F2]/20 hover:border-[#1DA1F2]/50 hover:text-[#1DA1F2] transition-all text-white/60">
-                <Twitter className="w-5 h-5" />
-              </a>
-            )}
-            {creator.socials.youtube && (
-              <a href={creator.socials.youtube} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-[#FF0000]/20 hover:border-[#FF0000]/50 hover:text-[#FF0000] transition-all text-white/60">
-                <Youtube className="w-5 h-5" />
-              </a>
-            )}
-            {creator.socials.twitch && (
-              <a href={creator.socials.twitch} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-[#9146FF]/20 hover:border-[#9146FF]/50 hover:text-[#9146FF] transition-all text-white/60">
-                <Twitch className="w-5 h-5" />
-              </a>
-            )}
-            {creator.socials.discord && (
-              <a href={creator.socials.discord} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-[#5865F2]/20 hover:border-[#5865F2]/50 hover:text-[#5865F2] transition-all text-white/60">
-                <MessageSquare className="w-5 h-5" />
-              </a>
-            )}
-            {creator.socials.steam && (
-              <a href={creator.socials.steam} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-[#171a21]/40 hover:border-[#66c0f4]/50 hover:text-[#66c0f4] transition-all text-white/60">
-                <Gamepad2 className="w-5 h-5" />
-              </a>
-            )}
-            {creator.socials.website && (
-              <a href={creator.socials.website} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 border border-white/10 rounded-full hover:bg-[#10b981]/20 hover:border-[#10b981]/50 hover:text-[#10b981] transition-all text-white/60">
-                <Globe className="w-5 h-5" />
-              </a>
-            )}
-          </div>
-
-          {/* Stats Grid - Hidden until API key goes live */}
-          {/* 
-          <div>
-            <h3 className="text-sm font-semibold text-foreground-muted uppercase tracking-widest mb-4">Performance Metrics</h3>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-
-              {/* Followers */}
-              {/* <div className="p-5 rounded-2xl bg-white/5 border border-white/10 glass-panel">
-                <div className="flex items-center gap-2 mb-2">
-                  <Users className="w-4 h-4 text-primary" />
-                  <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Followers</span>
+            {/* YouTube Embed */}
+            {creator.embeds?.youtube && (
+              <div className="mb-12">
+                <h3 className="text-xs font-black text-white/30 uppercase tracking-[0.3em] mb-4">Latest Transmission</h3>
+                <div className="aspect-video rounded-3xl overflow-hidden glass-card border border-white/10">
+                  <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src={creator.embeds.youtube.replace('watch?v=', 'embed/')} 
+                    title="YouTube video player" 
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowFullScreen
+                  />
                 </div>
-                <div className="text-2xl font-black text-white">{creator.stats.followers}</div>
-              </div> */}
-
-              {/* Total Likes */}
-              {/* <div className="p-5 rounded-2xl bg-white/5 border border-white/10 glass-panel">
-                <div className="flex items-center gap-2 mb-2">
-                  <Heart className="w-4 h-4 text-pink-500" />
-                  <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Total Likes</span>
-                </div>
-                <div className="text-2xl font-black text-white">{creator.stats.totalLikes}</div>
               </div>
+            )}
 
+            {/* Custom Links */}
+            {(creator.customLinks && creator.customLinks.length > 0) && (
+              <div className="mb-12">
+                <h3 className="text-xs font-black text-white/30 uppercase tracking-[0.3em] mb-4">External Receptors</h3>
+                <div className="grid grid-cols-1 gap-4">
+                  {creator.customLinks.map((link, index) => (
+                    <a 
+                      key={index}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-6 bg-white/5 border border-white/10 rounded-3xl hover:bg-white/10 hover:border-primary/50 transition-all group flex items-center justify-between"
+                    >
+                      <span className="text-lg font-black text-white uppercase tracking-wider group-hover:text-primary transition-colors">
+                        {link.label}
+                      </span>
+                      <ExternalLink className="w-6 h-6 text-white/20 group-hover:text-primary transition-all group-hover:translate-x-1" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Specialties */}
+            <div className="mb-12">
+              <h3 className="text-xs font-black text-white/30 uppercase tracking-[0.3em] mb-4">Core Specialists</h3>
+              <div className="flex flex-wrap gap-2">
+                {creator.tags.map(tag => (
+                  <span
+                    key={tag}
+                    className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-black text-white/40 uppercase tracking-widest"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
+
           </div>
-          */}
-
-
         </div>
       </Section>
     </div>

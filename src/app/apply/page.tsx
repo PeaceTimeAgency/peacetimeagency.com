@@ -1,4 +1,4 @@
-import { getCreatorsFromDb } from "@/lib/creators-db";
+import { getCreatorsFromDb, getSiteSettingsFromDb } from "@/lib/creators-db";
 import ApplyClient from "./ApplyClient";
 
 export const metadata = {
@@ -8,5 +8,6 @@ export const metadata = {
 
 export default async function ApplicationPage() {
     const creators = await getCreatorsFromDb();
-    return <ApplyClient initialCreators={creators} />;
+    const settings = await getSiteSettingsFromDb();
+    return <ApplyClient initialCreators={creators} settings={settings} />;
 }

@@ -134,21 +134,6 @@ export default async function RecruiterPage({ params }: RecruiterPageProps) {
                             </div>
                         </div>
 
-                        {/* Stats Grid */}
-                        <div className="mb-12">
-                            <h3 className="text-sm font-semibold text-foreground-muted uppercase tracking-widest mb-4">Portfolio Stats</h3>
-                            <div className="grid grid-cols-2 gap-4">
-
-                                <div className="p-5 rounded-2xl bg-foreground/5 border border-foreground/10 glass-panel">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <Users className="w-4 h-4 text-primary" />
-                                        <span className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest">Followers</span>
-                                    </div>
-                                    <div className="text-2xl font-black text-foreground">{creator.stats.followers}</div>
-                                </div>
-
-                            </div>
-                        </div>
 
                         {/* Interview CTA */}
                         {/* <div className="pt-8 border-t border-foreground/10">

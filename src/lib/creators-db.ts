@@ -4,7 +4,9 @@ import { Article, defaultArticles } from './news';
 import fs from 'fs';
 import path from 'path';
 
-const REDIS_KEY = 'pta:creators_list';
+const CREATORS_REGISTRY_KEY = 'pta:creators_registry'; // Stores array of IDs
+const CREATOR_PREFIX = 'pta:creator:';
+const REDIS_KEY = 'pta:creators_list'; // Legacy fallback
 const SITE_SETTINGS_KEY = 'pta:site_settings';
 const NEWS_KEY = 'pta:news_list';
 const MOCK_DB_PATH = path.join(process.cwd(), 'mock-db.json');
@@ -27,40 +29,79 @@ function saveMockDb(data: any) {
 }
 
 export async function getCreatorsFromDb(): Promise<Creator[]> {
+  const ensurePasswords = (creators: Creator[]) => {
+    return creators.map(c => ({
+      ...c,
+      password: c.password || '1234',
+      mediaAssets: c.mediaAssets || []
+    }));
+  };
+
   try {
+    // 1. Try granular keys first
+    const registry = await redis.get<string[]>(CREATORS_REGISTRY_KEY);
+    if (registry && Array.isArray(registry)) {
+      const creators = await Promise.all(
+        registry.map(id => redis.get<Creator>(`${CREATOR_PREFIX}${id}`))
+      );
+      const validCreators = creators.filter((c): c is Creator => c !== null);
+      if (validCreators.length > 0) return ensurePasswords(validCreators);
+    }
+
+    // 2. Fallback to legacy single-key if registry empty
     const data = await redis.get<Creator[]>(REDIS_KEY);
     if (data && Array.isArray(data)) {
-      return data;
+      return ensurePasswords(data);
     }
     
-    // Fallback to file-based mock DB (Mock Mode persistence)
+    // 3. Fallback to file-based mock DB
     const mockDb = getMockDb();
     if (mockDb.creators && Array.isArray(mockDb.creators)) {
-      console.log('Using file-based mock creators:', mockDb.creators.length);
-      return mockDb.creators;
+      return ensurePasswords(mockDb.creators);
     }
     
-    // Fallback to default list if not initialized in Redis or Mock DB
-    return defaultCreators;
+    return ensurePasswords(defaultCreators);
   } catch (error) {
     console.error('Error fetching creators from Redis:', error);
     const mockDb = getMockDb();
-    return mockDb.creators || defaultCreators;
+    const creators = mockDb.creators || defaultCreators;
+    return ensurePasswords(creators);
   }
 }
 
 export async function saveCreatorsToDb(creators: Creator[]): Promise<boolean> {
-  // Update file-based mock for immediate feedback in dev
-  console.log('Saving to file-based mock creators:', creators.length);
+  // Update file-based mock
   saveMockDb({ creators });
   
   try {
+    // 1. Save registry (IDs)
+    const registry = creators.map(c => c.id);
+    await redis.set(CREATORS_REGISTRY_KEY, registry);
+
+    // 2. Save each creator granularly
+    await Promise.all(
+      creators.map(c => redis.set(`${CREATOR_PREFIX}${c.id}`, c))
+    );
+
+    // 3. Keep legacy key updated for compatibility during migration
     await redis.set(REDIS_KEY, creators);
     return true;
   } catch (error) {
     console.error('Error saving creators to Redis:', error);
     return false;
   }
+}
+
+export async function updateCreatorInDb(updatedCreator: Creator): Promise<boolean> {
+  const creators = await getCreatorsFromDb();
+  const index = creators.findIndex(c => c.id === updatedCreator.id);
+  
+  if (index !== -1) {
+    creators[index] = updatedCreator;
+    return await saveCreatorsToDb(creators);
+  }
+  
+  return false;
 }
 
 export async function getNewsFromDb(): Promise<Article[]> {
@@ -102,6 +143,26 @@ export async function saveNewsToDb(news: Article[]): Promise<boolean> {
 // Optional utility to seed/reset Redis
 export async function resetCreatorsToDefault(): Promise<boolean> {
   return await saveCreatorsToDb(defaultCreators);
+}
+
+export interface ApplyFormQuestion {
+  id: string;
+  type: "text" | "textarea" | "radio" | "checkbox" | "select";
+  question: string;
+  required: boolean;
+  options?: string[];
+  helpText?: string;
+  showIf?: {
+    questionId: string;
+    equals: string;
+  };
+}
+
+export interface ApplyPageSettings {
+  title: string;
+  description: string;
+  certificationText: string;
+  questions: ApplyFormQuestion[];
 }
 
 export interface SiteSettings {
@@ -176,6 +237,7 @@ export interface SiteSettings {
       show: boolean;
     }[];
   };
+  applyPage?: ApplyPageSettings;
 }
 
 export const defaultSiteSettings: SiteSettings = {
@@ -336,6 +398,173 @@ export const defaultSiteSettings: SiteSettings = {
     socials: [
       { platform: 'tiktok', url: '#', show: true },
       { platform: 'discord', url: '#', show: true },
+    ]
+  },
+  applyPage: {
+    title: "Creator Intake Form",
+    description: "Join Peace Time Agency and level up your TikTok LIVE experience! We're here to support your growth, battles, and experiences in a positive creator network. Please fill out the following questions honestly and completely.",
+    certificationText: "I certify that all information provided is accurate and belongs to me.",
+    questions: [
+      {
+        id: "is18Plus",
+        type: "radio",
+        question: "1. Are you 18 years or older?",
+        required: true,
+        options: ["Yes", "No"],
+        helpText: "Must be 18+ to join and participate in LIVE features.",
+      },
+      {
+        id: "isUSCA",
+        type: "radio",
+        question: "2. Are you located in the United States or Canada?",
+        required: true,
+        options: ["Yes", "No"],
+        helpText: "Our primary support and features focus on US/CA creators at this time.",
+      },
+      {
+        id: "streamingCountry",
+        type: "text",
+        question: "What country are you streaming from?",
+        required: true,
+        showIf: { questionId: "isUSCA", equals: "No" }
+      },
+      {
+        id: "contentTypes",
+        type: "checkbox",
+        question: "3. What type of content do you make on TikTok LIVE? (Select up to 3)",
+        required: true,
+        options: [
+          "Just Chatting / Casual Talk", "Gaming / Gameplay", "IRL (In Real Life) / Daily Life",
+          "Talent Shows / Singing, Dancing, Performances", "Battles / PK / LIVE Matches",
+          "Educational / Tutorials / Advice", "Q&A / Fan Interaction", "Other (please specify below)"
+        ],
+        helpText: "Choose the categories that best describe your LIVE style/content.",
+      },
+      {
+        id: "otherContentType",
+        type: "text",
+        question: "Please describe your other content type",
+        required: true,
+        showIf: { questionId: "contentTypes", equals: "Other (please specify below)" }
+      },
+      {
+        id: "nicheDescription",
+        type: "textarea",
+        question: "4. Please describe your niche/style (e.g. gaming format, IRL vibe, specific talent).",
+        required: true,
+        helpText: "This helps us understand your vibe and how we can best support you.",
+      },
+      {
+        id: "liveFrequency",
+        type: "radio",
+        question: "5. How often do you plan to go LIVE per week?",
+        required: true,
+        options: ["0–2 times", "3–5 times", "6–10 times", "10+ times / Almost daily"],
+        helpText: "Consistency helps us plan support and campaigns for you.",
+      },
+      {
+        id: "averageSessionLength",
+        type: "radio",
+        question: "6. What is your average LIVE session length?",
+        required: true,
+        options: ["Under 1 hour", "1–2 hours", "2–4 hours", "4+ hours"],
+        helpText: "This helps us tailor tips and scheduling advice.",
+      },
+      {
+        id: "streamingDuration",
+        type: "radio",
+        question: "7. How long have you been streaming on TikTok LIVE?",
+        required: true,
+        options: ["Less than 1 month", "1 to 3 months", "3 to 6 months", "6 to 12 months", "1+ years"],
+      },
+      {
+        id: "streamingGoals",
+        type: "textarea",
+        question: "8. What are your goals for streaming?",
+        required: true,
+        helpText: "(Example: full-time income, growing a community, content creation, gaming career, etc.)",
+      },
+      {
+        id: "improvements",
+        type: "checkbox",
+        question: "9. What do you want to improve most right now? (Select all that apply)",
+        required: true,
+        options: ["Growing followers", "Monetization", "Viewer engagement", "Stream setup / overlays", "Content strategy", "Other"],
+      },
+      {
+        id: "otherImprovement",
+        type: "text",
+        question: "Please specify what else you want to improve",
+        required: true,
+        showIf: { questionId: "improvements", equals: "Other" }
+      },
+      {
+        id: "followerCount",
+        type: "text",
+        question: "10. What is your current follower count?",
+        required: true,
+        helpText: "e.g. 5,000",
+      },
+      {
+        id: "receivesGifts",
+        type: "radio",
+        question: "11. Do you currently receive gifts on LIVE?",
+        required: true,
+        options: ["Yes regularly", "Sometimes", "Rarely", "Not yet"],
+      },
+      {
+        id: "biggestChallenge",
+        type: "textarea",
+        question: "12. What is your biggest challenge with streaming right now?",
+        required: true,
+      },
+      {
+        id: "openToCoaching",
+        type: "radio",
+        question: "13. Are you open to coaching and feedback to grow your streams?",
+        required: true,
+        options: ["Yes", "No"],
+      },
+      {
+        id: "otherAgency",
+        type: "radio",
+        question: "14. Do you currently belong to another TikTok LIVE agency?",
+        required: true,
+        options: ["Yes", "No"],
+      },
+      {
+        id: "otherAgencyName",
+        type: "text",
+        question: "Agency Name",
+        required: true,
+        showIf: { questionId: "otherAgency", equals: "Yes" }
+      },
+      {
+        id: "tiktokHandle",
+        type: "text",
+        question: "15. TikTok Username (@)",
+        required: true,
+        helpText: "Please provide your current main TikTok handle so we can review your profile.",
+      },
+      {
+        id: "discordId",
+        type: "text",
+        question: "16. Discord ID",
+        required: false,
+        helpText: "Highly recommended! We use Discord for community chats, updates, training, and quick support.",
+      },
+      {
+        id: "emailAddress",
+        type: "text",
+        question: "17. Email Address",
+        required: false,
+      },
+      {
+        id: "additionalNotes",
+        type: "textarea",
+        question: "Additional Notes (Optional)",
+        required: false,
+      }
     ]
   }
 };

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Creator } from '@/lib/creators';
@@ -20,6 +20,8 @@ import { SiteSettings } from '@/lib/creators-db';
 export default function WhosLiveNow({ initialCreators = [], settings }: { initialCreators?: Creator[], settings: SiteSettings['liveSection'] }) {
   const [loading, setLoading] = useState(true);
   const [liveCreators, setLiveCreators] = useState<LiveCreator[]>([]);
+  const [lastSync, setLastSync] = useState<string>('');
+  const constraintsRef = useRef(null);
 
   useEffect(() => {
     const fetchLive = async () => {
@@ -28,6 +30,7 @@ export default function WhosLiveNow({ initialCreators = [], settings }: { initia
         const data = await res.json();
         if (data.status === 'success' && data.data?.live_creators) {
           setLiveCreators(data.data.live_creators);
+          setLastSync(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
         }
       } catch (err) {
         console.error('Failed to fetch live creators:', err);
@@ -61,9 +64,19 @@ export default function WhosLiveNow({ initialCreators = [], settings }: { initia
 
       {/* Header */}
       <div className="container mx-auto px-4 mb-10 flex justify-between items-end relative z-10">
-        <div>
-          <p className="text-xs font-semibold text-primary tracking-[0.2em] uppercase mb-2">{settings?.tag || "Live Now"}</p>
-          <h2 className="text-3xl font-black tracking-tight text-foreground">{settings?.title || "Elite Creators Broadcasting"}</h2>
+        <div className="flex items-center gap-4">
+          <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+          <div>
+            <p className="text-xs font-semibold text-primary tracking-[0.2em] uppercase mb-1">{settings?.tag || "Live Now"}</p>
+            <h2 className="text-3xl font-black tracking-tight text-foreground flex items-center gap-3">
+              {settings?.title || "Elite Creators Broadcasting"}
+              {lastSync && (
+                <span className="text-[10px] font-mono font-medium text-foreground/30 bg-white/[0.03] px-2 py-1 rounded border border-white/[0.05]">
+                  SYNC: {lastSync}
+                </span>
+              )}
+            </h2>
+          </div>
         </div>
         <Link href="/creators" className="hidden sm:flex items-center gap-1.5 text-sm text-foreground-muted hover:text-foreground transition-colors group font-medium">
           View All Roster
@@ -77,8 +90,21 @@ export default function WhosLiveNow({ initialCreators = [], settings }: { initia
       <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background-surface to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background-surface to-transparent z-10 pointer-events-none" />
 
-      {/* Scrolling track */}
-      <div className="flex w-fit animate-scroll hover:[animation-play-state:paused] gap-4 px-4">
+      {/* Scrolling track / Draggable */}
+      <div className="relative z-10" ref={constraintsRef}>
+        <motion.div 
+          drag={liveCreators.length > 3 ? "x" : false}
+          dragConstraints={constraintsRef}
+          className={`flex w-fit gap-4 px-12 ${!loading && liveCreators.length > 3 ? 'cursor-grab active:cursor-grabbing' : ''}`}
+          animate={!loading && liveCreators.length > 4 ? { x: [0, -1000] } : {}}
+          transition={!loading && liveCreators.length > 4 ? {
+            duration: 40,
+            repeat: Infinity,
+            ease: "linear",
+            repeatType: "loop"
+          } : {}}
+          whileTap={{ cursor: "grabbing" }}
+        >
         {loading ? (
           Array.from({ length: 6 }).map((_, i) => (
             <SkeletonCard key={`skel-${i}`} className="w-60 min-h-[140px] p-4 flex flex-col justify-between" />
@@ -140,6 +166,7 @@ export default function WhosLiveNow({ initialCreators = [], settings }: { initia
             );
           })
         )}
+        </motion.div>
       </div>
     </div>
   );

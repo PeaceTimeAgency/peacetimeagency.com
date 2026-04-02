@@ -55,7 +55,7 @@ export default function AdminDashboard() {
       setSettings(settingsData);
     } catch (err) {
       console.error(err);
-      showToast("Intelligence uplink compromised. Check credentials.", "error");
+      showToast("Failed to load data.", "error");
     } finally {
       setLoading(false);
     }
@@ -72,10 +72,10 @@ export default function AdminDashboard() {
       await saveCreatorsAction(updatedCreators);
       setCreators(updatedCreators);
       setEditingCreator(null);
-      showToast("Database synchronization successful.", "success");
+      showToast("Data saved successfully.", "success");
     } catch (err) {
       console.error(err);
-      showToast("Critical Sync Failure. Data not committed.", "error");
+      showToast("Failed to save data.", "error");
     } finally {
       setSaving(false);
     }
@@ -105,10 +105,10 @@ export default function AdminDashboard() {
       await saveNewsAction(newNews);
       setNews(newNews);
       setEditingArticle(null);
-      showToast("Intel deployment confirmed.", "success");
+      showToast("News article saved.", "success");
     } catch (err) {
       console.error(err);
-      showToast("Intel uplink failed.", "error");
+      showToast("Failed to save article.", "error");
     } finally {
       setSaving(false);
     }
@@ -132,8 +132,7 @@ export default function AdminDashboard() {
   const isMockMode = creators.length > 0 && !creators[0].id.includes('-');
 
   return (
-    <div className="w-full min-h-[90vh] flex flex-col bg-background-surface/30 backdrop-blur-2xl border border-white/5 rounded-[32px] overflow-hidden shadow-2xl relative">
-      <div className="absolute inset-0 bg-noise opacity-[0.03] pointer-events-none" />
+    <div className="w-full min-h-[90vh] flex flex-col bg-[#05060F]/80 border border-white/10 rounded-[32px] overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] relative">
       <div className="absolute inset-0 bg-dot-grid opacity-10 pointer-events-none" />
 
       {/* ── Header HUD ── */}
@@ -143,12 +142,12 @@ export default function AdminDashboard() {
             <LayoutDashboard className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <h1 className="text-2xl font-black tracking-tighter text-gradient-primary">
-              Management Console
+            <h1 className="text-2xl font-black tracking-tighter text-white">
+              Admin Dashboard
             </h1>
             <div className="flex items-center gap-2 mt-0.5">
               <div className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
-              <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-foreground-muted">System Operational</p>
+              <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-foreground-muted">System Online</p>
             </div>
           </div>
         </div>
@@ -230,7 +229,7 @@ export default function AdminDashboard() {
             >
                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                <Plus className="w-4 h-4 text-white relative z-10" />
-               <span className="text-white text-xs font-black uppercase tracking-widest relative z-10">Deploy Intel</span>
+               <span className="text-white text-xs font-black uppercase tracking-widest relative z-10">Add Article</span>
             </button>
           )}
           
@@ -325,7 +324,7 @@ export default function AdminDashboard() {
               {loading && creators.length === 0 ? (
                 <div className="flex-1 flex flex-col items-center justify-center space-y-4 opacity-50">
                   <div className="w-12 h-12 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
-                  <p className="text-[10px] uppercase tracking-[0.3em] font-black">Syncing Core Data</p>
+                  <p className="text-[10px] uppercase tracking-[0.3em] font-black">Loading Data</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 overflow-y-auto pr-2 scrollbar-thin">
@@ -418,8 +417,8 @@ export default function AdminDashboard() {
         isOpen={!!confirmDeleteId}
         onClose={() => setConfirmDeleteId(null)}
         onConfirm={confirmDelete}
-        title="Deauthorize Creator"
-        message="This action will permanently purge this creator's profile from the agency's primary database uplink. Confirm?"
+        title="Delete Creator"
+        message="This action will permanently delete this creator. Are you sure?"
         loading={saving}
       />
 
@@ -488,9 +487,9 @@ function CreatorEditModal({
             </div>
             <div>
               <h2 className="text-2xl font-black tracking-tighter text-white">
-                {creator.name ? `Editing: ${creator.name}` : "Integrate New Creator"}
+                {creator.name ? `Editing: ${creator.name}` : "Add Creator"}
               </h2>
-              <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-foreground-muted">System Level Access • UUID: {formData.id}</p>
+              <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-foreground-muted">Creator ID: {formData.id}</p>
             </div>
           </div>
           <button onClick={onClose} className="p-3 bg-white/5 hover:bg-white/10 rounded-2xl border border-white/10 transition-colors">
@@ -509,7 +508,7 @@ function CreatorEditModal({
                 
                 <div className="grid grid-cols-1 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-foreground-subtle ml-1">Internal Reference ID</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-foreground-subtle ml-1">Creator ID</label>
                     <input
                       required
                       value={formData.id}
@@ -520,7 +519,7 @@ function CreatorEditModal({
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-foreground-subtle ml-1">Legals Name</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-foreground-subtle ml-1">Name</label>
                       <input
                         required
                         value={formData.name}
@@ -540,7 +539,7 @@ function CreatorEditModal({
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-foreground-subtle ml-1">Cinematic Bio</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-foreground-subtle ml-1">Biography</label>
                     <textarea
                       required
                       rows={4}
@@ -552,7 +551,7 @@ function CreatorEditModal({
 
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-foreground-subtle ml-1">Visual Asset URL</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-foreground-subtle ml-1">Image URL</label>
                       <input
                         required
                         value={formData.image}
@@ -634,7 +633,7 @@ function CreatorEditModal({
         <div className="relative z-10 p-8 border-t border-white/10 bg-white/[0.02] flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <RefreshCcw className="w-4 h-4 text-foreground-subtle animate-spin-slow opacity-20" />
-            <span className="text-[9px] uppercase tracking-[0.2em] font-black text-foreground-subtle">Awaiting Finalization Commit</span>
+            <span className="text-[9px] uppercase tracking-[0.2em] font-black text-foreground-subtle">Unsaved Changes</span>
           </div>
 
           <div className="flex gap-4">
@@ -655,12 +654,12 @@ function CreatorEditModal({
               {saving ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin text-white relative z-10" />
-                  <span className="text-white text-xs font-black uppercase tracking-widest relative z-10">Syncing...</span>
+                  <span className="text-white text-xs font-black uppercase tracking-widest relative z-10">Saving...</span>
                 </>
               ) : (
                 <>
                   <Save className="w-4 h-4 text-white relative z-10" />
-                  <span className="text-white text-xs font-black uppercase tracking-widest relative z-10">Commit Changes</span>
+                  <span className="text-white text-xs font-black uppercase tracking-widest relative z-10">Save Changes</span>
                 </>
               )}
             </button>

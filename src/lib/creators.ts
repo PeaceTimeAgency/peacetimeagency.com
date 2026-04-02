@@ -29,6 +29,46 @@ export interface Creator {
     twitch?: string;
     steam?: string;
     website?: string;
+    x?: string;
+    threads?: string;
+    facebook?: string;
+  };
+  password?: string;
+  mediaAssets?: string[];
+  backgroundUrl?: string;
+  backgroundContrast?: number;
+  // New Fields
+  embeds?: {
+    youtube?: string;
+    spotify?: string;
+    tiktok?: string;
+  };
+  customization?: {
+    fontFamily?: string;
+    bgAnimation?: 'none' | 'stars' | 'bubbles' | 'waves';
+    themeColor?: string;
+  };
+  automation?: {
+    youtubeChannelId?: string;
+    instagramUsername?: string;
+    autoUpdateContent?: boolean;
+  };
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+  };
+  customLinks?: {
+    label: string;
+    url: string;
+  }[];
+  countdown?: {
+    targetDate?: string;
+    label?: string;
+  };
+  abTest?: {
+    enabled?: boolean;
+    altBio?: string;
+    altImage?: string;
   };
 }
 
@@ -50,6 +90,8 @@ export const creators: Creator[] = [
     tags: ["Staff", "Gaming"],
     tier: "staff",
     liveUrl: "https://www.tiktok.com/@baked.laze/live",
+    password: "1234",
+    mediaAssets: [],
     socials: {
       tiktok: "https://www.tiktok.com/@baked.laze"
     }
@@ -70,6 +112,8 @@ export const creators: Creator[] = [
     tags: ["Gaming", "FPS", "RPG", "MMO"],
     tier: "new",
     liveUrl: "https://www.tiktok.com/@coldp1zza/live",
+    password: "1234",
+    mediaAssets: [],
     socials: {
       tiktok: "https://www.tiktok.com/@coldp1zza",
       twitch: "https://www.twitch.tv/ColdP1zza",
@@ -93,6 +137,8 @@ export const creators: Creator[] = [
     tags: ["Gaming"],
     tier: "new",
     liveUrl: "https://www.tiktok.com/@macdaddy6.0/live",
+    password: "1234",
+    mediaAssets: [],
     socials: {
       tiktok: "https://www.tiktok.com/@macdaddy6.0",
       twitch: "https://www.twitch.tv/slingin6"
@@ -114,6 +160,8 @@ export const creators: Creator[] = [
     tags: ["Gaming", "JRPGs", "Classic"],
     tier: "new",
     liveUrl: "https://www.tiktok.com/@oopsitsjrpgtime/live",
+    password: "1234",
+    mediaAssets: [],
     socials: {
       tiktok: "https://www.tiktok.com/@oopsitsjrpgtime",
       twitch: "https://www.twitch.tv/oopsitsjrpgtime",
@@ -144,6 +192,8 @@ export const creators: Creator[] = [
       "/creators/mrleftythehand_tank.png",
       "/creators/mrleftythehand_plane.png"
     ],
+    password: "1234",
+    mediaAssets: [],
     socials: {
       tiktok: "https://www.tiktok.com/@mrleftythehand",
       twitch: "https://www.twitch.tv/mrleftythehand"
@@ -167,6 +217,8 @@ export const creators: Creator[] = [
     tags: ["Staff", "Gaming", "RPG", "Horror", "Just Chatting"],
     tier: "recruiter",
     liveUrl: "https://www.tiktok.com/@trashsoupgaming/live",
+    password: "1234",
+    mediaAssets: [],
     socials: {
       tiktok: "https://www.tiktok.com/@trashsoupgaming",
       youtube: "https://www.youtube.com/@trashsoupgaming",
@@ -189,6 +241,8 @@ export const creators: Creator[] = [
     tags: ["Gaming", "Just Chatting", "IRL", "War Thunder", "Wyoming"],
     tier: "new",
     liveUrl: "https://www.tiktok.com/@papa.j547/live",
+    password: "1234",
+    mediaAssets: [],
     socials: {
       tiktok: "https://www.tiktok.com/@papa.j547",
       twitch: "https://www.twitch.tv/Gaming_With_Papa_J",
@@ -211,6 +265,8 @@ export const creators: Creator[] = [
     tags: ["Gaming", "Warzone", "Memes", "Squad"],
     tier: "new",
     liveUrl: "https://www.tiktok.com/@itsjakee_78/live",
+    password: "1234",
+    mediaAssets: [],
     socials: {
       tiktok: "https://www.tiktok.com/@itsjakee_78",
       twitch: "https://m.twitch.tv/itsjakee_78",
@@ -236,6 +292,8 @@ export const creators: Creator[] = [
     tags: ["Staff", "Recruiter", "Gaming", "Just Chatting", "IRL"],
     tier: "recruiter",
     liveUrl: "https://www.tiktok.com/@TheJ3ssExpress/live",
+    password: "1234",
+    mediaAssets: [],
     socials: {
       tiktok: "https://www.tiktok.com/@TheJ3ssExpress"
     }
@@ -257,6 +315,8 @@ export const creators: Creator[] = [
     tags: ["Staff", "Gaming", "Just Chatting", "IRL"],
     tier: "recruiter",
     liveUrl: "https://www.tiktok.com/@generalspuds",
+    password: "1234",
+    mediaAssets: [],
     socials: {
       tiktok: "https://www.tiktok.com/@generalspuds",
       instagram: "https://www.instagram.com/generalspuds",
@@ -282,6 +342,8 @@ export const creators: Creator[] = [
     tags: ["Staff", "Gaming", "War Thunder VR", "Coach"],
     tier: "recruiter",
     liveUrl: "https://www.tiktok.com/@stealyn.vr/live",
+    password: "1234",
+    mediaAssets: [],
     socials: {
       tiktok: "https://www.tiktok.com/@stealyn.vr",
       discord: "https://discord.gg/UajNn4KaQP"
@@ -309,6 +371,8 @@ export const creators: Creator[] = [
     tags: ["Gaming", "Just Chatting", "IRL", "Comedy", "Skits", "Small Business"],
     tier: "new",
     liveUrl: "https://www.tiktok.com/@internettourguide/live",
+    password: "1234",
+    mediaAssets: [],
     socials: {
       tiktok: "https://www.tiktok.com/@internettourguide",
       youtube: "https://www.youtube.com/@colethetourguide",
@@ -316,7 +380,29 @@ export const creators: Creator[] = [
       instagram: "https://www.instagram.com/internettourguide/",
       website: "https://internettour.guide/"
     }
+  },
+  {
+    id: "morbidsunscheduledovertime",
+    name: "Morbid's Unscheduled Overtime",
+    handle: "@ass_ass_inn",
+    description: "I work in industrial maintenance, but I'm also a multistreamer, I like to try multiple games and genre's, and I typically play with viewers!",
+    image: "/branding/KYRAX425.png",
+    category: ["Gaming"],
+    stats: {
+      followers: "New",
+      avgWatchTime: "N/A",
+      peakCCV: "N/A",
+      totalLikes: "0"
+    },
+    tags: ["Gaming", "Industrial Maintenance", "Multistreamer"],
+    tier: "new",
+    liveUrl: "https://www.tiktok.com/@ass_ass_inn/live",
+    password: "1234",
+    mediaAssets: [],
+    socials: {
+      tiktok: "https://www.tiktok.com/@ass_ass_inn?_r=1&_t=ZP-95C20p6kOHG",
+      twitch: "https://m.twitch.tv/morbidunscheduledovertime/home",
+      discord: "https://discordapp.com/users/Morbid1454"
+    }
   }
 ];
-
-

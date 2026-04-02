@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { 
   MeshDistortMaterial, 
@@ -22,11 +23,11 @@ function Scene() {
     meshRef.current.rotation.x += 0.005;
     meshRef.current.rotation.y += 0.005;
     
-    // React to mouse
-    const targetX = state.mouse.x * 0.5;
-    const targetY = state.mouse.y * 0.5;
-    meshRef.current.position.x = THREE.MathUtils.lerp(meshRef.current.position.x, targetX, 0.1);
-    meshRef.current.position.y = THREE.MathUtils.lerp(meshRef.current.position.y, targetY, 0.1);
+    // React to mouse - scaled down intensity but kept the lerp
+    const targetX = state.mouse.x * 0.4;
+    const targetY = state.mouse.y * 0.4;
+    meshRef.current.position.x = THREE.MathUtils.lerp(meshRef.current.position.x, targetX, 0.05);
+    meshRef.current.position.y = THREE.MathUtils.lerp(meshRef.current.position.y, targetY, 0.05);
   });
 
   return (
@@ -44,18 +45,18 @@ function Scene() {
       >
         <Sphere
           ref={meshRef}
-          args={[1.5, 64, 64]}
+          args={[1.6, 128, 128]}
           onPointerOver={() => setHovered(true)}
           onPointerOut={() => setHovered(false)}
         >
           <MeshDistortMaterial
             color={hovered ? "#FF3C5F" : "#A78BFA"}
-            distort={0.4}
-            speed={2}
-            roughness={0.1}
-            metalness={0.8}
-            emissive="#FF3C5F"
-            emissiveIntensity={hovered ? 0.5 : 0.2}
+            distort={0.45}
+            speed={2.5}
+            roughness={0.05}
+            metalness={0.9}
+            emissive={hovered ? "#FF3C5F" : "#7C5FC4"}
+            emissiveIntensity={hovered ? 0.8 : 0.4}
           />
         </Sphere>
       </Float>
@@ -83,10 +84,20 @@ export function Hero3DObject() {
   }, []);
 
   return (
-    <div ref={containerRef} className="absolute inset-0 z-0 pointer-events-none opacity-40">
-      <Canvas frameloop={isVisible ? "always" : "demand"}>
+    <motion.div 
+      ref={containerRef} 
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={isVisible ? { opacity: 0.75, scale: 1 } : { opacity: 0 }}
+      transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
+      className="absolute inset-0 z-0 pointer-events-none"
+    >
+      <Canvas 
+        frameloop={isVisible ? "always" : "demand"}
+        dpr={[1, 2]}
+        gl={{ antialias: true, alpha: true }}
+      >
         <Scene />
       </Canvas>
-    </div>
+    </motion.div>
   );
 }

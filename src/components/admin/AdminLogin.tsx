@@ -45,27 +45,11 @@ export default function AdminLogin() {
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className="relative glass-card p-10 flex flex-col items-center overflow-hidden"
       >
-        {/* Cinematic Scanline */}
-        <motion.div
-          animate={{ y: ["-100%", "400%"] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent z-10 pointer-events-none"
-        />
-
-        <div className="relative mb-8">
-          <div className="w-20 h-20 bg-gradient-to-tr from-primary to-secondary rounded-2xl rotate-3 flex items-center justify-center shadow-neon-primary animate-pulse-soft">
-            <div className="-rotate-3">
-              <ShieldCheck className="w-10 h-10 text-white" />
-            </div>
-          </div>
-          <div className="absolute -inset-4 bg-primary/20 blur-2xl rounded-full -z-10 animate-breathe" />
-        </div>
-        
-        <h1 className="text-4xl font-black tracking-tighter text-gradient-primary mb-3 text-center">
-          Terminal Access
+        <h1 className="text-4xl font-black tracking-tighter text-white mb-3 text-center">
+          Admin Portal
         </h1>
         <p className="text-foreground-muted text-sm mb-10 text-center max-w-[280px] font-medium leading-relaxed">
-          Authorized personnel only. Please input your secure decryption key.
+          Welcome back. Enter your secure PIN to access the dashboard.
         </p>
 
         <form onSubmit={handleSubmit} className="w-full space-y-6 relative z-20">
@@ -104,7 +88,7 @@ export default function AdminLogin() {
               <Loader2 className="w-6 h-6 animate-spin text-white relative z-10" />
             ) : (
               <>
-                <span className="text-white font-black uppercase tracking-[0.2em] text-sm relative z-10">Initiate Link</span>
+                <span className="text-white font-black uppercase tracking-[0.2em] text-sm relative z-10">Sign In</span>
                 <ArrowRight className="w-5 h-5 text-white relative z-10 group-hover:translate-x-1 transition-transform" />
               </>
             )}
@@ -121,12 +105,6 @@ export default function AdminLogin() {
             </div>
           </div>
         </form>
-
-        <div className="mt-10 pt-8 border-t border-white/5 w-full flex justify-center">
-            <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-foreground-subtle">
-              System ID: <span className="text-foreground-muted">PTA-INTERNAL-01</span>
-            </p>
-        </div>
       </motion.div>
     </div>
   );

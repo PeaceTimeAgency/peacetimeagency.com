@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import Link from 'next/link';
 
 // ── Nano Banana 2 Noise Engine ──────────────────────────────────────────────
@@ -304,6 +304,44 @@ function useHeroCanvas(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
   }, [draw, canvasRef]);
 }
 
+function MagneticButton({ children, className, style, href, onMouseEnter, onMouseLeave }: { children: React.ReactNode, className?: string, style?: any, href: string, onMouseEnter?: (e: any) => void, onMouseLeave?: (e: any) => void }) {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 });
+  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = ref.current!.getBoundingClientRect();
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
+    x.set(clientX - centerX);
+    y.set(clientY - centerY);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+    if (onMouseLeave) onMouseLeave({ currentTarget: ref.current } as any);
+  };
+
+  return (
+    <motion.a
+      ref={ref}
+      href={href}
+      className={className}
+      style={{ ...style, x: mouseXSpring, y: mouseYSpring }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onMouseEnter={onMouseEnter}
+    >
+      {children}
+    </motion.a>
+  );
+}
+
 // ── Fade-up animation variant ───────────────────────────────────────────────
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
@@ -396,7 +434,7 @@ export function Hero({ settings }: { settings: SiteSettings['hero'] }) {
         {/* Headline */}
         <motion.h1
           custom={1} initial="hidden" animate="show" variants={fadeUp}
-          className="text-5xl font-black tracking-tighter sm:text-6xl md:text-7xl lg:text-[88px] leading-[0.93] text-white"
+          className="text-5xl font-black tracking-tighter sm:text-6xl md:text-7xl lg:text-[88px] leading-[0.93] text-white font-display"
         >
           <span
             style={{
@@ -437,21 +475,22 @@ export function Hero({ settings }: { settings: SiteSettings['hero'] }) {
           className="flex flex-col gap-4 sm:flex-row items-center justify-center pt-1 w-full"
         >
           {/* Primary CTA */}
-          <Link href="/apply"
-            className="group relative inline-flex items-center justify-center h-[52px] px-8 rounded-xl font-bold text-sm text-white overflow-hidden transition-all duration-300"
+          <MagneticButton href="/apply"
+            className="group relative inline-flex items-center justify-center h-[52px] px-10 rounded-xl font-bold text-sm text-white overflow-hidden transition-all duration-300"
             style={{
               background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%)',
               boxShadow: '0 0 0 1px color-mix(in srgb, var(--color-primary), transparent 60%), 0 4px 24px color-mix(in srgb, var(--color-primary), transparent 70%)',
             }}
             onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 0 1px color-mix(in srgb, var(--color-primary), transparent 40%), 0 8px 40px color-mix(in srgb, var(--color-primary), transparent 50%)')}
-            onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 0 1px color-mix(in srgb, var(--color-primary), transparent 60%), 0 4px 24px color-mix(in srgb, var(--color-primary), transparent 70%)')}
           >
-            <span className="relative z-10 tracking-wide">Join the Roster</span>
+            <span className="relative z-10 tracking-[0.1em] uppercase group-hover:scale-110 transition-transform duration-300">Join the Roster</span>
+            {/* Glitch underlying layer */}
+            <div className="absolute inset-0 bg-white/20 translate-x-full group-hover:translate-x-0 transition-transform duration-500 -skew-x-12" />
             <div className="absolute inset-0 bg-gradient-to-r from-[#FF3C5F] to-[#FF8FA3] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          </Link>
+          </MagneticButton>
 
           {/* Secondary CTA */}
-          <Link href="/#creators"
+          <MagneticButton href="/#creators"
             className="group inline-flex items-center justify-center h-[52px] px-8 rounded-xl font-semibold text-sm gap-2 transition-all duration-300"
             style={{
               background: 'rgba(255,255,255,0.035)',
@@ -460,18 +499,16 @@ export function Hero({ settings }: { settings: SiteSettings['hero'] }) {
               color: 'rgba(255,255,255,0.75)',
             }}
             onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.035)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; }}
           >
             <span className="group-hover:text-white transition-colors">View Creators</span>
-            {/* Fixed: single transition class, removed duplicate */}
             <svg
-              className="w-4 h-4 group-hover:translate-x-0.5 transition-all"
+              className="w-4 h-4 group-hover:translate-x-1 transition-all"
               fill="none" stroke="currentColor" viewBox="0 0 24 24"
               aria-hidden="true"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M9 5l7 7-7 7" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
             </svg>
-          </Link>
+          </MagneticButton>
         </motion.div>
 
         {/* Stats bar */}

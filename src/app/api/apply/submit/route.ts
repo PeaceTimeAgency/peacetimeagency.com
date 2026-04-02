@@ -3,120 +3,54 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const {
-      recruiterId,
-      is18Plus,
-      isUSCA,
-      streamingCountry,
-      contentTypes,
-      otherContentType,
-      nicheDescription,
-      liveFrequency,
-      averageSessionLength,
-      streamingDuration,
-      streamingGoals,
-      improvements,
-      otherImprovement,
-      followerCount,
-      receivesGifts,
-      biggestChallenge,
-      openToCoaching,
-      otherAgency,
-      otherAgencyName,
-      tiktokHandle,
-      discordId,
-      emailAddress,
-      additionalNotes
-    } = body;
+    const { recruiterId, answers } = body;
 
     // Master webhook for all applications
     const webhookUrl = "https://discord.com/api/webhooks/1481203208830455890/XKAAcnGVAjbNpcXNWcLU7EvW05e1gx1Jz9CoofZb4NHDqPmd4xkTUrOckEPIQxMaxAm2";
 
-    const discordDisplay = discordId || "Not Provided";
-    const emailDisplay = emailAddress || "Not Provided";
-
-    // Format the selected content types
-    let contentTypesString = "None";
-    if (contentTypes && Array.isArray(contentTypes)) {
-      contentTypesString = contentTypes.join(", ");
+    const fields = [];
+    
+    // Convert answers object to Discord Embed Fields
+    // Discord Embed Fields have a limit of 1024 characters per value and 25 fields total.
+    let currentField = { name: "Applicant Responses", value: "" };
+    
+    if (answers && typeof answers === 'object') {
+      for (const [question, answer] of Object.entries(answers)) {
+        if (!question || answer === undefined || answer === "") continue;
+        
+        const answerStr = Array.isArray(answer) ? answer.join(", ") : String(answer);
+        const entry = `**${question}**\n${answerStr}\n\n`;
+        
+        if (currentField.value.length + entry.length > 1000) {
+          fields.push({...currentField});
+          currentField = { name: "Responses (Cont.)", value: entry };
+        } else {
+          currentField.value += entry;
+        }
+      }
     }
-    if (otherContentType) {
-      contentTypesString += ` (Other: ${otherContentType})`;
+    
+    if (currentField.value) {
+      fields.push(currentField);
+    }
+    
+    if (recruiterId) {
+      fields.push({
+        name: "🤝 Recruiter",
+        value: `Managed by recruiter: **${recruiterId}**`,
+      });
     }
 
-    // Format improvements
-    let improvementsString = "None";
-    if (improvements && Array.isArray(improvements)) {
-      improvementsString = improvements.join(", ");
-    }
-    if (otherImprovement) {
-      improvementsString += ` (Other: ${otherImprovement})`;
-    }
-
-    // Location display
-    const locationDisplay = isUSCA === "Yes" ? "US/CA" : `International (${streamingCountry || "Unknown"})`;
-
-    // Agency status display
-    const agencyDisplay = otherAgency === "Yes" ? `Currently in Agency: ${otherAgencyName}` : "Not in an agency";
-
-    // Prepare Discord Webhook Payload
     const embed = {
       title: "🚀 New Creator Intake Form Submitted!",
       color: 0xE11D48, // Primary color hex
       description: `A new creator has applied to join **Peace Time Agency**.`,
-      fields: [
-        {
-          name: "👤 General",
-          value: `**TikTok Handle:** ${tiktokHandle}\n**18+:** ${is18Plus}\n**Location:** ${locationDisplay}\n**Followers:** ${followerCount}`,
-          inline: false
-        },
-        {
-          name: "Contact Info",
-          value: `**Discord:** ${discordDisplay}\n**Email:** ${emailDisplay}`,
-          inline: true
-        },
-        {
-          name: "Agency Status",
-          value: agencyDisplay,
-          inline: true
-        },
-        {
-          name: "📱 Content Details",
-          value: `**Content Types:** ${contentTypesString}\n**Niche/Style:** ${nicheDescription}`,
-          inline: false
-        },
-        {
-          name: "🎥 LIVE Experience",
-          value: `**Duration:** ${streamingDuration}\n**Frequency:** ${liveFrequency}\n**Avg Session:** ${averageSessionLength}\n**Receives Gifts:** ${receivesGifts}`,
-          inline: false
-        },
-        {
-          name: "🎯 Goals & Challenges",
-          value: `**Goals:** ${streamingGoals}\n**Improvements:** ${improvementsString}\n**Challenge:** ${biggestChallenge}\n**Open to Coaching:** ${openToCoaching}`,
-          inline: false
-        }
-      ],
+      fields: fields,
       timestamp: new Date().toISOString(),
       footer: {
         text: "Peace Time Agency • Talent Intake System",
       }
     };
-
-    if (additionalNotes) {
-      embed.fields.push({
-        name: "📝 Additional Notes",
-        value: additionalNotes,
-        inline: false
-      });
-    }
-
-    if (recruiterId) {
-      embed.fields.push({
-        name: "🤝 Recruiter",
-        value: `Managed by recruiter: **${recruiterId}**`,
-        inline: false
-      });
-    }
 
     const discordPayload = {
       embeds: [embed]

@@ -12,5 +12,7 @@ export const redis = (redisUrl && redisToken)
       set: async () => 'OK',
       setex: async () => 'OK',
       del: async () => 1,
+      incr: async () => 1,
+      expire: async () => 1,
       // Add other methods as needed to prevent "is not a function" errors
     } as unknown as Redis;

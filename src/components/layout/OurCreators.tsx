@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Creator } from "@/lib/creators";
@@ -13,92 +13,199 @@ const CreatorCardImage = ({ creator }: { creator: Creator }) => {
   const images = creator.images && creator.images.length > 0 ? creator.images : [creator.image];
   
   return (
-    <CreatorMediaBox
-      images={images}
-      name={creator.name}
-      imageClassName="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-    />
+    <div className="w-full h-full relative overflow-hidden">
+      <CreatorMediaBox
+        images={images}
+        name={creator.name}
+        imageClassName="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0 group-hover:brightness-110"
+      />
+    </div>
+  );
+};
+
+const CreatorCard = ({ creator, isUserSection, isLive, index }: { creator: Creator, isUserSection: boolean, isLive: boolean, index: number }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const mouseXSpring = useSpring(mouseX);
+  const mouseYSpring = useSpring(mouseY);
+
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [10, -10]), { stiffness: 300, damping: 30 });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-10, 10]), { stiffness: 300, damping: 30 });
+
+  const shineOpacity = useTransform(mouseXSpring, [0, 300], [0, 0.3]);
+  const shineX = useTransform(mouseXSpring, [0, 300], ["0%", "100%"]);
+  const shineY = useTransform(mouseYSpring, [0, 500], ["0%", "100%"]);
+
+  function onMouseMove(e: React.MouseEvent<HTMLElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseXVal = e.clientX - rect.left;
+    const mouseYVal = e.clientY - rect.top;
+
+    const xPct = mouseXVal / width - 0.5;
+    const yPct = mouseYVal / height - 0.5;
+
+    x.set(xPct);
+    y.set(yPct);
+    mouseX.set(mouseXVal);
+    mouseY.set(mouseYVal);
+  }
+
+  function onMouseLeave() {
+    x.set(0);
+    y.set(0);
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.05, duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+      className="perspective-1000"
+    >
+      <Link 
+        href={`/creators/${creator.id}`} 
+        className="block group relative h-full"
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+      >
+        <motion.div 
+          style={{ rotateX, rotateY }}
+          className={`relative overflow-hidden rounded-[2rem] glass-card border border-foreground/10 transition-all duration-500 h-full flex flex-col ${isLive ? 'shadow-[0_0_40px_rgba(255,60,95,0.2)] ring-1 ring-primary/50' : 'group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] group-hover:border-primary/30'}`}
+        >
+          {/* Animated Shine/Glare Overlay */}
+          <motion.div 
+            style={{ 
+              opacity: shineOpacity,
+              background: `radial-gradient(circle at ${shineX} ${shineY}, rgba(255,255,255,0.4) 0%, transparent 80%)`,
+            }}
+            className="absolute inset-0 z-30 pointer-events-none transition-opacity duration-300"
+          />
+
+          {/* Animated Border Beam (Only on hover) */}
+          <div className="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+            <div className="absolute inset-[-1px] rounded-[2rem] bg-gradient-to-r from-transparent via-primary/50 to-transparent blur-sm animate-shine" />
+          </div>
+
+          {/* Background Image (Custom) */}
+          {creator.backgroundUrl && (
+            <div 
+              className="absolute inset-0 z-0 transition-opacity duration-500"
+              style={{ opacity: (creator.backgroundContrast ?? 100) / 100 }}
+            >
+              <img 
+                src={creator.backgroundUrl} 
+                alt="" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
+
+          {/* Image Container */}
+          <div className="aspect-[4/5] overflow-hidden relative z-10">
+            <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/20 via-transparent to-black/60 opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+            
+            {isLive && (
+              <div className="absolute top-4 left-4 z-40 flex items-center gap-1.5 bg-primary px-3 py-1.5 rounded-full shadow-lg shadow-primary/20 scale-90 origin-left group-hover:scale-100 transition-transform duration-300">
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                <span className="text-[10px] font-black text-white tracking-widest uppercase">Live</span>
+              </div>
+            )}
+            
+            {isUserSection && (
+              <div className="absolute top-4 left-4 z-40 flex items-center gap-1.5 bg-green-500 px-3 py-1.5 rounded-full shadow-lg shadow-green-500/20">
+                <span className="text-[10px] font-black text-white tracking-widest uppercase">You</span>
+              </div>
+            )}
+
+            {/* Hover Floating Category */}
+            <div className="absolute top-4 right-4 z-40 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+               <span className="px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-[9px] font-bold text-white uppercase tracking-tighter">
+                 {creator.category?.[0] || 'Creator'}
+               </span>
+            </div>
+
+            <CreatorCardImage creator={creator} />
+          </div>
+
+          {/* Content Area */}
+          <div className="relative p-6 pt-2 mt-auto z-40 bg-gradient-to-t from-black via-black/80 to-transparent">
+            <motion.div 
+              initial={false}
+              className="flex items-center gap-2 mb-2 translate-y-2 group-hover:translate-y-0 transition-transform duration-300"
+            >
+              <span className="h-[2px] w-5 bg-primary rounded-full" />
+              <span className="text-[10px] font-bold text-primary tracking-[0.2em] uppercase">
+                {creator.title || (Array.isArray(creator.category) ? creator.category[0] : creator.category)}
+              </span>
+            </motion.div>
+
+            <h4 className="text-2xl font-black text-white mb-1 group-hover:text-primary transition-colors duration-300 [text-shadow:0_2px_10px_rgba(0,0,0,0.5)] leading-tight">
+              {creator.name}
+            </h4>
+
+            <div className="flex items-center justify-between">
+              <p className="text-sm text-white/50 font-mono group-hover:text-white/80 transition-colors">
+                @{creator.handle.replace('@', '')}
+              </p>
+              
+              <div className="opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all duration-300">
+                <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </div>
+
+            <div className="mt-4 flex flex-wrap gap-2 overflow-hidden h-0 group-hover:h-8 transition-all duration-500 ease-in-out opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0">
+              {creator.tags.slice(0, 3).map(tag => (
+                <span key={tag} className="text-[9px] font-bold px-2 py-1 rounded-md bg-white/5 text-white/40 border border-white/10 uppercase tracking-wider">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </Link>
+    </motion.div>
   );
 };
 
 const CreatorGrid = ({ title, desc, list, liveHandles = [], isUserSection = false }: { title: string, desc?: string, list: Creator[], liveHandles?: string[], isUserSection?: boolean }) => {
-  const router = useRouter();
-
   const isCreatorLive = (creator: Creator) => {
     const handle = creator.handle.toLowerCase();
     return liveHandles.includes(handle) || 
-           (creator.liveUrl && liveHandles.some(lh => creator.liveUrl?.toLowerCase().includes(lh.toLowerCase())));
+           !!(creator.liveUrl && liveHandles.some(lh => creator.liveUrl?.toLowerCase().includes(lh.toLowerCase())));
   };
 
   if (list.length === 0) return null;
   return (
-    <div className="mb-24 last:mb-0">
-      <div className="mb-8 border-b border-foreground/10 pb-4">
-        <h3 className="text-3xl font-black text-foreground tracking-tight [text-shadow:0_0_1.5px_rgba(0,0,0,0.8)]">{title}</h3>
-        {desc && <p className="text-foreground-muted mt-2 text-sm">{desc}</p>}
+    <div className="mb-32 last:mb-0">
+      <div className="mb-12 relative">
+        <div className="absolute -left-4 top-1/2 -translate-y-1/2 w-1 h-8 bg-primary rounded-full shadow-[0_0_15px_rgba(255,60,95,0.5)]" />
+        <h3 className="text-4xl font-black text-foreground tracking-tight pl-4 uppercase italic">{title}</h3>
+        {desc && <p className="text-foreground-muted mt-2 text-sm max-w-2xl pl-4">{desc}</p>}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-        {list.map((creator, i) => {
-          const isLive = isCreatorLive(creator);
-          return (
-            <motion.div
-              key={creator.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-            >
-              <Link href={`/creators/${creator.id}`} className="block group relative h-full">
-                <div className={`relative overflow-hidden rounded-3xl glass-card transition-all duration-500 group-hover:scale-[1.02] h-full flex flex-col ${isLive ? 'shadow-[0_0_30px_rgba(255,60,95,0.3)] ring-1 ring-primary' : 'group-hover:shadow-neon-primary'}`}>
-                  {/* Image Container */}
-                  <div className="aspect-[4/5] overflow-hidden relative">
-                    {isLive && (
-                      <div className="absolute top-3 left-4 z-20 flex items-center gap-1.5 bg-primary px-2.5 py-1 rounded shadow-lg shadow-black/50">
-                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                        <span className="text-[10px] font-black text-white tracking-widest uppercase">Live</span>
-                      </div>
-                    )}
-                    {isUserSection && (
-                      <div className="absolute top-3 left-4 z-20 flex items-center gap-1.5 bg-green-500 px-2.5 py-1 rounded shadow-lg shadow-black/50">
-                        <span className="text-[10px] font-black text-white tracking-widest uppercase">You</span>
-                      </div>
-                    )}
-                    <CreatorCardImage creator={creator} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-black/20 to-transparent opacity-80" />
-                  </div>
-
-                  {/* Content Overlay */}
-                  <div className="absolute inset-x-0 bottom-0 p-5 mt-auto bg-gradient-to-t from-black/80 to-transparent text-left">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <span className="h-px w-4 bg-primary" />
-                      <span className="text-[10px] font-bold text-primary tracking-widest uppercase truncate">
-                        {creator.title ? creator.title : (Array.isArray(creator.category) ? creator.category.join(' / ') : creator.category)}
-                      </span>
-                    </div>
-                    <h4 className="text-xl font-black text-foreground group-hover:text-primary transition-colors duration-300 truncate [text-shadow:0_0_1.5px_rgba(0,0,0,0.8)]">
-                      {creator.name}
-                    </h4>
-                    <p className="text-xs text-foreground/50 font-mono mt-0.5 group-hover:text-foreground/80 transition-colors truncate">
-                      {creator.handle}
-                    </p>
-
-                    <div className="mt-3 flex flex-wrap gap-1.5">
-                      {creator.tags.slice(0, 2).map(tag => (
-                        <span key={tag} className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-foreground/5 text-foreground/40 border border-foreground/10 uppercase tracking-tighter truncate max-w-full">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          );
-        })}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+        {list.map((creator, i) => (
+          <CreatorCard 
+            key={creator.id} 
+            creator={creator} 
+            isUserSection={isUserSection} 
+            isLive={isCreatorLive(creator)} 
+            index={i}
+          />
+        ))}
       </div>
     </div>
   );
 };
+
 
 interface LiveCreator {
   username: string;
