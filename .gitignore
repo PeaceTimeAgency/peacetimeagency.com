@@ -39,3 +39,22 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local development
+/src/app/playground
+
+# terminal logs and reports
+*.log
+*_out.txt
+*_output.txt
+lint_report*
+lint_results.txt
+
+# temporary files and local scripts
+/tmp/
+find_rule.py
+parse_lint.py
+Phase_Production_Roadmap.md
+
+# local dev config
+/.vscode/
