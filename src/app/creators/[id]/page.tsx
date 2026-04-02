@@ -119,8 +119,8 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
         </div>
       ) : (
         <>
-          <div className="fixed inset-0 bg-dot-grid opacity-20 pointer-events-none mix-blend-screen" />
-          <div className="fixed inset-0 bg-gradient-to-b from-background via-background/90 to-background pointer-events-none" />
+          <div className="fixed inset-0 bg-dot-grid opacity-10 dark:opacity-20 pointer-events-none" />
+          <div className="fixed inset-0 bg-gradient-to-b from-background via-background/95 to-background pointer-events-none" />
         </>
       )}
 
@@ -155,7 +155,7 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
 
           {/* Left Column: Image & Media */}
           <div className="lg:col-span-5 flex flex-col gap-8">
-            <div className="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden glass-card shadow-2xl border border-white/10 group">
+            <div className="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden glass-card shadow-2xl border border-foreground/10 group">
               <CreatorMediaBox
                 images={showAlt && creator.abTest?.altImage ? [creator.abTest.altImage] : (creator.images && creator.images.length > 0 ? creator.images : [creator.image])}
                 name={creator.name}
@@ -166,7 +166,7 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
               {/* Category Badge */}
               <div className="absolute top-6 left-6 flex items-center gap-2 z-10">
                 <span 
-                  className="px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-[10px] font-black uppercase tracking-widest"
+                  className="px-3 py-1.5 rounded-full bg-background/50 backdrop-blur-md border border-foreground/10 text-[10px] font-black uppercase tracking-widest"
                   style={{ color: 'var(--accent-color)' }}
                 >
                   {creator.title || creator.category.join(' / ')}
@@ -185,7 +185,7 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
 
             {/* Spotify Embed */}
             {creator.embeds?.spotify && (
-              <div className="rounded-3xl overflow-hidden glass-card p-2 border border-white/5">
+              <div className="rounded-3xl overflow-hidden glass-card p-2 border border-foreground/5">
                 <iframe 
                   src={creator.embeds.spotify.replace('open.spotify.com', 'open.spotify.com/embed')} 
                   width="100%" 
@@ -203,7 +203,7 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
           <div className="lg:col-span-7 flex flex-col">
 
             <div className="mb-8">
-              <h1 className="text-6xl lg:text-8xl font-black text-white tracking-tighter mb-4 flex items-center gap-4 flex-wrap leading-none">
+              <h1 className="text-6xl lg:text-8xl font-black text-foreground tracking-tighter mb-4 flex items-center gap-4 flex-wrap leading-none">
                 {creator.name}
               </h1>
               <a
@@ -218,8 +218,8 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
             </div>
 
             <div className="mb-12">
-              <h3 className="text-xs font-black text-white/30 uppercase tracking-[0.3em] mb-4">Transmission Bio</h3>
-              <p className="text-xl text-white/80 leading-relaxed font-medium">
+              <h3 className="text-xs font-black text-foreground/30 uppercase tracking-[0.3em] mb-4">Transmission Bio</h3>
+              <p className="text-xl text-foreground/80 leading-relaxed font-medium">
                 {displayBio}
               </p>
             </div>
@@ -240,7 +240,7 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
                   href={getDeepLink(social.url!, social.platform)} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="p-4 bg-white/5 border border-white/10 rounded-2xl hover:scale-110 transition-all text-white/60 hover:text-white"
+                  className="p-4 bg-foreground/5 border border-foreground/10 rounded-2xl hover:scale-110 transition-all text-foreground/60 hover:text-foreground"
                   style={{ '--hover-color': social.color } as any}
                 >
                   <social.icon className="w-6 h-6 transition-colors group-hover:text-[var(--hover-color)]" />
@@ -251,8 +251,8 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
             {/* YouTube Embed */}
             {creator.embeds?.youtube && (
               <div className="mb-12">
-                <h3 className="text-xs font-black text-white/30 uppercase tracking-[0.3em] mb-4">Latest Transmission</h3>
-                <div className="aspect-video rounded-3xl overflow-hidden glass-card border border-white/10">
+                <h3 className="text-xs font-black text-foreground/30 uppercase tracking-[0.3em] mb-4">Latest Transmission</h3>
+                <div className="aspect-video rounded-3xl overflow-hidden glass-card border border-foreground/10">
                   <iframe 
                     width="100%" 
                     height="100%" 
@@ -269,7 +269,7 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
             {/* Custom Links */}
             {(creator.customLinks && creator.customLinks.length > 0) && (
               <div className="mb-12">
-                <h3 className="text-xs font-black text-white/30 uppercase tracking-[0.3em] mb-4">External Receptors</h3>
+                <h3 className="text-xs font-black text-foreground/30 uppercase tracking-[0.3em] mb-4">External Receptors</h3>
                 <div className="grid grid-cols-1 gap-4">
                   {creator.customLinks.map((link, index) => (
                     <a 
@@ -277,12 +277,12 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-6 bg-white/5 border border-white/10 rounded-3xl hover:bg-white/10 hover:border-primary/50 transition-all group flex items-center justify-between"
+                      className="p-6 bg-foreground/5 border border-foreground/10 rounded-3xl hover:bg-foreground/10 hover:border-primary/50 transition-all group flex items-center justify-between"
                     >
-                      <span className="text-lg font-black text-white uppercase tracking-wider group-hover:text-primary transition-colors">
+                      <span className="text-lg font-black text-foreground uppercase tracking-wider group-hover:text-primary transition-colors">
                         {link.label}
                       </span>
-                      <ExternalLink className="w-6 h-6 text-white/20 group-hover:text-primary transition-all group-hover:translate-x-1" />
+                      <ExternalLink className="w-6 h-6 text-foreground/20 group-hover:text-primary transition-all group-hover:translate-x-1" />
                     </a>
                   ))}
                 </div>
@@ -291,12 +291,12 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
 
             {/* Specialties */}
             <div className="mb-12">
-              <h3 className="text-xs font-black text-white/30 uppercase tracking-[0.3em] mb-4">Core Specialists</h3>
+              <h3 className="text-xs font-black text-foreground/30 uppercase tracking-[0.3em] mb-4">Core Specialists</h3>
               <div className="flex flex-wrap gap-2">
                 {creator.tags.map(tag => (
                   <span
                     key={tag}
-                    className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-black text-white/40 uppercase tracking-widest"
+                    className="px-4 py-2 rounded-xl bg-foreground/5 border border-foreground/10 text-xs font-black text-foreground/40 uppercase tracking-widest"
                   >
                     {tag}
                   </span>

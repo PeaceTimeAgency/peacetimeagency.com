@@ -10,7 +10,10 @@ export function middleware(request: NextRequest) {
   // Strict Portal Lock (enabled by default unless explicitly unlocked)
   const isPortalsLocked = process.env.HIDE_ADMIN_PORTAL === "true";
 
-  if (isPortalsLocked && (pathname.startsWith('/admin') || pathname.startsWith('/creator-portal'))) {
+  const lockedPaths = ['/admin', '/creator-portal', '/creators', '/apply', '/cardform'];
+  const isTargetingPortal = lockedPaths.some(path => pathname.startsWith(path));
+
+  if (isPortalsLocked && isTargetingPortal) {
     // Redirect to home if portals are sealed off
     const url = request.nextUrl.clone();
     url.pathname = '/';
@@ -43,5 +46,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/creator-portal/:path*', '/admin/:path*'],
+  matcher: ['/creator-portal/:path*', '/admin/:path*', '/creators/:path*', '/apply/:path*', '/cardform/:path*'],
 };

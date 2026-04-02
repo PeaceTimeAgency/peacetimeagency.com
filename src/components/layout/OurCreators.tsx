@@ -109,24 +109,24 @@ const CreatorCard = ({ creator, isUserSection, isLive, index }: { creator: Creat
 
           {/* Image Container */}
           <div className="aspect-[4/5] overflow-hidden relative z-10">
-            <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/20 via-transparent to-black/60 opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+            <div className="absolute inset-0 z-10 bg-gradient-to-b from-background/20 via-transparent to-background/60 opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
             
             {isLive && (
               <div className="absolute top-4 left-4 z-40 flex items-center gap-1.5 bg-primary px-3 py-1.5 rounded-full shadow-lg shadow-primary/20 scale-90 origin-left group-hover:scale-100 transition-transform duration-300">
-                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                <span className="text-[10px] font-black text-white tracking-widest uppercase">Live</span>
+                <span className="w-2 h-2 rounded-full bg-foreground animate-pulse" />
+                <span className="text-[10px] font-black text-foreground tracking-widest uppercase">Live</span>
               </div>
             )}
             
             {isUserSection && (
               <div className="absolute top-4 left-4 z-40 flex items-center gap-1.5 bg-green-500 px-3 py-1.5 rounded-full shadow-lg shadow-green-500/20">
-                <span className="text-[10px] font-black text-white tracking-widest uppercase">You</span>
+                <span className="text-[10px] font-black text-foreground tracking-widest uppercase">You</span>
               </div>
             )}
 
             {/* Hover Floating Category */}
             <div className="absolute top-4 right-4 z-40 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-               <span className="px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-[9px] font-bold text-white uppercase tracking-tighter">
+               <span className="px-2.5 py-1 rounded-full bg-background/40 backdrop-blur-md border border-foreground/10 text-[9px] font-bold text-foreground uppercase tracking-tighter">
                  {creator.category?.[0] || 'Creator'}
                </span>
             </div>
@@ -135,23 +135,23 @@ const CreatorCard = ({ creator, isUserSection, isLive, index }: { creator: Creat
           </div>
 
           {/* Content Area */}
-          <div className="relative p-6 pt-2 mt-auto z-40 bg-gradient-to-t from-black via-black/80 to-transparent">
+          <div className="relative p-6 pt-2 mt-auto z-40 bg-gradient-to-t from-background via-background/80 to-transparent">
             <motion.div 
               initial={false}
               className="flex items-center gap-2 mb-2 translate-y-2 group-hover:translate-y-0 transition-transform duration-300"
             >
               <span className="h-[2px] w-5 bg-primary rounded-full" />
-              <span className="text-[10px] font-bold text-primary tracking-[0.2em] uppercase">
+              <span className="text-[10px] font-bold text-foreground tracking-[0.2em] uppercase opacity-80">
                 {creator.title || (Array.isArray(creator.category) ? creator.category[0] : creator.category)}
               </span>
             </motion.div>
 
-            <h4 className="text-2xl font-black text-white mb-1 group-hover:text-primary transition-colors duration-300 [text-shadow:0_2px_10px_rgba(0,0,0,0.5)] leading-tight">
+            <h4 className="text-2xl font-black text-foreground mb-1 group-hover:text-primary transition-colors duration-300 dark:[text-shadow:0_2px_10px_rgba(0,0,0,0.5)] leading-tight">
               {creator.name}
             </h4>
 
             <div className="flex items-center justify-between">
-              <p className="text-sm text-white/50 font-mono group-hover:text-white/80 transition-colors">
+              <p className="text-sm text-foreground/50 font-mono group-hover:text-foreground/80 transition-colors">
                 @{creator.handle.replace('@', '')}
               </p>
               
@@ -164,7 +164,7 @@ const CreatorCard = ({ creator, isUserSection, isLive, index }: { creator: Creat
 
             <div className="mt-4 flex flex-wrap gap-2 overflow-hidden h-0 group-hover:h-8 transition-all duration-500 ease-in-out opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0">
               {creator.tags.slice(0, 3).map(tag => (
-                <span key={tag} className="text-[9px] font-bold px-2 py-1 rounded-md bg-white/5 text-white/40 border border-white/10 uppercase tracking-wider">
+                <span key={tag} className="text-[9px] font-bold px-2 py-1 rounded-md bg-foreground/5 text-foreground/40 border border-foreground/10 uppercase tracking-wider">
                   #{tag}
                 </span>
               ))}

@@ -866,6 +866,48 @@
       },
       "password": "1234",
       "mediaAssets": []
+    },
+    {
+      "id": "kiermojak",
+      "name": "KierMojaK",
+      "handle": "@Kiermojak525",
+      "description": "Hello! I’m KierMojaK. I’m a gaming livestreamer creating high energy, interactive content on TikTok. The KierMojak Community doesn’t just watch, they are part of the experience. I play a lot of Soulslike/Soulsborne titles like Elden Ring and Bloodborne, bringing a mix of skill, personality, and engagement that keeps viewers coming back. I’ve been jumping into more variety gaming as well like ARC Raiders and various Horror games.\n\nI’ve built a growing, loyal audience by focusing on connection, consistency, and making every stream feel like something you don’t want to miss. Whether it’s intense gameplay, chaotic moments, community driven challenges, or just goofing around and having hilarious moments together. I create content that stands out and keeps people involved.\n\nAs I continue expanding my presence, I’m focused on leveling up my content, and turning my platform into something bigger than just streams. It’s a space people want to be part of.",
+      "image": "/creators/kiermojak.webp",
+      "category": [
+        "Gaming",
+        "Just Chatting",
+        "IRL",
+        "Comedy",
+        "Skits"
+      ],
+      "stats": {
+        "followers": "New",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Gaming",
+        "Soulslike",
+        "Soulsborne",
+        "Elden Ring",
+        "Bloodborne",
+        "Variety Gaming",
+        "Horror",
+        "Interactive"
+      ],
+      "tier": "new",
+      "liveUrl": "https://www.tiktok.com/@kiermojak525/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@kiermojak525?_r=1&_t=ZT-95D5eSMrS7p",
+        "twitch": "https://www.twitch.tv/kiermojak525",
+        "youtube": "https://www.youtube.com/@KierMojaK52590",
+        "discord": "https://discord.gg/5wUwrrKuCp",
+        "instagram": "https://www.instagram.com/kiermojak525/",
+        "facebook": "https://facebook.com/kiermojak525"
+      },
+      "password": "",
+      "mediaAssets": []
     }
   ],
   "news": []
