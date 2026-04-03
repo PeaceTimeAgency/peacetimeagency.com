@@ -61,7 +61,7 @@ export function Navigation() {
           {!isCardForm ? (
             <div className="flex items-center gap-6">
               <Link href="/" className="flex items-center group">
-                <span className="text-xl font-bold tracking-tighter" style={{ textShadow: '0 0 1px rgba(0,0,0,0.8)' }}>
+                <span className="text-2xl font-black tracking-tighter font-display" style={{ textShadow: '0 0 1px rgba(0,0,0,0.8)' }}>
                   <span style={{ color: '#FFFFFF' }}>Peace Time</span>
                   <span className="text-primary"> Agency</span>
                 </span>

@@ -543,7 +543,7 @@ export function Hero({ settings }: { settings: SiteSettings['hero'] }) {
               >
                 {s.value}
               </span>
-              <span className="text-[10px] mt-1.5 font-semibold text-white/50 uppercase tracking-[0.18em] group-hover:text-white/70 transition-colors">
+              <span className="text-[10px] mt-1.5 font-semibold text-white/50 uppercase tracking-[0.18em] group-hover:text-white/70 transition-colors font-mono">
                 {s.label}
               </span>
             </div>

@@ -48,8 +48,9 @@
 
 @theme inline {
   /* Typography */
-  --font-sans: var(--font-space-grotesk), "Inter", sans-serif;
-  --font-display: var(--font-syncopate), var(--font-space-grotesk), sans-serif;
+  --font-sans: var(--font-space-grotesk), var(--font-outfit), sans-serif;
+  --font-display: var(--font-outfit), var(--font-space-grotesk), sans-serif;
+  --font-mono: var(--font-michroma), monospace;
 
   /* Colors: Black Label Palette (Mapped to CSS variables for dynamic routing) */
   --color-background: var(--color-background-base);
@@ -156,6 +157,10 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
 }
 
 /* ─── Glassmorphism ─────────────────────────── */
