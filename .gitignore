@@ -58,3 +58,8 @@ Phase_Production_Roadmap.md
 
 # local dev config
 /.vscode/
+
+# brand and skill data
+skills_list.txt
+skills_found.txt
+Brand_Font_Guidelines.md
