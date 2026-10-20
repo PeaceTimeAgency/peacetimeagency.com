@@ -656,10 +656,10 @@
     },
     {
       "id": "generalspuds",
-      "name": "General Spuds",
-      "handle": "@generalspuds",
-      "title": "Virtual Training/Recruiter",
-      "description": "HI! I am general Spuds. I have been creating for years and play a variety of games from FPS to RPGS. I enjoy creating a positive environment and inspiring the people I meet. Rather I am streaming or helping another creator, I love lifting people up. Positive times and Vibes",
+      "name": "General Artirius",
+      "handle": "@generalartirius",
+      "title": "Pro Streamer",
+      "description": "HI! I am General Artirius. I have been creating for years and play a variety of games from FPS to RPGS. I enjoy creating a positive environment and inspiring the people I meet. Rather I am streaming or helping another creator, I love lifting people up. Positive times and Vibes",
       "image": "/creators/generalspuds.jpg",
       "category": [
         "Gaming",
@@ -679,7 +679,7 @@
         "Just Chatting",
         "IRL"
       ],
-      "tier": "recruiter",
+      "tier": "new",
       "liveUrl": "https://www.tiktok.com/@generalspuds",
       "socials": {
         "tiktok": "https://www.tiktok.com/@generalspuds",
