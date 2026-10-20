@@ -484,33 +484,6 @@
       "mediaAssets": []
     },
     {
-      "id": "slingin6_0",
-      "name": "Slingin6.0",
-      "handle": "@macdaddy6.0",
-      "description": "I like streaming and having fun doing it",
-      "image": "/branding/KYRAX425.png",
-      "category": [
-        "Gaming"
-      ],
-      "stats": {
-        "followers": "New",
-        "avgWatchTime": "N/A",
-        "peakCCV": "N/A",
-        "totalLikes": "0"
-      },
-      "tags": [
-        "Gaming"
-      ],
-      "tier": "new",
-      "liveUrl": "https://www.tiktok.com/@macdaddy6.0/live",
-      "socials": {
-        "tiktok": "https://www.tiktok.com/@macdaddy6.0",
-        "twitch": "https://www.twitch.tv/slingin6"
-      },
-      "password": "",
-      "mediaAssets": []
-    },
-    {
       "id": "oopsitsjrpgtime",
       "name": "OopsItsJRPGTime",
       "handle": "@oopsitsjrpgtime",
