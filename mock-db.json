@@ -618,6 +618,69 @@
       "mediaAssets": []
     },
     {
+      "id": "zquirrelz",
+      "name": "Zquirrelz",
+      "handle": "@zquirrelz",
+      "description": "Hey everyone! I'm Zquirrelz. I'm a variety creator who mainly streams gaming content, including Destiny, Diablo, Path of Exile, and whatever else pulls me into a good flow state. My streams are all about community interaction, chaos, and storytelling. Chat usually ends up becoming part of the show! I run a little corner of the internet called the Acorn Army, where the main rule is simple: Be nice to my friends. And since you're here, you're my friend. So remember to be nice to yourself, too. I also love building interactive experiences for my streams, including custom games, bot systems, overlays, and creative ideas that make chat part of the action. Fair warning: While the Acorn Army is a welcoming community, my streams can get pretty feral and are intended for mature audiences only. I'm always happy to collaborate, exchange ideas, and help fellow creators grow. Looking forward to meeting everyone and seeing what we can build together!",
+      "image": "/creators/zquirrelz.jpg",
+      "category": [
+        "Staff",
+        "Gaming",
+        "vtuber",
+        "Retro"
+      ],
+      "title": "Recruiter",
+      "stats": {
+        "followers": "Full-time",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Staff",
+        "Gaming",
+        "Retro"
+      ],
+      "tier": "recruiter",
+      "liveUrl": "https://www.tiktok.com/@zquirrelz/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@zquirrelz"
+      },
+      "password": "",
+      "mediaAssets": []
+    },
+    {
+      "id": "Brandon",
+      "name": "Brandon",
+      "handle": "@peacetimebrandon",
+      "description": "Hey everyone! I'm Zquirrelz. I'm a variety creator who mainly streams gaming content, including Destiny, Diablo, Path of Exile, and whatever else pulls me into a good flow state. My streams are all about community interaction, chaos, and storytelling. Chat usually ends up becoming part of the show! I run a little corner of the internet called the Acorn Army, where the main rule is simple: Be nice to my friends. And since you're here, you're my friend. So remember to be nice to yourself, too. I also love building interactive experiences for my streams, including custom games, bot systems, overlays, and creative ideas that make chat part of the action. Fair warning: While the Acorn Army is a welcoming community, my streams can get pretty feral and are intended for mature audiences only. I'm always happy to collaborate, exchange ideas, and help fellow creators grow. Looking forward to meeting everyone and seeing what we can build together!",
+      "image": "/creators/peacetimebrandon.jpg",
+      "category": [
+        "Staff",
+        "Gaming",
+        "Espanol"
+      ],
+      "title": "Recruiter",
+      "stats": {
+        "followers": "Full-time",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Staff",
+        "Gaming",
+        "Retro"
+      ],
+      "tier": "recruiter",
+      "liveUrl": "https://www.tiktok.com/@peacetimebrandon/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@peacetimebrandon"
+      },
+      "password": "",
+      "mediaAssets": []
+    },
+    {
       "id": "papaj",
       "name": "Papa J",
       "handle": "@papa.j547",
@@ -678,9 +741,9 @@
         "IRL"
       ],
       "tier": "recruiter",
-      "liveUrl": "https://www.tiktok.com/@TheJ3ssExpress/live",
+      "liveUrl": "https://www.tiktok.com/@thej3ssexpress/live",
       "socials": {
-        "tiktok": "https://www.tiktok.com/@TheJ3ssExpress"
+        "tiktok": "https://www.tiktok.com/@thej3ssexpress"
       },
       "password": "",
       "mediaAssets": []
