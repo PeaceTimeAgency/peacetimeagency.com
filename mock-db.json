@@ -586,6 +586,38 @@
       "password": "",
       "mediaAssets": []
     },
+     {
+      "id": "lordxundead",
+      "name": "༺✟𝕷𝖔𝖗𝖉 𝖀𝖓𝖉𝖊𝖆𝖉♱༻",
+      "handle": "@lordxundead",
+      "description": "Hey everyone, I stream as Lord Undead, and currently, only on Tiktok.Right now I’m doing evening gaming streams and playing The Legend of Zelda while I work on a custom program I’ve been building called the Necrotone Controller, The idea is to control the game using an IRL ocarina instead of a controller to perform the in-game songs. It’s still a work in progress, so for now I’m focusing on Zelda while I build it out, but I plan to branch into a variety of games over time. ",
+      "image": "/creators/lordundead.JPG",
+      "category": [
+        "Staff",
+        "Gaming",
+        "Retro"
+      ],
+      "title": "Recruiter",
+      "stats": {
+        "followers": "Full-time",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Staff",
+        "Gaming",
+        "Retro"
+      ],
+      "tier": "recruiter",
+      "liveUrl": "https://www.tiktok.com/@lordxundead/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@lordxundead",
+        "youtube": "https://www.youtube.com/@lordxundead"
+      },
+      "password": "",
+      "mediaAssets": []
+    },
     {
       "id": "papaj",
       "name": "Papa J",
