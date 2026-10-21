@@ -110,7 +110,7 @@ export default function WhosLiveNow({ initialCreators = [], settings }: { initia
             <SkeletonCard key={`skel-${i}`} className="w-60 min-h-[140px] p-4 flex flex-col justify-between" />
           ))
         ) : (
-          [...liveCreators, ...liveCreators].map((creator, i) => {
+          liveCreators.map((creator, i) => {
             const avatar = getCreatorAvatar(creator.id, creator.username);
             return (
               <div
