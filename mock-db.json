@@ -754,8 +754,9 @@
 
       },
       "password": "",
-      "mediaAssets": []
-      {
+    "mediaAssets": []
+     },
+     {
       "id": "y2kgamingofficial",
       "name": "Y2K Gaming",
       "handle": "@y2kgamingofficial",
