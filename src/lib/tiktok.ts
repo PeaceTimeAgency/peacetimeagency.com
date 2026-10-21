@@ -130,8 +130,8 @@ export async function fetchTikTokLiveStatus(handle: string) {
     // Check for common indicators of a live stream in the HTML
     // TikTok often includes "RENDER_DATA" or specific live meta tags
     // FORCE DISABLED: Returning false per user request until a more robust scraping/API fix is implemented.
-    const isLive = false;
 const roomStatusMatch = html.match(/"liveRoom"\s*:\s*\{[^}]*"status"\s*:\s*(\d+)/);
+const isLive = roomStatusMatch?.[1] === "2";
 
 console.log(
   `[LIVE TEST] @${username}: HTTP ${response.status}, roomStatus=${roomStatusMatch?.[1] ?? "not found"}`
