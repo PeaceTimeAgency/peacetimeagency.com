@@ -475,7 +475,7 @@ export function Hero({ settings }: { settings: SiteSettings['hero'] }) {
           className="flex flex-col gap-4 sm:flex-row items-center justify-center pt-1 w-full"
         >
           {/* Primary CTA */}
-          <MagneticButton href="/apply"
+          <MagneticButton href="https://www.tiktok.com/t/ZMBaXxSD2/"
             className="group relative inline-flex items-center justify-center h-[52px] px-10 rounded-xl font-bold text-sm text-white overflow-hidden transition-all duration-300"
             style={{
               background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%)',
