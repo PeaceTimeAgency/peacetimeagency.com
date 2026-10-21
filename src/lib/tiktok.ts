@@ -131,10 +131,10 @@ export async function fetchTikTokLiveStatus(handle: string) {
     // TikTok often includes "RENDER_DATA" or specific live meta tags
     // FORCE DISABLED: Returning false per user request until a more robust scraping/API fix is implemented.
     const isLive = false;
-const liveRoomMatch = html.match(/"liveRoom"\s*:\s*(null|\{)/);
+const roomStatusMatch = html.match(/"liveRoom"\s*:\s*\{[^}]*"status"\s*:\s*(\d+)/);
 
 console.log(
-  `[LIVE TEST] @${username}: HTTP ${response.status}, liveRoomValue=${liveRoomMatch?.[1] ?? "not found"}`
+  `[LIVE TEST] @${username}: HTTP ${response.status}, roomStatus=${roomStatusMatch?.[1] ?? "not found"}`
 );
     /*
     const isLive = html.includes('"liveRoom":') || 
