@@ -120,7 +120,7 @@ export default function WhosLiveNow({ initialCreators = [], settings }: { initia
                 {/* Hover glow border */}
                 <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-primary/40 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-[2px]" />
 
-                <Link href={`/creators/${creator.id}`} className="block relative glass-card rounded-2xl p-4 transition-transform duration-300 group-hover:-translate-y-1.5 h-full">
+                <Link href={`https://www.tiktok.com/@${creator.username.replace(/^@/, '')}/live`} target="_blank" rel="noopener noreferrer" className="block relative glass-card rounded-2xl p-4 transition-transform duration-300 group-hover:-translate-y-1.5 h-full">
                   {/* Top accent line on hover */}
                   <div className="absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
 
