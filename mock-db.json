@@ -653,7 +653,7 @@
       "id": "Brandon",
       "name": "Brandon",
       "handle": "@peacetimebrandon",
-      "description": "Hey everyone! I'm Zquirrelz. I'm a variety creator who mainly streams gaming content, including Destiny, Diablo, Path of Exile, and whatever else pulls me into a good flow state. My streams are all about community interaction, chaos, and storytelling. Chat usually ends up becoming part of the show! I run a little corner of the internet called the Acorn Army, where the main rule is simple: Be nice to my friends. And since you're here, you're my friend. So remember to be nice to yourself, too. I also love building interactive experiences for my streams, including custom games, bot systems, overlays, and creative ideas that make chat part of the action. Fair warning: While the Acorn Army is a welcoming community, my streams can get pretty feral and are intended for mature audiences only. I'm always happy to collaborate, exchange ideas, and help fellow creators grow. Looking forward to meeting everyone and seeing what we can build together!",
+      "description": "Hola mi nombre es Brandon, tengo 24 años de edad y soy el nuevo reclutador de PeaceTime",
       "image": "/creators/peacetimebrandon.jpg",
       "category": [
         "Staff",
@@ -725,6 +725,7 @@
         "Gaming",
         "Just Chatting",
         "IRL",
+        "Staff",
         "Recruiter"
       ],
       "stats": {
@@ -820,7 +821,7 @@
         "twitch": "https://m.twitch.tv/morbidunscheduledovertime/home",
         "discord": "https://discordapp.com/users/Morbid1454"
       },
-      "password": "1234",
+      "password": "",
       "mediaAssets": []
     },
     {
