@@ -867,12 +867,76 @@
         "totalLikes": "0"
       },
       "tags": [
-        "Gaming"
+        "Gaming",
+        "JRPG",
+        "Emulators"
       ],
       "tier": "new",
       "liveUrl": "https://www.tiktok.com/@y2kgamingofficial/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@y2kgamingofficial"
+
+      },
+      "password": "",
+      "mediaAssets": []
+    },
+    {
+      "id": "ghosty867",
+      "name": "Ghosty",
+      "handle": "@ghosty867",
+      "description": "Hey there, I'm Ghosty (Bearer of the One Rock, King of the Lizards, Finder of the Chair), a variety streamer with more interests than attention span. On any given day, there's no telling what you might find me playing: RPGs, FPS, RTS, colony sims, and the ever-present staple of BOATS (World of Warships). I also enjoy 3D printing useful things and parts for my Ren Faire costume, then featuring them in videos or on stream. Come check us out, join the swamp, discover the lore, and have a good time!",
+      "image": "/branding/ghosty.png",
+      "category": [
+        "Gaming",
+        "world of warships",
+        "RPGS"
+      ],
+      "stats": {
+        "followers": "New",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Gaming",
+        "world of warships",
+        "RPGS"
+      ],
+      "tier": "new",
+      "liveUrl": "https://www.tiktok.com/@ghosty867/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@ghosty867"
+
+      },
+      "password": "",
+      "mediaAssets": []
+    },
+    {
+      "id": "aknevari",
+      "name": "Nevari",
+      "handle": "@aknevari",
+      "description": "What's up! I'm Nevari, an Alaskan variety streamer and the King of Roses! 👑🌹 From challenging games to good laughs and genuine conversations, I'm here to build more than a following. I'm building a community. Welcome to the Legion!",
+      "image": "/branding/aknevari.png",
+      "category": [
+        "Gaming",
+        "variety",
+        "King of Roses"
+      ],
+      "stats": {
+        "followers": "New",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Gaming",
+        "variety",
+        "King of Roses"
+      ],
+      "tier": "new",
+      "liveUrl": "https://www.tiktok.com/@aknevari/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@aknevari"
 
       },
       "password": "",
