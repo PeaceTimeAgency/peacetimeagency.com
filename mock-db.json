@@ -704,7 +704,7 @@
         "War Thunder",
         "Wyoming"
       ],
-      "tier": "new",
+      "tier": "creator",
       "liveUrl": "https://www.tiktok.com/@papa.j547/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@papa.j547",
@@ -937,6 +937,279 @@
       "liveUrl": "https://www.tiktok.com/@aknevari/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@aknevari"
+
+      },
+      "password": "",
+      "mediaAssets": []
+    },
+     {
+      "id": "schtitle24",
+      "name": "Schtitle24",
+      "handle": "@schtitle24",
+      "description": "Schtitle24 is a variety streamer focused on community, whether that's movie nights, game nights, or charity streams. You can find him playing Sky: Children Of The Light most mornings, Warframe on Wednesdays, getting scared on Terrify Me Thursdays, and messing around with friends for Fun Game Fridays. An Avid cook and amateur baker, sharing the recipes he loves most. With a background in Esports and Commentating you can always join in for some low stakes high action marble races at the end of his Monday streams.",
+      "image": "/creators/schtitle24.jpg",
+      "category": [
+        "Gaming",
+        "variety",
+        "Baking"
+      ],
+      "stats": {
+        "followers": "New",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Gaming",
+        "variety",
+        "Baking"
+      ],
+      "tier": "new",
+      "liveUrl": "https://www.tiktok.com/@schtitle24/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@schtitle24"
+
+      },
+      "password": "",
+      "mediaAssets": []
+    },
+    {
+      "id": "skwuidgames",
+      "name": "Skwuid",
+      "handle": "@SkwuidGames",
+      "description": "My friends call me Skwuid, or at least they would if I had any friends 🦑 Aspiring VA, Off-key vocalist, Gamer. I’m a ZeldAutistic that loves horror, anime, and retro gaming. Come join The Shoal!",
+      "image": "/creators/skwuidgames.png",
+      "category": [
+        "Gaming",
+        "Horror",
+        "Retro",
+        "Anime"
+      ],
+      "stats": {
+        "followers": "New",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Gaming",
+        "Horror",
+        "Retro",
+        "Anime"
+      ],
+      "tier": "new",
+      "liveUrl": "https://www.tiktok.com/@skwuidgames/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@skwuidgames"
+
+      },
+      "password": "",
+      "mediaAssets": []
+    },
+    {
+      "id": "cozyceecee",
+      "name": "Cozy Cee Cee 🖤🎮",
+      "handle": "@cozyceecee",
+      "description": "Oh, hey, hi! I’m Cee Cee known as CozyCeeCee on TikTok. I’m a mom, wife, teacher, and small cozy streamer. I love playing cozy games including Disney Dreamlight Vally, Aniimo, Witchspire, and more. Come check out my stream when I’m live and stay a while to chat. I can’t wait to meet you!",
+      "image": "/creators/cozyceecee.png",
+      "category": [
+        "Gaming",
+        "variety",
+        "Cozy"
+      ],
+      "stats": {
+        "followers": "New",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Gaming",
+        "variety",
+        "Cozy"
+      ],
+      "tier": "new",
+      "liveUrl": "https://www.tiktok.com/@cozyceecee/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@cozyceecee"
+
+      },
+      "password": "",
+      "mediaAssets": []
+    },
+     {
+      "id": "ttvkgals1",
+      "name": "KGals1",
+      "handle": "@ttvkgals1",
+      "description": "Variety PNG Tuber/streamer that mostly plays War Thunder.  Simulators, shooters, and racers are my bread and butter.  The Spongiest streamer in the seven seas!  Posts clips, cuts of long-form content, and edits!",
+      "image": "/creators/ttvkgals1.png",
+      "category": [
+        "Gaming",
+        "War Thunder",
+        "Vtuber"
+      ],
+      "stats": {
+        "followers": "New",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Gaming",
+        "War Thunder",
+        "Vtuber"
+      ],
+      "tier": "new",
+      "liveUrl": "https://www.tiktok.com/@ttvkgals1/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@ttvkgals1"
+
+      },
+      "password": "",
+      "mediaAssets": []
+    },
+    {
+      "id": "rebelgrrrlgaming",
+      "name": "🎮 RebelGrrrl Gaming",
+      "handle": "@rebelgrrrlgaming",
+      "description": "Variety gaming creator specializing in Call of Duty and the occasional horror or cozy game. Building a community focused on engaging gameplay, interactive live streams, and connecting with fellow gamers across TikTok.",
+      "image": "/creators/rebelgrrrlgaming.jpg",
+      "category": [
+        "Gaming",
+        "cozy",
+        "Horror"
+      ],
+      "stats": {
+        "followers": "New",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Gaming",
+        "Cozy",
+        "Horror"
+      ],
+      "tier": "new",
+      "liveUrl": "https://www.tiktok.com/@rebelgrrrlgaming/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@rebelgrrrlgaming"
+
+      },
+      "password": "",
+      "mediaAssets": []
+    },
+     {
+      "id": "fanaticrpg",
+      "name": "Fanaticrpg",
+      "handle": "@fanaticrpg",
+      "description": "🎮 RPG Gaymer 🌈 | 🎵 Former Choral Educator 🎵 | 📅 Stream Schedule: Mon–Fri 7:30 PM–10 PMish CST | Sat & Sun 11 AM–3 PM and 7:30 PM–10 PMish CST",
+      "image": "/creators/fanaticrpg.png",
+      "category": [
+        "Gaming",
+        "cozy"
+      ],
+      "stats": {
+        "followers": "New",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Gaming",
+        "Cozy"
+      ],
+      "tier": "new",
+      "liveUrl": "https://www.tiktok.com/@fanaticrpg/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@fanaticrpg"
+
+      },
+      "password": "",
+      "mediaAssets": []
+    },
+      {
+      "id": "gunlord_edits",
+      "name": "Fanaticrpg",
+      "handle": "@gunlord_edits",
+      "description": "⚔️ GUNLORD_EDITS ⚔️ | 🎬 Military & Aviation Edits | 🎮 Gaming Content & LIVE Streams | 📩 DMs Open for Collaborations",
+      "image": "/creators/gunlord_edits.png",
+      "category": [
+        "Gaming",
+        "War Thunder"
+      ],
+      "stats": {
+        "followers": "New",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Gaming",
+        "War Thunder"
+      ],
+      "tier": "new",
+      "liveUrl": "https://www.tiktok.com/@gunlord_edits/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@gunlord_edits"
+
+      },
+      "password": "",
+      "mediaAssets": []
+    },
+      {
+      "id": "shadowhunter_xk",
+      "name": "ShadowHunter Xk",
+      "handle": "@shadowhunter_xk",
+      "description": "🎮 Hey, I'm ShadowHunter Xk! I'm 26, a proud nerd, anime fan, and variety gamer who loves keeping everyone smiling and having fun! I mainly play FPS games, but I'm always up for something different. 🐱 My cat Leo is the real star of the show some nights! 🔴 LIVE 5–7 days a week!",
+      "image": "/creators/shadowhunter_xk.jpg",
+      "category": [
+        "Gaming",
+        "War Thunder"
+      ],
+      "stats": {
+        "followers": "New",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Gaming",
+        "War Thunder"
+      ],
+      "tier": "new",
+      "liveUrl": "https://www.tiktok.com/@shadowhunter_xk/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@shadowhunter_xk"
+
+      },
+      "password": "",
+      "mediaAssets": []
+    },
+     {
+      "id": "itsmreliiiii916",
+      "name": "ShadowHunter Xk",
+      "handle": "@itsmreliiiii916",
+      "description": "Yippieeeeeeeee!!! Im Mr. Eli, and Im a small time streamer on Tiktok, that started in May 2026! I mostly stream RPG games, and love engaging with my community! I fully love being silly and bringing laughter to everyone!!",
+      "image": "/creators/itsmreliiiii916.jpg",
+      "category": [
+        "Gaming",
+        "RPGS"
+      ],
+      "stats": {
+        "followers": "New",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Gaming",
+        "RPGS"
+      ],
+      "tier": "new",
+      "liveUrl": "https://www.tiktok.com/@itsmreliiiii916/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@itsmreliiiii916"
 
       },
       "password": "",
