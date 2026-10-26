@@ -73,56 +73,32 @@ export async function updateCreatorAction(updatedCreator: Creator) {
   return { success: true, creator: finalUpdate };
 }
 
-// Verification & Password Setup
-const mockVerificationCodes: Record<string, string> = {};
+
+ // Verification & Password Setup
+ // Temporarily disabled until secure account activation is ready.
 
 export async function requestVerificationAction(handle: string) {
-  const normalizedHandle = handle.startsWith('@') ? handle : `@${handle}`;
-  const creators = await getCreatorsFromDb();
-  const creator = creators.find(c => c.handle.toLowerCase() === normalizedHandle.toLowerCase());
-
-  if (!creator) {
-    return { success: false, error: 'Creator not found with this handle' };
-  }
-
-  // Mock "sending" a code
-  const code = Math.floor(100000 + Math.random() * 900000).toString(); // Generate random 6-digit code
-  mockVerificationCodes[normalizedHandle] = code;
-
-  console.log(`[MOCK] Sent verification code ${code} to TikTok DM of ${normalizedHandle}`);
-  return { success: true, message: 'Verification code sent to your TikTok DM' };
+  return {
+    success: false,
+    error: 'Creator account activation is not yet available. Please contact Peace Time Agency.',
+  };
 }
 
 export async function verifyIdentityAction(handle: string, code: string) {
-  const normalizedHandle = handle.startsWith('@') ? handle : `@${handle}`;
-  const storedCode = mockVerificationCodes[normalizedHandle];
-
-  if (code === storedCode) {
-    return { success: true };
-  }
-
-  return { success: false, error: 'Invalid verification code' };
-}
-
-export async function resetPasswordAction(handle: string, code: string, newPassword: string) {
-  const normalizedHandle = handle.startsWith('@') ? handle : `@${handle}`;
-  
-  // Re-verify code for security
-  const verifyResult = await verifyIdentityAction(handle, code);
-  if (!verifyResult.success) return verifyResult;
-
-  const creators = await getCreatorsFromDb();
-  const creator = creators.find(c => c.handle.toLowerCase() === normalizedHandle.toLowerCase());
-
-  if (!creator) return { success: false, error: 'Creator not found' };
-
-  const updatedCreator = {
-    ...creator,
-    password: newPassword
+  return {
+    success: false,
+    error: 'Account verification is temporarily unavailable.',
   };
-
-  await updateCreatorInDb(updatedCreator);
-  delete mockVerificationCodes[normalizedHandle];
-
-  return { success: true };
 }
+
+export async function resetPasswordAction(
+  handle: string,
+  code: string,
+  newPassword: string
+) {
+  return {
+    success: false,
+    error: 'Password resets are temporarily unavailable.',
+  };
+}
+
