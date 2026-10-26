@@ -12,6 +12,7 @@ import { Creator } from "@/lib/creators";
 
 const NAV_LINKS = [
   { name: "Creators", href: "/creators" },
+  { name: "Education Center", href: "/education" },
   { name: "News", href: "/news" },
   { name: "Recruiters", href: "/recruiters" },
   { name: "FAQ", href: "/#faq" },
