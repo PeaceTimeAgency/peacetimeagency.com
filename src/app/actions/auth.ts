@@ -7,6 +7,12 @@ import { Creator } from '@/lib/creators';
 const SESSION_COOKIE_NAME = 'pta_creator_session';
 
 export async function signInAction(handle: string, password: string) {
+  return {
+    success: false,
+    error: 'Creator accounts are not yet activated. Please check back soon.',
+  };
+
+  /*
   const creators = await getCreatorsFromDb();
   
   // Normalize handle (ensure it starts with @)
@@ -31,6 +37,7 @@ export async function signInAction(handle: string, password: string) {
   });
 
   return { success: true, creatorId: creator.id };
+    */
 }
 
 export async function signOutAction() {
