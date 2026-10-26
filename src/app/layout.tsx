@@ -21,10 +21,25 @@ const michroma = Michroma({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://peacetimeagency.com"),
   title: "Peace Time Agency | The Elite Hub for TikTok LIVE Creators",
   description: "Elevating streams with high production, strategy, campaigns, and the Creator Growth System.",
+  openGraph: {
+    title: "Peace Time Agency | The Elite Hub for TikTok LIVE Creators",
+    description: "Elevating streams with high production, strategy, campaigns, and the Creator Growth System.",
+    url: "https://peacetimeagency.com",
+    siteName: "Peace Time Agency",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Peace Time Agency",
+      },
+    ],
+    type: "website",
+  },
 };
-
 import { Navigation } from "@/components/layout/Navigation";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Script from "next/script";
