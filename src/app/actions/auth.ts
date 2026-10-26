@@ -46,14 +46,8 @@ export async function signOutAction() {
   return { success: true };
 }
 
-export async function getSession() {
-  const cookieStore = await cookies();
-  const creatorId = cookieStore.get(SESSION_COOKIE_NAME)?.value;
-
-  if (!creatorId) return null;
-
-  const creators = await getCreatorsFromDb();
-  return creators.find((c) => c.id === creatorId) || null;
+export async function getSession(): Promise<Creator | null> {
+  return null;
 }
 
 import { updateCreatorInDb } from '@/lib/creators-db';
