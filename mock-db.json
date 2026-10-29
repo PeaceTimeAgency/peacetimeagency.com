@@ -1221,7 +1221,9 @@
       "image": "/creators/sara_kent_art.jpg",
       "category": [
         "Art",
-        "IRL"
+        "IRL",
+        "Painting",
+        "Creative" 
       ],
       "stats": {
         "followers": "New",
@@ -1230,8 +1232,10 @@
         "totalLikes": "0"
       },
       "tags": [
-        "Gaming",
-        "RPGS"
+        "Art",
+        "IRL",
+        "Painting",
+        "Creative" 
       ],
       "tier": "new",
       "liveUrl": "https://www.tiktok.com/@sara_kent_art/live",
