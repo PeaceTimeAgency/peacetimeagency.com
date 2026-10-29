@@ -774,7 +774,7 @@
         "Just Chatting",
         "IRL"
       ],
-      "tier": "creator",
+      "tier": "new",
       "liveUrl": "https://www.tiktok.com/@generalspuds",
       "socials": {
         "tiktok": "https://www.tiktok.com/@generalspuds",
@@ -842,7 +842,7 @@
       "tags": [
         "Gaming"
       ],
-      "tier": "new",
+      "tier": "creator",
       "liveUrl": "https://www.tiktok.com/@foreststreetpete/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@foreststreetpete"
@@ -871,7 +871,7 @@
         "JRPG",
         "Emulators"
       ],
-      "tier": "new",
+      "tier": "creator",
       "liveUrl": "https://www.tiktok.com/@y2kgamingofficial/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@y2kgamingofficial"
@@ -902,7 +902,7 @@
         "world of warships",
         "RPGS"
       ],
-      "tier": "new",
+      "tier": "creator",
       "liveUrl": "https://www.tiktok.com/@ghosty867/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@ghosty867"
@@ -933,7 +933,7 @@
         "variety",
         "King of Roses"
       ],
-      "tier": "new",
+      "tier": "creator",
       "liveUrl": "https://www.tiktok.com/@aknevari/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@aknevari"
@@ -964,7 +964,7 @@
         "variety",
         "Baking"
       ],
-      "tier": "new",
+      "tier": "creator",
       "liveUrl": "https://www.tiktok.com/@schtitle24/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@schtitle24"
@@ -997,7 +997,7 @@
         "Retro",
         "Anime"
       ],
-      "tier": "new",
+      "tier": "creator",
       "liveUrl": "https://www.tiktok.com/@skwuidgames/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@skwuidgames"
@@ -1028,7 +1028,7 @@
         "variety",
         "Cozy"
       ],
-      "tier": "new",
+      "tier": "creator",
       "liveUrl": "https://www.tiktok.com/@cozyceecee/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@cozyceecee"
@@ -1059,7 +1059,7 @@
         "War Thunder",
         "Vtuber"
       ],
-      "tier": "new",
+      "tier": "creator",
       "liveUrl": "https://www.tiktok.com/@ttvkgals1/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@ttvkgals1"
@@ -1090,7 +1090,7 @@
         "Cozy",
         "Horror"
       ],
-      "tier": "new",
+      "tier": "creator",
       "liveUrl": "https://www.tiktok.com/@rebelgrrrlgaming/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@rebelgrrrlgaming"
@@ -1148,7 +1148,7 @@
         "Gaming",
         "War Thunder"
       ],
-      "tier": "new",
+      "tier": "creator",
       "liveUrl": "https://www.tiktok.com/@gunlord_edits/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@gunlord_edits"
@@ -1177,7 +1177,7 @@
         "Gaming",
         "War Thunder"
       ],
-      "tier": "new",
+      "tier": "creator",
       "liveUrl": "https://www.tiktok.com/@shadowhunter_xk/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@shadowhunter_xk"
@@ -1206,10 +1206,68 @@
         "Gaming",
         "RPGS"
       ],
-      "tier": "new",
+      "tier": "creator",
       "liveUrl": "https://www.tiktok.com/@itsmreliiiii916/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@itsmreliiiii916"
+
+      },
+      "password": "",
+      "mediaAssets": []
+    },
+     {
+      "id": "sara_kent_art",
+      "name": "Sara Kent Art",
+      "handle": "@sara_kent_art",
+      "description": "I'm an artist with a wild imagination and a soul that sees beauty differently. 🎨 I don't just paint what I see, I create what I feel. Imperfectly human. Unapologetically creative. Always creating. Here to make art, inspire souls, and remind the world that ART WILL NEVER DIE.",
+      "image": "/creators/sara_kent_art.jpg",
+      "category": [
+        "Art",
+        "IRL"
+      ],
+      "stats": {
+        "followers": "New",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Gaming",
+        "RPGS"
+      ],
+      "tier": "new",
+      "liveUrl": "https://www.tiktok.com/@sara_kent_art/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@sara_kent_art"
+
+      },
+      "password": "",
+      "mediaAssets": []
+    },
+    {
+      "id": "rustjt",
+      "name": "RUST JT",
+      "handle": "@rustjt",
+      "description": "What it do! I'm a Dad, content creator, and connoisseur of all things horror and post-apocalyptic. Anchored by LIVE Rust gameplay, I bridge the gap between high-tier PvP and creative roleplay. I focus on breaking the meta with out-of-the-box strategies, teaching clever mechanics, and disarming griefers with good-humored roasts to keep the community genuinely positive.",
+      "image": "/creators/rustjt.jpg",
+      "category": [
+        "Art",
+        "IRL"
+      ],
+      "stats": {
+        "followers": "New",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Gaming",
+        "RPGS"
+      ],
+      "tier": "new",
+      "liveUrl": "https://www.tiktok.com/@rustjt/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@rustjt"
 
       },
       "password": "",
@@ -1244,7 +1302,7 @@
         "Horror",
         "Interactive"
       ],
-      "tier": "creator",
+      "tier": "new",
       "liveUrl": "https://www.tiktok.com/@kiermojak525/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@kiermojak525?_r=1&_t=ZT-95D5eSMrS7p",
