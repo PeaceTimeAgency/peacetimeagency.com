@@ -759,8 +759,7 @@
       "category": [
         "Gaming",
         "Just Chatting",
-        "IRL",
-        "Staff"
+        "IRL"
       ],
       "stats": {
         "followers": "N/A",
@@ -769,7 +768,6 @@
         "totalLikes": "0"
       },
       "tags": [
-        "Staff",
         "Gaming",
         "Just Chatting",
         "IRL"
@@ -1251,8 +1249,9 @@
       "description": "What it do! I'm a Dad, content creator, and connoisseur of all things horror and post-apocalyptic. Anchored by LIVE Rust gameplay, I bridge the gap between high-tier PvP and creative roleplay. I focus on breaking the meta with out-of-the-box strategies, teaching clever mechanics, and disarming griefers with good-humored roasts to keep the community genuinely positive.",
       "image": "/creators/rustjt.jpg",
       "category": [
-        "Art",
-        "IRL"
+        "RUST",
+        "Gaming",
+        "hats"
       ],
       "stats": {
         "followers": "New",
@@ -1261,8 +1260,9 @@
         "totalLikes": "0"
       },
       "tags": [
+        "RUST",
         "Gaming",
-        "RPGS"
+        "hats"
       ],
       "tier": "new",
       "liveUrl": "https://www.tiktok.com/@rustjt/live",
