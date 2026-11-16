@@ -551,6 +551,41 @@
       "password": "",
       "mediaAssets": []
     },
+        {
+      "id": "thej3ssexpress",
+      "name": "Jessica",
+      "handle": "@TheJ3ssExpress",
+      "title": "General Manager/Recruiter",
+      "description": "Hey! I’m Jessica, aka TheJ3ssExpress. I’m a recruiter and The Creator Retention Manager with Peacetime, where I help support and grow creators on TikTok. Seeing creators succeed is something I’m really passionate about.\n\nOn my own streams, you’ll usually find me cozy gaming while jamming to some rock or EDM. Every now and then I’ll dive into a horror game and suffer through a few jumpscares. I also like to pop in with occasional IRL lives whether it’s just chatting or a “cook dinner with me” stream.",
+      "image": "/creators/564674.jpg",
+      "category": [
+        "Gaming",
+        "Just Chatting",
+        "IRL",
+        "Staff",
+        "Recruiter"
+      ],
+      "stats": {
+        "followers": "3.8k",
+        "avgWatchTime": "N/A",
+        "peakCCV": "N/A",
+        "totalLikes": "0"
+      },
+      "tags": [
+        "Staff",
+        "Recruiter",
+        "Gaming",
+        "Just Chatting",
+        "IRL"
+      ],
+      "tier": "recruiter",
+      "liveUrl": "https://www.tiktok.com/@thej3ssexpress/live",
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@thej3ssexpress"
+      },
+      "password": "",
+      "mediaAssets": []
+    },
     {
       "id": "trashplaysgames",
       "name": "Trash (aka Lindsey)",
@@ -710,41 +745,6 @@
         "tiktok": "https://www.tiktok.com/@papa.j547",
         "twitch": "https://www.twitch.tv/Gaming_With_Papa_J",
         "discord": "https://discordapp.com/users/pwnll307"
-      },
-      "password": "",
-      "mediaAssets": []
-    },
-    {
-      "id": "thej3ssexpress",
-      "name": "Jessica",
-      "handle": "@TheJ3ssExpress",
-      "title": "General Manager/Recruiter",
-      "description": "Hey! I’m Jessica, aka TheJ3ssExpress. I’m a recruiter and The Creator Retention Manager with Peacetime, where I help support and grow creators on TikTok. Seeing creators succeed is something I’m really passionate about.\n\nOn my own streams, you’ll usually find me cozy gaming while jamming to some rock or EDM. Every now and then I’ll dive into a horror game and suffer through a few jumpscares. I also like to pop in with occasional IRL lives whether it’s just chatting or a “cook dinner with me” stream.",
-      "image": "/creators/564674.jpg",
-      "category": [
-        "Gaming",
-        "Just Chatting",
-        "IRL",
-        "Staff",
-        "Recruiter"
-      ],
-      "stats": {
-        "followers": "3.8k",
-        "avgWatchTime": "N/A",
-        "peakCCV": "N/A",
-        "totalLikes": "0"
-      },
-      "tags": [
-        "Staff",
-        "Recruiter",
-        "Gaming",
-        "Just Chatting",
-        "IRL"
-      ],
-      "tier": "recruiter",
-      "liveUrl": "https://www.tiktok.com/@thej3ssexpress/live",
-      "socials": {
-        "tiktok": "https://www.tiktok.com/@thej3ssexpress"
       },
       "password": "",
       "mediaAssets": []
@@ -948,6 +948,7 @@
       "image": "/creators/schtitle24.jpg",
       "category": [
         "Gaming",
+       "Recruiter",
         "variety",
         "Baking"
       ],
@@ -959,10 +960,11 @@
       },
       "tags": [
         "Gaming",
+        "Recruiter",
         "variety",
         "Baking"
       ],
-      "tier": "creator",
+      "tier": "staff",
       "liveUrl": "https://www.tiktok.com/@schtitle24/live",
       "socials": {
         "tiktok": "https://www.tiktok.com/@schtitle24"
